@@ -1,0 +1,67 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@import "minima";
+
+/* ================================= */
+/*  CUSTOM STYLES GO BELOW THIS LINE */
+/* ================================= */
+
+.feature-row {
+  display: flex;
+  align-items: center;
+  padding: 3rem 2rem;
+  gap: 2rem;
+}
+
+/* Layout for the Feature Rows */
+.feature-row {
+  display: flex;
+  align-items: center; /* Vertically centers text with image */
+  padding: 3rem 2rem;
+  gap: 2rem; /* Space between image and text */
+}
+
+/* Alternate: Image on Left (Default) */
+.feature-row.left {
+  flex-direction: row;
+}
+
+/* Alternate: Image on Right */
+.feature-row.right {
+  flex-direction: row-reverse; /* Flips the order */
+}
+
+/* Background Colors */
+.bg-gray {
+  background-color: #f0f4f8; /* Light blue-gray from your screenshot */
+  border-radius: 8px; /* Optional: rounds the corners */
+}
+.bg-white {
+  background-color: #ffffff;
+}
+
+/* Responsive: Stack them on mobile phones */
+@media (max-width: 768px) {
+  .feature-row.left, .feature-row.right {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* Image styling */
+.feature-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Adds a subtle shadow */
+}
+
+/* Text styling */
+.feature-text {
+  flex: 1; /* Takes up remaining space */
+}
+.feature-image {
+  flex: 1; /* Takes up equal space */
+}
