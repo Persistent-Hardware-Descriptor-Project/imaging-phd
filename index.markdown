@@ -16,26 +16,26 @@ title: Home
   </div>
   <div class="feature-text">
     <h2>Metadata for Microscopes</h2>
-    <p>Here you can describe the metadata model, etc. This text block will automatically center itself next to the image.</p>
+    <p>Text!s</p>
   </div>
 </div>
 
 <div class="feature-row right bg-white">
   <div class="feature-image">
-    <img src="https://placehold.co/600x400?text=Spider+Web" alt="Spider Web">
+    <img src="assets/images/shutterstock_64005883.jpg" alt="Spider Web">
   </div>
   <div class="feature-text">
-    <h2>Natural Geometry</h2>
-    <p>Use this space to discuss the organic structures or the "Spider Web" concept shown in your mock-up.</p>
+    <h2>Heading</h2>
+    <p>Space for text.</p>
   </div>
 </div>
 
 <div class="feature-row left bg-gray">
   <div class="feature-image">
-    <img src="https://placehold.co/600x400?text=Data+vs+Metadata" alt="Data Cartoon">
+    <img src="assets/images/data_metadata_2-1.png" alt="Data Cartoon">
   </div>
   <div class="feature-text">
-    <h2>Data vs. Metadata</h2>
-    <p>Explain the importance of FAIR data principles here. The light gray background helps separate this section from the one above.</p>
+    <h2>Heading</h2>
+    <p>Text.</p>
   </div>
 </div>

@@ -27,8 +27,8 @@ logo: /assets/images/IPHD_logo_small.png
 baseurl: "/imaging-phd" # the subpath of your site, e.g. /blog
 url: "https://Persistent-Hardware-Descriptor-Project.github.io/imaging-phd" # the base hostname & protocol for your site, e.g. http://example.com
 # twitter_username: jekyllrb
+# github_username:  jcpetitto
 email: caterina.strambio@umassmed.edu
-github_username:  jcpetitto
 
 # Build settings
 theme: minima

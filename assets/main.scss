@@ -65,3 +65,34 @@
 .feature-image {
   flex: 1; /* Takes up equal space */
 }
+
+/* --- NAVIGATION BAR CHEAT SHEET --- */
+
+/* 1. The Bar Itself (Background) */
+.site-header {
+  background-color: #1B3B5D;
+  # border-top: none;           /* Removes the default thin line */
+  # border-bottom: 3px solid #ffcc00; /* Optional: Adds a bottom colored border */
+}
+
+/* 2. The Site Title (Top Left) */
+.site-title, .site-title:visited {
+  color: #ffffff !important;  /* White Text */
+  font-weight: bold;
+}
+
+/* 3. The Links (About, Projects, etc.) */
+.page-link {
+  color: #e0e0e0 !important;  /* Light Gray Text */
+}
+
+/* 4. Hover Effect (When mouse goes over link) */
+.page-link:hover {
+  color: #ffcc00 !important;  /* Gold/Yellow when hovering */
+  text-decoration: none;      /* Removes the underline */
+}
+
+/* 5. Mobile Menu Icon (The "Hamburger" lines) */
+.site-nav .menu-icon svg path {
+  fill: #ffffff;              /* Make the icon white on dark backgrounds */
+}
