@@ -15,7 +15,7 @@ title: Home
     <img src="assets/images/MicroscopeModeling_attr_Thao_Do.png" alt="Nature cover for fluorescence microscopy and metadata">
   </div>
   <div class="feature-text">
-    <h2>Metadata for Microscopes</h2>
+    <h2>Metadata to describe Microscopes</h2>
     <p>Text!s</p>
   </div>
 </div>
