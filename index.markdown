@@ -25,8 +25,8 @@ title: Home
     <img src="assets/images/shutterstock_64005883.jpg" alt="Spider Web">
   </div>
   <div class="feature-text">
-    <h2>TEXT 2</h2>
-    <p>Space for text.</p>
+    <h2>HEADER 2</h2>
+    <p>TEXT 2</p>
   </div>
 </div>
 
@@ -35,7 +35,7 @@ title: Home
     <img src="assets/images/data_metadata_2-1.png" alt="Data Cartoon">
   </div>
   <div class="feature-text">
-    <h2>TEXT 3</h2>
-    <p>Text.</p>
+    <h2>HEADER 3</h2>
+    <p>TEXT 3</p>
   </div>
 </div>
