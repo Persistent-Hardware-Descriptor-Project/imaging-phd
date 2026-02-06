@@ -16,7 +16,7 @@ title: Home
   </div>
   <div class="feature-text">
     <h2>Microscopy Acquisition Metadata</h2>
-    <p>Text!s</p>
+    <p>TEXT 1</p>
   </div>
 </div>
 
@@ -25,7 +25,7 @@ title: Home
     <img src="assets/images/shutterstock_64005883.jpg" alt="Spider Web">
   </div>
   <div class="feature-text">
-    <h2>Heading</h2>
+    <h2>TEXT 2</h2>
     <p>Space for text.</p>
   </div>
 </div>
@@ -35,7 +35,7 @@ title: Home
     <img src="assets/images/data_metadata_2-1.png" alt="Data Cartoon">
   </div>
   <div class="feature-text">
-    <h2>Heading</h2>
+    <h2>TEXT 3</h2>
     <p>Text.</p>
   </div>
 </div>
