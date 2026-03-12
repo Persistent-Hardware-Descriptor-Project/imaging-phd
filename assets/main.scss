@@ -11,7 +11,8 @@
 .feature-row {
   display: flex;
   align-items: center;
-  padding: 3rem 2rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
   gap: 2rem;
 }
 
@@ -36,7 +37,8 @@
 /* Background Colors */
 .bg-gray {
   background-color: #f0f4f8; /* Light blue-gray from your screenshot */
-  border-radius: 8px; /* Optional: rounds the corners */
+  margin-left: 0;
+  margin-right: 0;
 }
 .bg-white {
   background-color: #ffffff;
@@ -130,4 +132,24 @@
   color: #ffcc00 !important;
   text-decoration: none;
   background-color: rgba(255,255,255,0.05);
+}
+
+/* --- FULL WIDTH LAYOUT --- */
+/* Remove max-width constraint from main content wrapper */
+.wrapper {
+  max-width: 100%;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+/* Keep the header wrapper full width */
+.site-header .wrapper {
+  max-width: 100%;
+}
+
+/* Stretch the main page content */
+.page-content .wrapper {
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
 }
