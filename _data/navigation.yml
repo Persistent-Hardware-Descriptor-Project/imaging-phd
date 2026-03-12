@@ -2,6 +2,13 @@
 main:
   - title: "Home"
     url: /
+  - title: "About"
+    url: /about/
+    sublinks:
+      - title: "Project Description"
+        url: /about/project-description/
+      - title: "Team Members"
+        url: /about/team-members/
   - title: "Projects"
     url: /projects/
   - title: "Documentation"
