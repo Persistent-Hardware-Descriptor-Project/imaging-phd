@@ -9,6 +9,9 @@ main:
         url: /about/project-description/
       - title: "Team Members"
         url: /about/team-members/
+        sublinks:
+        - title: "David Grunwald"
+          url: /about/team-members/david-grunwald/
   - title: "Projects"
     url: /projects/
   - title: "Getting Started"
