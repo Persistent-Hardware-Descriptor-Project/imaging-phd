@@ -1,0 +1,51 @@
+---
+layout: default
+---
+
+<article class="member-profile-page">
+  <div class="member-profile">
+
+    <div class="member-photo-block">
+      {% if page.photo %}
+        <img src="{{ page.photo | relative_url }}" alt="Photo of {{ page.name }}" class="member-photo">
+      {% else %}
+        <div class="member-photo team-photo-placeholder"></div>
+      {% endif %}
+    </div>
+
+    <div class="member-details">
+      <h1>{{ page.name }}</h1>
+      <p class="member-title">{{ page.title }}</p>
+      {% if page.affiliation %}
+        <p class="member-affiliation">{{ page.affiliation }}</p>
+      {% endif %}
+
+      <div class="member-links">
+        {% if page.email %}
+          <a href="mailto:{{ page.email }}" class="team-link">Email</a>
+        {% endif %}
+        {% if page.orcid %}
+          <a href="https://orcid.org/{{ page.orcid }}" class="team-link">ORCID</a>
+        {% endif %}
+        {% if page.scholar %}
+          <a href="{{ page.scholar }}" class="team-link">Google Scholar</a>
+        {% endif %}
+        {% if page.github %}
+          <a href="{{ page.github }}" class="team-link">GitHub</a>
+        {% endif %}
+        {% if page.linkedin %}
+          <a href="{{ page.linkedin }}" class="team-link">LinkedIn</a>
+        {% endif %}
+        {% if page.website %}
+          <a href="{{ page.website }}" class="team-link">Website</a>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+
+  <div class="member-body">
+    {{ content }}
+  </div>
+
+</article>

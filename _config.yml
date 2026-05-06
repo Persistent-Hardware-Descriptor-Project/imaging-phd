@@ -13,10 +13,7 @@
 # https://learnxinyminutes.com/docs/yaml/
 #
 # Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
+# Custom variables: accessible in templates via {{ site.myvariable }}.
 
 title: Imaging-PHD
 email: your-email@example.com
@@ -24,9 +21,8 @@ description: >- # this means to ignore newlines until "baseurl:"
   The Imaging-PHD project is building a scalable cyberinfrastructure framework to capture, store, and disseminate persistent and machine-actionable metadata describing microscopy hardware configurations at the time of data acquisition
   This project is a proof of concept of clear, standardized records of the equipment used in research. These records, known as Persistent Hardware Descriptors (PHDs), are stored permanently and can be directly linked to scientific data and publications.
 logo: /assets/images/IPHD_logo_small.png
-baseurl: "/imaging-phd" # the subpath of your site, e.g. /blog
-url: "https://Persistent-Hardware-Descriptor-Project.github.io/imaging-phd" # the base hostname & protocol for your site, e.g. http://example.com
-# twitter_username: jekyllrb
+baseurl: "/imaging-phd" # site subpath (relative to organization GitHub)
+url: "https://Persistent-Hardware-Descriptor-Project.github.io/imaging-phd" # the base hostname & protocol 
 # github_username:  jcpetitto
 email: caterina.strambio@umassmed.edu
 
@@ -35,15 +31,24 @@ theme: minima
 plugins:
   - jekyll-feed
 
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
+# Collections
+collections:
+  team:
+    output: true
+    permalink: /about/team/:name/
+
+# sets the defaults for each member of a collection
+defaults:
+  - scope:
+      path: ""
+      type: team
+    values:
+      layout: team-member
+
+# Items or directories excluded from processing
 # exclude:
+#   - dir_to_exclude/
+# the below are excluded by default
 #   - .sass-cache/
 #   - .jekyll-cache/
 #   - gemfiles/
@@ -54,3 +59,7 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+#
+# Process excluded items explicitly listing the directories or file path in the `include:` list.
+# include:
+#   - dir_to_include/
