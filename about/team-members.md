@@ -41,7 +41,7 @@ Our team brings together expertise in microscopy, bioinformatics, and cyberinfra
   {% endfor %}
 </div>
 
-<div class="team-container team-grid" id="team-grid" style="display:none;">
+<!-- <div class="team-container team-grid" id="team-grid" style="display:none;">
   {% for member in site.team %}
   <div class="team-card">
     {% if member.photo %}
@@ -63,13 +63,13 @@ Our team brings together expertise in microscopy, bioinformatics, and cyberinfra
     </div>
   </div>
   {% endfor %}
-</div>
+</div> -->
 
-<script>
+<!-- <script>
 function setView(view) {
   document.getElementById('team-list').style.display = view === 'list' ? 'block' : 'none';
   document.getElementById('team-grid').style.display = view === 'grid' ? 'flex' : 'none';
   document.getElementById('btn-list').classList.toggle('active', view === 'list');
   document.getElementById('btn-grid').classList.toggle('active', view === 'grid');
 }
-</script>
+</script> -->
