@@ -1,11 +1,9 @@
 ---
-name: "Alex Rigano"
+name: "Aleksander Drozdz"
 title: ""
 sc: false
-affiliation: "UMass Chan Medical School"
-photo: 
-email: "alex.rigano@umassmed.edu"
-github: "https://github.com/Akramhar"
+affiliation: "SciCrunch, Inc."
+email: "aleksander@scicrunch.com"
 ---
 
 Full bio goes here. This can be as long as needed.

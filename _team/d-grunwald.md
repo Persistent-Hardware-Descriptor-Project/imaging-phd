@@ -1,14 +1,11 @@
 ---
 name: "David Grunwald"
 title: ""
-affiliation: "Department of Imaging Science, University Name"
+sc: true
+affiliation: "UMass Chan Medical School"
 photo: /assets/images/team/d-grunwald.jpg
-email: "jsmith@institution.edu"
-orcid: "0000-0000-0000-0000"
-scholar: "https://scholar.google.com/citations?user=XXXXXXX"
-github: "https://github.com/jsmith"
-linkedin: "https://linkedin.com/in/jsmith"
-website: "https://jsmith.lab.edu"
+email: "david.grunwald@umassmed.edu"
+github: "https://github.com/dgrundwald"
 ---
 
 Full bio goes here. This can be as long as needed.

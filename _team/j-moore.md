@@ -1,14 +1,11 @@
 ---
 name: "Josh Moore"
-title: "Principal Investigator"
-affiliation: "Department of Imaging Science, University Name"
-photo: /assets/images/team/c-strambio-de-castillia.jpg
-email: "jsmith@institution.edu"
-orcid: "0000-0000-0000-0000"
-scholar: "https://scholar.google.com/citations?user=XXXXXXX"
-github: "https://github.com/jsmith"
-linkedin: "https://linkedin.com/in/jsmith"
-website: "https://jsmith.lab.edu"
+title: ""
+sc: true
+affiliation: "German BioImaging; OME"
+email: "josh@openmicroscopy.org"
+github: "https://github.com/joshmoore"
+
 ---
 
 Full bio goes here. This can be as long as needed.

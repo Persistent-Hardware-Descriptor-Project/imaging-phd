@@ -1,11 +1,10 @@
 ---
-name: "Alex Rigano"
+name: "Judith Lacoste"
 title: ""
-sc: false
-affiliation: "UMass Chan Medical School"
-photo: 
-email: "alex.rigano@umassmed.edu"
-github: "https://github.com/Akramhar"
+sc: true
+affiliation: "MIA Cellavie"
+email: "jlacoste@miacellavie.com"
+github: "https://github.com/JSDLacoste"
 ---
 
 Full bio goes here. This can be as long as needed.

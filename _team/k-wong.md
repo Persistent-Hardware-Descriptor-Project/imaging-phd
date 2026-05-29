@@ -1,11 +1,10 @@
 ---
-name: "Alex Rigano"
+name: "Koon (Steven) Wong"
 title: ""
 sc: false
 affiliation: "UMass Chan Medical School"
-photo: 
-email: "alex.rigano@umassmed.edu"
-github: "https://github.com/Akramhar"
+email: "koon.wong@umassmed.edu"
+github: "https://github.com/stevenwong-umchan"
 ---
 
 Full bio goes here. This can be as long as needed.

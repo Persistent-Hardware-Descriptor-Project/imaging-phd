@@ -1,11 +1,9 @@
 ---
-name: "Alex Rigano"
+name: "Faten Taha"
 title: ""
 sc: false
-affiliation: "UMass Chan Medical School"
-photo: 
-email: "alex.rigano@umassmed.edu"
-github: "https://github.com/Akramhar"
+affiliation: "UCSD"
+email: "ftaha@health.ucsd.edu"
 ---
 
 Full bio goes here. This can be as long as needed.

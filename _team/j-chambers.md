@@ -1,11 +1,10 @@
 ---
-name: "Alex Rigano"
+name: "James Chambers"
 title: ""
-sc: false
-affiliation: "UMass Chan Medical School"
-photo: 
-email: "alex.rigano@umassmed.edu"
-github: "https://github.com/Akramhar"
+sc: true
+affiliation: "UMass Amherst"
+email: "jjchambe@umass.edu"
+github: "https://github.com/jamchamb"
 ---
 
 Full bio goes here. This can be as long as needed.

@@ -1,11 +1,10 @@
 ---
-name: "Alex Rigano"
+name: "Anita Bandrowski"
 title: ""
-sc: false
-affiliation: "UMass Chan Medical School"
-photo: 
-email: "alex.rigano@umassmed.edu"
-github: "https://github.com/Akramhar"
+sc: true
+affiliation: "SciCrunch, Inc.; University of California San Diego"
+email: "abandrowski@ucsd.edu"
+github: "https://github.com/bandrow"
 ---
 
 Full bio goes here. This can be as long as needed.

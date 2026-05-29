@@ -1,11 +1,10 @@
 ---
-name: "Alex Rigano"
+name: "Nate Herzog"
 title: ""
-sc: false
-affiliation: "UMass Chan Medical School"
-photo: 
-email: "alex.rigano@umassmed.edu"
-github: "https://github.com/Akramhar"
+sc: true
+affiliation: "University of Vermont"
+email: "nsherzog@uvm.edu"
+github: "https://github.com/nsherzog"
 ---
 
 Full bio goes here. This can be as long as needed.

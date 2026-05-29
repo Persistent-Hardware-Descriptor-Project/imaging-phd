@@ -1,11 +1,10 @@
 ---
-name: "Alex Rigano"
+name: "Jocelyn Petitto"
 title: ""
 sc: false
-affiliation: "UMass Chan Medical School"
-photo: 
-email: "alex.rigano@umassmed.edu"
-github: "https://github.com/Akramhar"
+affiliation: "UMass Chan Medical"
+email: "jocelyn.petitto@umassmed.edu"
+github: "https://github.com/jcpetitto"
 ---
 
 Full bio goes here. This can be as long as needed.

@@ -1,11 +1,9 @@
 ---
-name: "Alex Rigano"
+name: "Damien Goutte-Gattat"
 title: ""
 sc: false
-affiliation: "UMass Chan Medical School"
-photo: 
-email: "alex.rigano@umassmed.edu"
-github: "https://github.com/Akramhar"
+affiliation: "German BioImaging"
+email: "damien@gerbi-gmb.de"
 ---
 
 Full bio goes here. This can be as long as needed.
