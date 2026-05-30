@@ -1,54 +1,68 @@
+{% comment %}
+  Gantt Chart — CSS Grid implementation
+  Data source: _data/gantt.yml
+
+  Grid column layout (11 total):
+    Col 1:     Objective label (fixed 28px, rotated text)
+    Col 2:     Deliverable ID (fixed 40px)
+    Col 3:     Deliverable title (1fr — flexible)
+    Cols 4-11: 8 period columns (fixed 52px each)
+
+  To link a deliverable to a project page, add a url to
+  the link: field in _data/gantt.yml for that deliverable.
+{% endcomment %}
+
 <div class="gantt-wrapper">
-  <table class="gantt-table">
-    <thead>
-      <tr>
-        <th class="gantt-th-obj" colspan="2">Obj.</th>
-        <th class="gantt-th-title">Deliverable</th>
-        {% for period in site.data.gantt.periods %}
-        <th class="gantt-th-period">{{ period | replace: ". ", ".<br>" }}</th>
-        {% endfor %}
-      </tr>
-    </thead>
-    <tbody>
-      {% for objective in site.data.gantt.objectives %}
-        {% for deliverable in objective.deliverables %}
-        <tr class="gantt-row">
+  <div class="gantt-grid">
 
-          {% comment %} Objective label cell — only on first deliverable row {% endcomment %}
-          {% if forloop.first %}
-          <td rowspan="{{ objective.deliverables.size }}"
-              class="gantt-obj-label gantt-obj-{{ objective.color }}">
-            <span>{{ objective.label }}</span>
-          </td>
+    {% comment %} ── HEADER ROW ──────────────────────────────────── {% endcomment %}
+    <div class="gantt-header gantt-span-2">Obj.</div>
+    <div class="gantt-header gantt-header-title">Deliverable</div>
+    {% for period in site.data.gantt.periods %}
+    <div class="gantt-header gantt-header-period">{{ period }}</div>
+    {% endfor %}
+
+    {% comment %} ── DATA ROWS ───────────────────────────────────── {% endcomment %}
+    {% for objective in site.data.gantt.objectives %}
+      {% assign del_count = objective.deliverables.size %}
+
+      {% for deliverable in objective.deliverables %}
+
+        {% comment %} Objective label spans all rows for this objective {% endcomment %}
+        {% if forloop.first %}
+        <div class="gantt-obj-label gantt-obj-{{ objective.color }}"
+             style="grid-row: span {{ del_count }};">
+          <span>{{ objective.label }}</span>
+        </div>
+        {% endif %}
+
+        {% comment %} Deliverable ID {% endcomment %}
+        <div class="gantt-del-id">
+          {% if deliverable.link %}
+            <a href="{{ deliverable.link }}">{{ deliverable.id }}</a>
+          {% else %}
+            {{ deliverable.id }}
           {% endif %}
+        </div>
 
-          {% comment %} Deliverable ID {% endcomment %}
-          <td class="gantt-del-id">
-            {% if deliverable.link %}
-              <a href="{{ deliverable.link }}">{{ deliverable.id }}</a>
-            {% else %}
-              {{ deliverable.id }}
-            {% endif %}
-          </td>
+        {% comment %} Deliverable title {% endcomment %}
+        <div class="gantt-del-title">{{ deliverable.title }}</div>
 
-          {% comment %} Deliverable title {% endcomment %}
-          <td class="gantt-del-title">{{ deliverable.title }}</td>
-
-          {% comment %} Timeline cells {% endcomment %}
-          {% for cell in deliverable.cells %}
-            {% if cell.type == "empty" %}
-            <td colspan="{{ cell.span }}" class="gantt-cell gantt-cell-empty"></td>
-            {% else %}
-            <td colspan="{{ cell.span }}"
-                class="gantt-cell gantt-cell-{{ cell.type }} gantt-obj-bar-{{ objective.color }}">
-              {% if cell.label %}{{ cell.label }}{% endif %}
-            </td>
-            {% endif %}
-          {% endfor %}
-
-        </tr>
+        {% comment %} Timeline cells {% endcomment %}
+        {% for cell in deliverable.cells %}
+          {% if cell.type == "empty" %}
+          <div class="gantt-cell gantt-cell-empty"
+               style="grid-column: span {{ cell.span }};"></div>
+          {% else %}
+          <div class="gantt-cell gantt-cell-{{ cell.type }} gantt-bar-{{ objective.color }}"
+               style="grid-column: span {{ cell.span }};">
+            {% if cell.label %}<span class="gantt-cell-label">{{ cell.label }}</span>{% endif %}
+          </div>
+          {% endif %}
         {% endfor %}
+
       {% endfor %}
-    </tbody>
-  </table>
+    {% endfor %}
+
+  </div>
 </div>

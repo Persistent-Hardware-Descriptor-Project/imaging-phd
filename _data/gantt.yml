@@ -88,7 +88,7 @@ objectives:
             type: active
 
   - id: obj-2
-    label: "2 - Devel. of MMPF"
+    label: "2 - Development of MMPF"
     color: red
     deliverables:
       - id: "2-1"
@@ -100,7 +100,7 @@ objectives:
             label: "Development"
           - span: 1
             type: support
-            label: "Supp."
+            label: "Support"
           - span: 4
             type: empty
 
@@ -182,7 +182,7 @@ objectives:
         cells:
           - span: 1
             type: development
-            label: "Devel."
+            label: "Development"
           - span: 1
             type: empty
           - span: 6

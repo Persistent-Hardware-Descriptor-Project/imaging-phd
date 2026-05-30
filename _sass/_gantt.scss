@@ -1,80 +1,126 @@
 /* ================================= */
-/*  GANTT CHART                       */
+/*  GANTT CHART — CSS Grid            */
 /* ================================= */
 
-/* --- Wrapper: horizontal scroll on small screens --- */
+/*
+  Resize priority contract:
+  ─────────────────────────────────────────────────────────────
+  1. Title column (col 3) grows until longest title = one line
+     → uses max-content: column is exactly as wide as it needs
+       to be and never grows further
+
+  2. Period columns (cols 4-11) grow until:
+       a. Year headers fit on one line ("Yr. 4-2")
+       b. Cell labels fit on one line ("Development")
+     → uses max-content: same principle
+
+  3. Once all columns are at max-content, the table has a
+     fixed total width. The wrapper uses fit-content + margin:auto
+     to center it on the page and stop it from stretching further.
+
+  4. Below min-width (600px): horizontal scroll kicks in.
+     Only the title column compresses (minmax lower bound = 120px).
+     Period columns hold at 50px minimum.
+  ─────────────────────────────────────────────────────────────
+*/
+
+/* --- Outer wrapper ---
+   fit-content = be exactly as wide as the grid needs
+   max-width: 100% = never overflow the viewport
+   margin: auto = center on the page once table hits max width
+   overflow-x: auto = scroll on narrow viewports               */
 .gantt-wrapper {
+  width: fit-content;
+  max-width: 100%;
+  margin: 1.5rem auto;
   overflow-x: auto;
-  margin: 1.5rem 0;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* --- Base table reset --- */
-.gantt-table {
-  border-collapse: collapse;
-  width: 100%;
-  min-width: 700px;
-  font-size: 0.82rem;
-  table-layout: fixed;
-  /* Override site-wide table styles */
-  margin: 0;
+/* --- The grid ---
+   Column breakdown:
+     28px                       objective label (fixed)
+     40px                       deliverable ID (fixed)
+     minmax(120px, max-content) title: flexible down to 120px,
+                                grows to longest title then stops
+     repeat(8, minmax(50px, max-content))
+                                period cols: hold at 50px minimum,
+                                grow to longest content then stop   */
+.gantt-grid {
+  display: grid;
+  grid-template-columns:
+    auto
+    40px
+    minmax(120px, max-content)
+    repeat(8, minmax(50px, max-content));
+  min-width: 600px;
 }
 
-.gantt-table tr:hover {
-  background-color: transparent;
+/* --- Utility: span 2 columns (for "Obj." header) --- */
+.gantt-span-2 {
+  grid-column: span 2;
 }
 
-/* --- Column widths --- */
-.gantt-th-obj      { width: 28px; }
-.gantt-th-obj + th { width: 36px; }  /* ID column */
-.gantt-th-title    { width: 220px; }
-.gantt-th-period   { width: 52px; }
-
-/* --- Header row --- */
-.gantt-table thead tr {
+/* --- Header cells --- */
+.gantt-header {
   background-color: #f0f4f8;
-}
-
-.gantt-table th {
   border: 1px solid #ccc;
-  padding: 5px 4px;
-  text-align: center;
-  font-weight: 600;
+  padding: 5px 6px;
   font-size: 0.78rem;
+  font-weight: 600;
   color: #1B3B5D;
-  background-color: #f0f4f8;
-  line-height: 1.3;
-}
-
-/* Override site table th border-bottom */
-.gantt-table th {
-  border-bottom: 1px solid #ccc;
-}
-
-/* --- Objective label cell (rotated vertical text) --- */
-.gantt-obj-label {
   text-align: center;
-  vertical-align: middle;
-  padding: 4px 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.3;
+  /* No wrapping on headers — max-content sizing handles width */
+  white-space: nowrap;
+}
+
+.gantt-header-title {
+  text-align: left;
+  justify-content: flex-start;
+  padding-left: 8px;
+  white-space: nowrap;
+}
+
+.gantt-header-period {
+  font-size: 0.72rem;
+  /* No wrapping — period columns size to fit this text */
+  white-space: nowrap;
+}
+
+/* --- Objective label cell --- */
+.gantt-obj-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid #ccc;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  white-space: nowrap;
   color: #ffffff;
-  width: 28px;
+  text-align: center;
+  padding: 4px 2px;
+  white-space: normal;
+  overflow: hidden;
 }
 
 /* --- Deliverable ID cell --- */
 .gantt-del-id {
-  text-align: center;
-  vertical-align: middle;
-  padding: 4px 6px;
   border: 1px solid #ccc;
+  padding: 4px 4px;
+  font-size: 0.78rem;
   font-weight: 600;
-  white-space: nowrap;
-  background-color: #fafafa;
   color: #1B3B5D;
+  background-color: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .gantt-del-id a {
@@ -87,64 +133,88 @@
   text-decoration: underline;
 }
 
-/* --- Deliverable title cell --- */
+/* --- Deliverable title cell ---
+   white-space: break-word — wraps when column is narrower than text.
+  */
 .gantt-del-title {
-  padding: 5px 8px;
   border: 1px solid #ccc;
-  vertical-align: middle;
-  line-height: 1.4;
-  background-color: #ffffff;
+  padding: 5px 8px;
+  font-size: 0.82rem;
   color: #222;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  line-height: 1.4;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
-/* --- Timeline cells --- */
+/* --- Timeline cells (base) --- */
 .gantt-cell {
   border: 1px solid #ccc;
-  padding: 4px 3px;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
 }
 
 .gantt-cell-empty {
   background-color: #ffffff;
 }
 
+/* --- Cell labels ---
+   white-space: nowrap forces period columns to expand
+   until the longest label ("Development") fits on one line  */
+.gantt-cell-label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.2;
+  white-space: nowrap;
+  padding: 0 4px;
+}
+
 /* --- Objective bar colors --- */
 
 /* Green — Obj 1 */
-.gantt-obj-label.gantt-obj-green    { background-color: #4a9e47; }
-.gantt-obj-bar-green.gantt-cell-active      { background-color: #7dc17a; color: transparent; }
-.gantt-obj-bar-green.gantt-cell-development { background-color: #7dc17a; color: #1a4a19; }
-.gantt-obj-bar-green.gantt-cell-support     { background-color: #b8ddb7; color: #1a4a19; }
+.gantt-obj-label.gantt-obj-green         { background-color: #4a9e47; }
+.gantt-bar-green.gantt-cell-active       { background-color: #7dc17a; }
+.gantt-bar-green.gantt-cell-development  { background-color: #7dc17a; }
+.gantt-bar-green.gantt-cell-development .gantt-cell-label { color: #1a4a19; }
+.gantt-bar-green.gantt-cell-support      { background-color: #b8ddb7; }
+.gantt-bar-green.gantt-cell-support .gantt-cell-label { color: #1a4a19; }
 
 /* Red/Salmon — Obj 2 */
-.gantt-obj-label.gantt-obj-red      { background-color: #c9503e; }
-.gantt-obj-bar-red.gantt-cell-active        { background-color: #e8796a; color: transparent; }
-.gantt-obj-bar-red.gantt-cell-development   { background-color: #e8796a; color: #5a1a12; }
-.gantt-obj-bar-red.gantt-cell-support       { background-color: #f2b8b2; color: #5a1a12; }
+.gantt-obj-label.gantt-obj-red           { background-color: #c9503e; }
+.gantt-bar-red.gantt-cell-active         { background-color: #e8796a; }
+.gantt-bar-red.gantt-cell-development    { background-color: #e8796a; }
+.gantt-bar-red.gantt-cell-development .gantt-cell-label { color: #5a1a12; }
+.gantt-bar-red.gantt-cell-support        { background-color: #f2b8b2; }
+.gantt-bar-red.gantt-cell-support .gantt-cell-label { color: #5a1a12; }
 
 /* Blue/Purple — Obj 3 */
-.gantt-obj-label.gantt-obj-blue     { background-color: #5c6fbf; }
-.gantt-obj-bar-blue.gantt-cell-active       { background-color: #8a9dd4; color: transparent; }
-.gantt-obj-bar-blue.gantt-cell-development  { background-color: #8a9dd4; color: #1a2260; }
-.gantt-obj-bar-blue.gantt-cell-support      { background-color: #c0c9ea; color: #1a2260; }
+.gantt-obj-label.gantt-obj-blue          { background-color: #5c6fbf; }
+.gantt-bar-blue.gantt-cell-active        { background-color: #8a9dd4; }
+.gantt-bar-blue.gantt-cell-development   { background-color: #8a9dd4; }
+.gantt-bar-blue.gantt-cell-development .gantt-cell-label { color: #1a2260; }
+.gantt-bar-blue.gantt-cell-support       { background-color: #c0c9ea; }
+.gantt-bar-blue.gantt-cell-support .gantt-cell-label { color: #1a2260; }
 
 /* Grey — Obj 4 */
-.gantt-obj-label.gantt-obj-grey     { background-color: #888888; }
-.gantt-obj-bar-grey.gantt-cell-active       { background-color: #b8b8b8; color: transparent; }
-.gantt-obj-bar-grey.gantt-cell-development  { background-color: #b8b8b8; color: #333333; }
-.gantt-obj-bar-grey.gantt-cell-support      { background-color: #d8d8d8; color: #333333; }
+.gantt-obj-label.gantt-obj-grey          { background-color: #888888; }
+.gantt-bar-grey.gantt-cell-active        { background-color: #b8b8b8; }
+.gantt-bar-grey.gantt-cell-development   { background-color: #b8b8b8; }
+.gantt-bar-grey.gantt-cell-development .gantt-cell-label { color: #333333; }
+.gantt-bar-grey.gantt-cell-support       { background-color: #d8d8d8; }
+.gantt-bar-grey.gantt-cell-support .gantt-cell-label { color: #333333; }
 
-/* --- Alternating row backgrounds for readability --- */
-.gantt-table tbody tr:nth-child(even) .gantt-del-title,
-.gantt-table tbody tr:nth-child(even) .gantt-del-id {
+/* --- Alternating row shading on title + ID only --- */
+.gantt-del-title:nth-of-type(even),
+.gantt-del-id:nth-of-type(even) {
   background-color: #f7f9fc;
 }
 
-/* Override site-wide table zebra striping for gantt rows */
-.gantt-table tbody tr:nth-child(even) {
-  background-color: transparent;
+.gantt-obj-label {
+  height: 0;
+  min-height: 0;
 }
