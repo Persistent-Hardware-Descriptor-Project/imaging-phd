@@ -1,0 +1,150 @@
+/* ================================= */
+/*  GANTT CHART                       */
+/* ================================= */
+
+/* --- Wrapper: horizontal scroll on small screens --- */
+.gantt-wrapper {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+/* --- Base table reset --- */
+.gantt-table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 700px;
+  font-size: 0.82rem;
+  table-layout: fixed;
+  /* Override site-wide table styles */
+  margin: 0;
+}
+
+.gantt-table tr:hover {
+  background-color: transparent;
+}
+
+/* --- Column widths --- */
+.gantt-th-obj      { width: 28px; }
+.gantt-th-obj + th { width: 36px; }  /* ID column */
+.gantt-th-title    { width: 220px; }
+.gantt-th-period   { width: 52px; }
+
+/* --- Header row --- */
+.gantt-table thead tr {
+  background-color: #f0f4f8;
+}
+
+.gantt-table th {
+  border: 1px solid #ccc;
+  padding: 5px 4px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.78rem;
+  color: #1B3B5D;
+  background-color: #f0f4f8;
+  line-height: 1.3;
+}
+
+/* Override site table th border-bottom */
+.gantt-table th {
+  border-bottom: 1px solid #ccc;
+}
+
+/* --- Objective label cell (rotated vertical text) --- */
+.gantt-obj-label {
+  text-align: center;
+  vertical-align: middle;
+  padding: 4px 2px;
+  border: 1px solid #ccc;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: #ffffff;
+  width: 28px;
+}
+
+/* --- Deliverable ID cell --- */
+.gantt-del-id {
+  text-align: center;
+  vertical-align: middle;
+  padding: 4px 6px;
+  border: 1px solid #ccc;
+  font-weight: 600;
+  white-space: nowrap;
+  background-color: #fafafa;
+  color: #1B3B5D;
+}
+
+.gantt-del-id a {
+  color: #1B3B5D;
+  text-decoration: none;
+}
+
+.gantt-del-id a:hover {
+  color: #ffcc00;
+  text-decoration: underline;
+}
+
+/* --- Deliverable title cell --- */
+.gantt-del-title {
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+  vertical-align: middle;
+  line-height: 1.4;
+  background-color: #ffffff;
+  color: #222;
+}
+
+/* --- Timeline cells --- */
+.gantt-cell {
+  border: 1px solid #ccc;
+  padding: 4px 3px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.gantt-cell-empty {
+  background-color: #ffffff;
+}
+
+/* --- Objective bar colors --- */
+
+/* Green — Obj 1 */
+.gantt-obj-label.gantt-obj-green    { background-color: #4a9e47; }
+.gantt-obj-bar-green.gantt-cell-active      { background-color: #7dc17a; color: transparent; }
+.gantt-obj-bar-green.gantt-cell-development { background-color: #7dc17a; color: #1a4a19; }
+.gantt-obj-bar-green.gantt-cell-support     { background-color: #b8ddb7; color: #1a4a19; }
+
+/* Red/Salmon — Obj 2 */
+.gantt-obj-label.gantt-obj-red      { background-color: #c9503e; }
+.gantt-obj-bar-red.gantt-cell-active        { background-color: #e8796a; color: transparent; }
+.gantt-obj-bar-red.gantt-cell-development   { background-color: #e8796a; color: #5a1a12; }
+.gantt-obj-bar-red.gantt-cell-support       { background-color: #f2b8b2; color: #5a1a12; }
+
+/* Blue/Purple — Obj 3 */
+.gantt-obj-label.gantt-obj-blue     { background-color: #5c6fbf; }
+.gantt-obj-bar-blue.gantt-cell-active       { background-color: #8a9dd4; color: transparent; }
+.gantt-obj-bar-blue.gantt-cell-development  { background-color: #8a9dd4; color: #1a2260; }
+.gantt-obj-bar-blue.gantt-cell-support      { background-color: #c0c9ea; color: #1a2260; }
+
+/* Grey — Obj 4 */
+.gantt-obj-label.gantt-obj-grey     { background-color: #888888; }
+.gantt-obj-bar-grey.gantt-cell-active       { background-color: #b8b8b8; color: transparent; }
+.gantt-obj-bar-grey.gantt-cell-development  { background-color: #b8b8b8; color: #333333; }
+.gantt-obj-bar-grey.gantt-cell-support      { background-color: #d8d8d8; color: #333333; }
+
+/* --- Alternating row backgrounds for readability --- */
+.gantt-table tbody tr:nth-child(even) .gantt-del-title,
+.gantt-table tbody tr:nth-child(even) .gantt-del-id {
+  background-color: #f7f9fc;
+}
+
+/* Override site-wide table zebra striping for gantt rows */
+.gantt-table tbody tr:nth-child(even) {
+  background-color: transparent;
+}

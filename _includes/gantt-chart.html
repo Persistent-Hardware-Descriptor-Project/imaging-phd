@@ -1,0 +1,54 @@
+<div class="gantt-wrapper">
+  <table class="gantt-table">
+    <thead>
+      <tr>
+        <th class="gantt-th-obj" colspan="2">Obj.</th>
+        <th class="gantt-th-title">Deliverable</th>
+        {% for period in site.data.gantt.periods %}
+        <th class="gantt-th-period">{{ period | replace: ". ", ".<br>" }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for objective in site.data.gantt.objectives %}
+        {% for deliverable in objective.deliverables %}
+        <tr class="gantt-row">
+
+          {% comment %} Objective label cell — only on first deliverable row {% endcomment %}
+          {% if forloop.first %}
+          <td rowspan="{{ objective.deliverables.size }}"
+              class="gantt-obj-label gantt-obj-{{ objective.color }}">
+            <span>{{ objective.label }}</span>
+          </td>
+          {% endif %}
+
+          {% comment %} Deliverable ID {% endcomment %}
+          <td class="gantt-del-id">
+            {% if deliverable.link %}
+              <a href="{{ deliverable.link }}">{{ deliverable.id }}</a>
+            {% else %}
+              {{ deliverable.id }}
+            {% endif %}
+          </td>
+
+          {% comment %} Deliverable title {% endcomment %}
+          <td class="gantt-del-title">{{ deliverable.title }}</td>
+
+          {% comment %} Timeline cells {% endcomment %}
+          {% for cell in deliverable.cells %}
+            {% if cell.type == "empty" %}
+            <td colspan="{{ cell.span }}" class="gantt-cell gantt-cell-empty"></td>
+            {% else %}
+            <td colspan="{{ cell.span }}"
+                class="gantt-cell gantt-cell-{{ cell.type }} gantt-obj-bar-{{ objective.color }}">
+              {% if cell.label %}{{ cell.label }}{% endif %}
+            </td>
+            {% endif %}
+          {% endfor %}
+
+        </tr>
+        {% endfor %}
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

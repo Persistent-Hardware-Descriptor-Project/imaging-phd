@@ -4,7 +4,7 @@ title: Projects
 permalink: /projects/
 ---
 
-<!-- Add any intro text here — appears above the project listing -->
+{% include gantt-chart.html %}
 
 <div class="projects-listing">
   {% assign sorted_categories = site.data.categories | sort: "order" %}
