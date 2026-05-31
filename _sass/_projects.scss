@@ -1,3 +1,12 @@
+/* ================================= */
+/*  PROJECTS LISTING                  */
+/* ================================= */
+
+/*
+  Color variables imported from _colors.scss via main.scss.
+  Do not hardcode objective/category hex values here.
+*/
+
 .projects-listing {
   margin-top: 1.5rem;
 }
@@ -22,12 +31,10 @@
   user-select: none;
 }
 
-/* Remove default triangle in Safari */
 .category-header::-webkit-details-marker {
   display: none;
 }
 
-/* Add custom expand indicator */
 .category-header::before {
   content: '▶';
   font-size: 0.7rem;
@@ -58,6 +65,12 @@ details[open] .category-header::before {
   color: #555;
   margin: 0;
 }
+
+/* --- Category header colors — match Gantt objective colors --- */
+.category-block.category-green .category-header { background-color: $color-obj-green; }
+.category-block.category-red   .category-header { background-color: $color-obj-red; }
+.category-block.category-blue  .category-header { background-color: $color-obj-blue; }
+.category-block.category-grey  .category-header { background-color: $color-obj-grey; }
 
 /* --- Project list inside expanded category --- */
 .project-list {
@@ -104,23 +117,9 @@ details[open] .category-header::before {
   white-space: nowrap;
 }
 
-.status-active {
-  background: #e6f4ea;
-  color: #1a7a3a;
-  border: 0.5px solid #aaddbb;
-}
-
-.status-complete {
-  background: #e8eef8;
-  color: #1a3a7a;
-  border: 0.5px solid #aabbdd;
-}
-
-.status-planned {
-  background: #f8f4e8;
-  color: #7a5a1a;
-  border: 0.5px solid #ddccaa;
-}
+.status-active   { background: #e6f4ea; color: #1a7a3a; border: 0.5px solid #aaddbb; }
+.status-complete { background: #e8eef8; color: #1a3a7a; border: 0.5px solid #aabbdd; }
+.status-planned  { background: #f8f4e8; color: #7a5a1a; border: 0.5px solid #ddccaa; }
 
 /* --- Output links --- */
 .project-outputs {

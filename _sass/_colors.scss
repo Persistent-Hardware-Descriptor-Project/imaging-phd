@@ -1,0 +1,46 @@
+@use "sass:color";
+
+/* ================================= */
+/*  SHARED COLOR TOKENS               */
+/* ================================= */
+/*
+  Objective / Category colors
+  Used by: _gantt.scss, _projects.scss, _navigation.scss
+  Change a base color here and all derived variants update automatically.
+
+  Derived variants use color.adjust() with calculated lightness deltas:
+    active/development: base + ~15% lightness
+    support:            base + ~30% lightness
+    label text:         base - ~30% lightness (dark, for readability)
+*/
+
+/* --- Site colors --- */
+$color-nav:           #1B3B5D;
+$color-nav-text:      #e0e0e0;
+$color-nav-hover:     #ffcc00;
+
+/* --- Objective / Category base colors --- */
+$color-obj-green:     #4a9e47;
+$color-obj-red:       #c9503e;
+$color-obj-blue:      #5c6fbf;
+$color-obj-grey:      #888888;
+
+/* --- Green derived --- */
+$color-obj-green-active:      color.adjust($color-obj-green, $lightness: 16.9%);
+$color-obj-green-support:     color.adjust($color-obj-green, $lightness: 34.3%);
+$color-obj-green-label:       color.adjust($color-obj-green, $lightness: -25.5%);
+
+/* --- Red derived --- */
+$color-obj-red-active:        color.adjust($color-obj-red, $lightness: 14.7%);
+$color-obj-red-support:       color.adjust($color-obj-red, $lightness: 30.8%);
+$color-obj-red-label:         color.adjust($color-obj-red, $lightness: -30.4%);
+
+/* --- Blue derived --- */
+$color-obj-blue-active:       color.adjust($color-obj-blue, $lightness: 13.1%);
+$color-obj-blue-support:      color.adjust($color-obj-blue, $lightness: 28.0%);
+$color-obj-blue-label:        color.adjust($color-obj-blue, $lightness: -31.6%);
+
+/* --- Grey derived --- */
+$color-obj-grey-active:       color.adjust($color-obj-grey, $lightness: 18.8%);
+$color-obj-grey-support:      color.adjust($color-obj-grey, $lightness: 31.4%);
+$color-obj-grey-label:        color.adjust($color-obj-grey, $lightness: -33.3%);

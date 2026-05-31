@@ -9,12 +9,18 @@
 /*  Each file lives in _sass/         */
 /*  Order matters — later imports     */
 /*  override earlier ones.            */
+/*                                    */
+/*  _colors MUST come first —         */
+/*  all other partials depend on      */
+/*  its variables.                    */
 /* ================================= */
 
+@import "colors";
 @import "layout";
 @import "navigation";
 @import "tables";
 @import "team";
 @import "projects";
-@import "mermaid";
 @import "gantt";
+@import "mermaid";
+@import "footer";

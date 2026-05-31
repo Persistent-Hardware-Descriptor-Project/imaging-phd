@@ -1,0 +1,176 @@
+/* ================================= */
+/*  FOOTER                            */
+/* ================================= */
+
+/*
+  Color variables imported from _colors.scss via main.scss.
+  $color-nav (#1B3B5D) used for footer background to match nav bar.
+*/
+
+.site-footer {
+  background-color: $color-nav;
+  color: #e0e0e0;
+  margin-top: 3rem;
+  padding: 2rem 0 1rem;
+}
+
+.footer-wrapper {
+  max-width: 100%;
+  padding: 0 2rem;
+}
+
+/* --- Top section: brand left, NSF right --- */
+.footer-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+/* Left: IPHD logo + site title */
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-shrink: 0;
+}
+
+.footer-logo {
+  height: 48px;
+  width: auto;
+}
+
+.footer-site-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Right: NSF logo + acknowledgment text */
+.footer-nsf {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  max-width: 620px;
+}
+
+/* Reversed (white) NSF logo — appropriate for dark backgrounds
+   per NSF branding guidelines: https://www.nsf.gov/policies/brand */
+.footer-nsf-logo {
+  height: 60px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.footer-nsf-text {
+  font-size: 0.78rem;
+  color: #b0bec5;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.footer-nsf-text a {
+  color: $color-nav-hover;
+  text-decoration: none;
+}
+
+.footer-nsf-text a:hover {
+  text-decoration: underline;
+}
+
+/* --- Bottom bar: contact + copyright --- */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  font-size: 0.78rem;
+  color: #78909c;
+}
+
+.footer-bottom a {
+  color: #b0bec5;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  color: $color-nav-hover;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .footer-top {
+    flex-direction: column;
+  }
+
+  .footer-nsf {
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 0.4rem;
+    text-align: center;
+  }
+}
+
+
+/* ================================= */
+/*  LOGO-LINK LIST                    */
+/* ================================= */
+/*
+  Reusable component for resource/link lists where each
+  item has a small logo to the left of the link text.
+
+  HTML structure:
+  <ul class="logo-link-list">
+    <li class="logo-link-item">
+      <img src="..." alt="..." class="logo-link-img">
+      <a href="...">Link text</a>
+    </li>
+  </ul>
+
+  Size variants: add .sm or .lg to .logo-link-img
+*/
+
+.logo-link-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.logo-link-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.5rem 0;
+  border-bottom: 0.5px solid #e0e0e0;
+}
+
+.logo-link-item:last-child {
+  border-bottom: none;
+}
+
+.logo-link-img {
+  height: 28px;
+  width: auto;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.logo-link-img.sm { height: 20px; }
+.logo-link-img.lg { height: 40px; }
+
+.logo-link-item a {
+  font-size: 0.95rem;
+  color: $color-nav;
+  text-decoration: none;
+}
+
+.logo-link-item a:hover {
+  color: $color-nav-hover;
+  text-decoration: none;
+}

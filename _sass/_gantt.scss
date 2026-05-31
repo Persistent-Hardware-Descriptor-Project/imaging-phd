@@ -1,34 +1,48 @@
+@use "sass:color";
+
 /* ================================= */
-/*  GANTT CHART — CSS Grid            */
+/*  GANTT CHART                       */
 /* ================================= */
 
 /*
-  Resize priority contract:
-  ─────────────────────────────────────────────────────────────
-  1. Title column (col 3) grows until longest title = one line
-     → uses max-content: column is exactly as wide as it needs
-       to be and never grows further
+  Key structural decision:
+  Objective labels are in a SEPARATE flex column (.gantt-labels-col)
+  alongside the main CSS Grid (.gantt-grid). They are NOT grid items.
+  This means labels can never influence grid row heights.
 
-  2. Period columns (cols 4-11) grow until:
-       a. Year headers fit on one line ("Yr. 4-2")
-       b. Cell labels fit on one line ("Development")
-     → uses max-content: same principle
+  Alignment mechanism:
+    grid-auto-rows: $gantt-row-height  → every data row = fixed height
+    height: N × $gantt-row-height      → label height matches exactly
+    box-sizing: border-box             → borders included in height
 
-  3. Once all columns are at max-content, the table has a
-     fixed total width. The wrapper uses fit-content + margin:auto
-     to center it on the page and stop it from stretching further.
-
-  4. Below min-width (600px): horizontal scroll kicks in.
-     Only the title column compresses (minmax lower bound = 120px).
-     Period columns hold at 50px minimum.
-  ─────────────────────────────────────────────────────────────
+  Color variables imported from _colors.scss via main.scss.
+  Do not hardcode hex values here — use the $color-obj-* variables.
 */
 
-/* --- Outer wrapper ---
-   fit-content = be exactly as wide as the grid needs
-   max-width: 100% = never overflow the viewport
-   margin: auto = center on the page once table hits max width
-   overflow-x: auto = scroll on narrow viewports               */
+/* SHARED - Tokens
+   row_height also defined in _data/gantt.yml as row_height: 36
+   Keep in sync if you change this value                          */
+$gantt-row-height: 36px;
+$gantt-min-col-width: 28px;
+
+/* SHARED - Base styles
+   Extended by .gantt-header and .gantt-labels-header to guarantee
+   identical height via identical padding + font-size              */
+%gantt-header-base {
+  background-color: #f0f4f8;
+  border: 1px solid #ccc;
+  padding: 5px 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #1B3B5D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+/* --- Wrapper: centers the table, scrolls on narrow screens --- */
 .gantt-wrapper {
   width: fit-content;
   max-width: 100%;
@@ -37,66 +51,38 @@
   -webkit-overflow-scrolling: touch;
 }
 
-/* --- The grid ---
-   Column breakdown:
-     28px                       objective label (fixed)
-     40px                       deliverable ID (fixed)
-     minmax(120px, max-content) title: flexible down to 120px,
-                                grows to longest title then stops
-     repeat(8, minmax(50px, max-content))
-                                period cols: hold at 50px minimum,
-                                grow to longest content then stop   */
-.gantt-grid {
-  display: grid;
-  grid-template-columns:
-    auto
-    40px
-    minmax(120px, max-content)
-    repeat(8, minmax(50px, max-content));
-  min-width: 600px;
-}
-
-/* --- Utility: span 2 columns (for "Obj." header) --- */
-.gantt-span-2 {
-  grid-column: span 2;
-}
-
-/* --- Header cells --- */
-.gantt-header {
-  background-color: #f0f4f8;
-  border: 1px solid #ccc;
-  padding: 5px 6px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: #1B3B5D;
-  text-align: center;
+/* --- Outer flex container --- */
+.gantt-outer {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1.3;
-  /* No wrapping on headers — max-content sizing handles width */
-  white-space: nowrap;
+  flex-direction: row;
+  align-items: stretch;
+  min-width: 580px;
 }
 
-.gantt-header-title {
-  text-align: left;
-  justify-content: flex-start;
-  padding-left: 8px;
-  white-space: nowrap;
+/* ── LEFT: Labels column ──────────────────────────────────────── */
+
+.gantt-labels-col {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  min-width: $gantt-min-col-width;
+  width: fit-content;
 }
 
-.gantt-header-period {
-  font-size: 0.72rem;
-  /* No wrapping — period columns size to fit this text */
-  white-space: nowrap;
+/* Spacer matching header row height */
+.gantt-labels-header {
+  @extend %gantt-header-base;
+  flex-shrink: 0;
+  height: #{$gantt-row-height};
 }
 
-/* --- Objective label cell --- */
+/* Objective label cells */
 .gantt-obj-label {
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid #ccc;
+  border-top: none;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   font-size: 0.72rem;
@@ -106,25 +92,64 @@
   padding: 4px 2px;
   white-space: normal;
   overflow: hidden;
+  width: 100%;
+  min-width: $gantt-min-col-width;
+  flex-shrink: 0;
+  flex-grow: 0;
+  box-sizing: border-box;
+  /* height set via inline style in template: N × row_height */
+}
+
+/* ── RIGHT: Main grid ─────────────────────────────────────────── */
+
+.gantt-grid {
+  display: grid;
+  grid-template-columns:
+    40px
+    minmax(120px, max-content)
+    repeat(8, minmax(50px, max-content));
+  grid-auto-rows: $gantt-row-height;
+  flex: 1;
+}
+
+/* --- Header cells --- */
+.gantt-header {
+  @extend %gantt-header-base;
+}
+
+.gantt-header-id {
+  background-color: #f0f4f8;
+  border-left: none;
+}
+
+.gantt-header-title {
+  text-align: left;
+  justify-content: flex-start;
+  padding-left: 8px;
+}
+
+.gantt-header-period {
+  font-size: 0.72rem;
 }
 
 /* --- Deliverable ID cell --- */
 .gantt-del-id {
   border: 1px solid #ccc;
-  padding: 4px 4px;
+  border-top: none;
+  padding: 4px;
   font-size: 0.78rem;
   font-weight: 600;
-  color: #1B3B5D;
-  background-color: #fafafa;
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   white-space: nowrap;
+  box-sizing: border-box;
 }
 
 .gantt-del-id a {
-  color: #1B3B5D;
+  color: #ffffff;
   text-decoration: none;
 }
 
@@ -133,11 +158,17 @@
   text-decoration: underline;
 }
 
-/* --- Deliverable title cell ---
-   white-space: break-word — wraps when column is narrower than text.
-  */
+/* ID cell colors match objective */
+.gantt-id-green { background-color: $color-obj-green; }
+.gantt-id-red   { background-color: $color-obj-red; }
+.gantt-id-blue  { background-color: $color-obj-blue; }
+.gantt-id-grey  { background-color: $color-obj-grey; }
+
+/* --- Deliverable title cell --- */
 .gantt-del-title {
   border: 1px solid #ccc;
+  border-top: none;
+  border-left: none;
   padding: 5px 8px;
   font-size: 0.82rem;
   color: #222;
@@ -145,76 +176,70 @@
   display: flex;
   align-items: center;
   line-height: 1.4;
+  white-space: nowrap;
   overflow-wrap: break-word;
   word-break: break-word;
+  box-sizing: border-box;
 }
 
-/* --- Timeline cells (base) --- */
+/* --- Timeline cells --- */
 .gantt-cell {
   border: 1px solid #ccc;
+  border-top: none;
+  border-left: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 32px;
+  box-sizing: border-box;
 }
 
 .gantt-cell-empty {
   background-color: #ffffff;
 }
 
-/* --- Cell labels ---
-   white-space: nowrap forces period columns to expand
-   until the longest label ("Development") fits on one line  */
 .gantt-cell-label {
   font-size: 0.68rem;
   font-weight: 500;
   text-align: center;
-  line-height: 1.2;
   white-space: nowrap;
   padding: 0 4px;
 }
 
-/* --- Objective bar colors --- */
+/* --- Objective colors --- */
 
 /* Green — Obj 1 */
-.gantt-obj-label.gantt-obj-green         { background-color: #4a9e47; }
-.gantt-bar-green.gantt-cell-active       { background-color: #7dc17a; }
-.gantt-bar-green.gantt-cell-development  { background-color: #7dc17a; }
-.gantt-bar-green.gantt-cell-development .gantt-cell-label { color: #1a4a19; }
-.gantt-bar-green.gantt-cell-support      { background-color: #b8ddb7; }
-.gantt-bar-green.gantt-cell-support .gantt-cell-label { color: #1a4a19; }
+.gantt-obj-label.gantt-obj-green         { background-color: $color-obj-green; }
+.gantt-bar-green.gantt-cell-active       { background-color: $color-obj-green-active; }
+.gantt-bar-green.gantt-cell-development  { background-color: $color-obj-green-active; }
+.gantt-bar-green.gantt-cell-development .gantt-cell-label { color: $color-obj-green-label; }
+.gantt-bar-green.gantt-cell-support      { background-color: $color-obj-green-support; }
+.gantt-bar-green.gantt-cell-support .gantt-cell-label     { color: $color-obj-green-label; }
 
-/* Red/Salmon — Obj 2 */
-.gantt-obj-label.gantt-obj-red           { background-color: #c9503e; }
-.gantt-bar-red.gantt-cell-active         { background-color: #e8796a; }
-.gantt-bar-red.gantt-cell-development    { background-color: #e8796a; }
-.gantt-bar-red.gantt-cell-development .gantt-cell-label { color: #5a1a12; }
-.gantt-bar-red.gantt-cell-support        { background-color: #f2b8b2; }
-.gantt-bar-red.gantt-cell-support .gantt-cell-label { color: #5a1a12; }
+/* Red — Obj 2 */
+.gantt-obj-label.gantt-obj-red           { background-color: $color-obj-red; }
+.gantt-bar-red.gantt-cell-active         { background-color: $color-obj-red-active; }
+.gantt-bar-red.gantt-cell-development    { background-color: $color-obj-red-active; }
+.gantt-bar-red.gantt-cell-development .gantt-cell-label   { color: $color-obj-red-label; }
+.gantt-bar-red.gantt-cell-support        { background-color: $color-obj-red-support; }
+.gantt-bar-red.gantt-cell-support .gantt-cell-label       { color: $color-obj-red-label; }
 
-/* Blue/Purple — Obj 3 */
-.gantt-obj-label.gantt-obj-blue          { background-color: #5c6fbf; }
-.gantt-bar-blue.gantt-cell-active        { background-color: #8a9dd4; }
-.gantt-bar-blue.gantt-cell-development   { background-color: #8a9dd4; }
-.gantt-bar-blue.gantt-cell-development .gantt-cell-label { color: #1a2260; }
-.gantt-bar-blue.gantt-cell-support       { background-color: #c0c9ea; }
-.gantt-bar-blue.gantt-cell-support .gantt-cell-label { color: #1a2260; }
+/* Blue — Obj 3 */
+.gantt-obj-label.gantt-obj-blue          { background-color: $color-obj-blue; }
+.gantt-bar-blue.gantt-cell-active        { background-color: $color-obj-blue-active; }
+.gantt-bar-blue.gantt-cell-development   { background-color: $color-obj-blue-active; }
+.gantt-bar-blue.gantt-cell-development .gantt-cell-label  { color: $color-obj-blue-label; }
+.gantt-bar-blue.gantt-cell-support       { background-color: $color-obj-blue-support; }
+.gantt-bar-blue.gantt-cell-support .gantt-cell-label      { color: $color-obj-blue-label; }
 
 /* Grey — Obj 4 */
-.gantt-obj-label.gantt-obj-grey          { background-color: #888888; }
-.gantt-bar-grey.gantt-cell-active        { background-color: #b8b8b8; }
-.gantt-bar-grey.gantt-cell-development   { background-color: #b8b8b8; }
-.gantt-bar-grey.gantt-cell-development .gantt-cell-label { color: #333333; }
-.gantt-bar-grey.gantt-cell-support       { background-color: #d8d8d8; }
-.gantt-bar-grey.gantt-cell-support .gantt-cell-label { color: #333333; }
+.gantt-obj-label.gantt-obj-grey          { background-color: $color-obj-grey; }
+.gantt-bar-grey.gantt-cell-active        { background-color: $color-obj-grey-active; }
+.gantt-bar-grey.gantt-cell-development   { background-color: $color-obj-grey-active; }
+.gantt-bar-grey.gantt-cell-development .gantt-cell-label  { color: $color-obj-grey-label; }
+.gantt-bar-grey.gantt-cell-support       { background-color: $color-obj-grey-support; }
+.gantt-bar-grey.gantt-cell-support .gantt-cell-label      { color: $color-obj-grey-label; }
 
-/* --- Alternating row shading on title + ID only --- */
-.gantt-del-title:nth-of-type(even),
-.gantt-del-id:nth-of-type(even) {
+/* --- Alternating row shading on title column only --- */
+.gantt-del-title:nth-of-type(even) {
   background-color: #f7f9fc;
-}
-
-.gantt-obj-label {
-  height: 0;
-  min-height: 0;
 }
