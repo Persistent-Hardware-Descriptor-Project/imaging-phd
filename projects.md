@@ -15,7 +15,7 @@ permalink: /projects/
         {% assign category_projects = category_projects | push: project %}
       {% endif %}
     {% endfor %}
-    <details class="category-block">
+    <details class="category-block category-{{ category.color }}">
       <summary class="category-header">
         <span class="category-title">{{ category.title }}</span>
         <span class="category-count">{{ category_projects.size }} project{% if category_projects.size != 1 %}s{% endif %}</span>
