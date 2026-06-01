@@ -16,7 +16,7 @@ title: Home
   </div>
   <div class="feature-text">
     <h2>Microscopy Metadata</h2>
-    <p>In microscopy experiments, image metadata can be subdivided as follows: (1) experimental and sample metadata; (2) microscopy metadata; and (3) analysis metadata. In turn, microscopy metadata (pink boxes) can be subdivided into two categories: (1) provenance metadata, which includes information that documents microscope hardware specifications, image acquisition settings, and image structur,e and (2) quality-control metadata, which includes metrics that quantitatively assess the performance of the microscope at the time of image acquisition and the quality of image data. </p>
+    <p>In microscopy experiments, image metadata can be subdivided as follows: (1) experimental and sample metadata; (2) microscopy metadata; and (3) analysis metadata. In turn, microscopy metadata (pink boxes) can be subdivided into two categories: (1) provenance metadata, which includes information that documents microscope hardware specifications, image acquisition settings and image structure; and (2) quality-control metadata, which includes metrics that quantitatively assess the performance of the microscope at the time of image acquisition and the quality of image data. </p>
   </div>
 </div>
 
@@ -37,7 +37,7 @@ title: Home
   <div class="feature-text">
     <h2>Imaging-PHD provides PIDs for Instruments and Hardware Descriptors</h2>
     <p>Imaging-PHD builds on the existing Micro-Meta App to provide a streamlined tool for documenting individual instruments. Each published instrument record receives a unique, permanent identifier — linking specific microscopes to their home facilities, the data they generate, and the researchers who use them.
-A searchable registry allows scientists to discover instruments with particular features and compare equipment across labs and institutions.
-By standardizing how instruments are described and identified, Imaging-PHD improves the reliability of scientific results, gives proper credit to core facility staff, and makes advanced imaging technologies more accessible to the broader research community.</p>
+    A searchable registry allows scientists to discover instruments with particular features and compare equipment across labs and institutions.
+    By standardizing how instruments are described and identified, Imaging-PHD improves the reliability of scientific results, gives proper credit to core facility staff, and makes advanced imaging technologies more accessible to the broader research community.</p>
   </div>
 </div>
