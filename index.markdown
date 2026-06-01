@@ -22,7 +22,7 @@ title: Home
 
 <div class="feature-row right bg-white">
   <div class="feature-image">
-    <img src="assets/images/IPHD_data_dag.png" alt="Interaction diagram of data and research.">
+    <img src="assets/images/IPHD_data_dag.png" alt="Interaction diagram of data and research">
   </div>
   <div class="feature-text">
     <h2>The Persistent Identification of Instruments supports FAIR principles </h2>
