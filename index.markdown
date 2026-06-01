@@ -33,6 +33,7 @@ title: Home
 <div class="feature-row left bg-gray">
   <div class="feature-image">
     <img src="assets/images/IPHD_visual_of_metadata.png" alt="Depiction of metadata">
+    <img src="assets/images/IPHD_visual_of_metadata.png" alt="Depiction of metadata">
   </div>
   <div class="feature-text">
     <h2>Imaging-PHD provides PIDs for Instruments and Hardware Descriptors</h2>
