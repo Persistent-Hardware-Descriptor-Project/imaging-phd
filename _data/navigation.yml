@@ -12,7 +12,7 @@ main:
   - title: "Projects"
     url: /projects/
   - title: "Getting Started"
-    url: /documentation/
+    url: /getting_started/
   - title: "Resources"
     url: /resources/
   - title: "Publications"
