@@ -12,7 +12,7 @@ title: Home
 
 <div class="feature-row left bg-gray">
   <div class="feature-image">
-    <img src="assets/images/MicroscopeModeling_attr_Thao_Do.png" alt="Nature cover for fluorescence microscopy and metadata">
+    <img src="assets/images/IPHD_imaging_data.png" alt="Nature cover for fluorescence microscopy and metadata">
   </div>
   <div class="feature-text">
     <h2>Microscopy Metadata</h2>
@@ -22,7 +22,7 @@ title: Home
 
 <div class="feature-row right bg-white">
   <div class="feature-image">
-    <img src="assets/images/IPHD_cornerstone.png" alt="IPHD at the center with all aspects of research anchored to it.">
+    <img src="assets/images/IPHD_data_dag.png" alt="Interaction diagram of data and research.">
   </div>
   <div class="feature-text">
     <h2>The Persistent Identification of Instruments supports FAIR principles </h2>
