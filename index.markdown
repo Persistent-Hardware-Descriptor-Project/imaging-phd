@@ -22,7 +22,7 @@ title: Home
 
 <div class="feature-row right bg-white">
   <div class="feature-image">
-    <img src="assets/images/shutterstock_64005883.jpg" alt="Spider Web">
+    <img src="assets/images/IPHD_cornerstone.png" alt="IPHD at the center with all aspects of research anchored to it.">
   </div>
   <div class="feature-text">
     <h2>The Persistent Identification of Instruments supports FAIR principles </h2>
@@ -32,7 +32,7 @@ title: Home
 
 <div class="feature-row left bg-gray">
   <div class="feature-image">
-    <img src="assets/images/data_metadata_2-1.png" alt="Data Cartoon">
+    <img src="assets/images/IPHD_visual_of_metadata.png" alt="Depiction of metadata">
   </div>
   <div class="feature-text">
     <h2>Imaging-PHD provides PIDs for Instruments and Hardware Descriptors</h2>

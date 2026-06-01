@@ -59,9 +59,10 @@
 /* Reversed (white) NSF logo — appropriate for dark backgrounds
    per NSF branding guidelines: https://www.nsf.gov/policies/brand */
 .footer-nsf-logo {
-  height: 120px;
-  width: auto;
-  flex-shrink: 0;
+  width: 240px;
+  height: auto;
+  display: block;
+  max-width: none;
 }
 
 .footer-nsf-text {

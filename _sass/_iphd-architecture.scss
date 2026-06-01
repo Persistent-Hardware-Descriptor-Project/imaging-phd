@@ -242,6 +242,23 @@
   i:nth-child(3) { width: 85%; }
 }
 
+// Connector row — full-width SVG drawing upward arrows from
+// "Obtain PIDs" column to the three registry clouds above.
+// Hidden at narrow viewports since cloud positions change.
+.iphd-connectors {
+  grid-column: 1 / -1;
+  height: 52px;
+  position: relative;
+  z-index: 1;
+
+  &__svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+}
+
 // Workflow flow row (subgrid).
 .iphd-flow {
   grid-column: 1 / -1;
@@ -322,12 +339,18 @@
   display: block;
   height: 12px;
   width: 100%;
-  background-image: linear-gradient(to right, var(--d-muted) 70%, transparent 70%);
-  background-size: 6px 1.4px;
-  background-repeat: repeat-x;
-  background-position: left center;
   position: relative;
 
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 8px;
+    top: 50%;
+    height: 1.5px;
+    background: var(--d-muted);
+    transform: translateY(-50%);
+  }
   &::after {
     content: "";
     position: absolute;
@@ -483,7 +506,7 @@
   }
   .iphd-row-label { left: -26px; }
   .iphd-arch { padding-top: 22px; }
-
+  .iphd-connectors { display: none; }
   .iphd-col--mic, .iphd-col--cap, .iphd-col--obt, .iphd-col--pc { grid-column: 1; }
   .iphd-col--srch { grid-column: 2; }
   .iphd-col--hw, .iphd-col--mng, .iphd-col--pub, .iphd-col--qry { display: none; }

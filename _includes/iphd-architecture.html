@@ -4,14 +4,12 @@
   Drop this file at  _includes/iphd-architecture.html
   Render with:       {% include iphd-architecture.html %}
 
-  All URLs are pulled from _config.yml under the `iphd:` key — see the
-  config snippet shipped with this include. Any URL left blank in
-  config renders as a non-clickable element so the page never breaks.
+  URLs are pulled from _data/iphd.yml (site.data.iphd).
 
   Optional include parameters:
-    density   = "compact" | "comfortable" | "spacious"   (default comfortable)
-    accent    = "coral"   | "blue" | "sage" | "lilac"    (default coral)
-    show_clouds = "true"  | "false"                      (default true)
+    density     = "compact" | "comfortable" | "spacious"  (default comfortable)
+    accent      = "coral"   | "blue" | "sage" | "lilac"   (default coral)
+    show_clouds = "true"    | "false"                     (default true)
 
     {% include iphd-architecture.html density="spacious" accent="blue" %}
   ─────────────────────────────────────────────────────────────────────
@@ -20,7 +18,7 @@
 {%- assign density     = include.density     | default: "comfortable" -%}
 {%- assign accent      = include.accent      | default: "coral"       -%}
 {%- assign show_clouds = include.show_clouds | default: "true"        -%}
-{%- assign iphd        = site.iphd                                   -%}
+{%- assign iphd        = site.data.iphd                               -%}
 
 <div class="iphd-root iphd-density--{{ density }} iphd-accent--{{ accent }}">
 
@@ -49,6 +47,63 @@
           <span class="iphd-logo iphd-logo--sky">DataCite</span>
         </span>
       </a>
+    </div>
+
+    {%- comment -%}
+      ── Connector row ──────────────────────────────────────────────────
+      A full-width SVG that draws three upward-pointing arrows from the
+      "Obtain PIDs" column (col 5, ~43% from left) up to the three
+      registry cloud positions. The SVG uses viewBox="0 0 1000 52" with
+      percentage-based x coordinates calibrated to a typical desktop
+      width. The arrowhead marker is defined inline so this SVG is
+      self-contained even when included multiple times on a page.
+
+      If the arrows need tuning for your layout, adjust the x2 values
+      on the three <line> elements:
+        Left cloud  (CORE/RRID):  x2="210"
+        Middle cloud (PIDINST):   x2="490"
+        Right cloud (DataCite):   x2="770"
+      The y coordinates (y1="52" bottom, y2="4" top) should stay as-is.
+    ─────────────────────────────────────────────────────────────────── {%- endcomment -%}
+    <div class="iphd-connectors" aria-hidden="true">
+    <svg class="iphd-connectors__svg"
+        viewBox="0 0 100 10"
+        preserveAspectRatio="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <!--
+        x coordinates are percentage-based (0-100 = full width).
+        Tune x1 (source, Obtain PIDs column) and x2 values (cloud centers)
+        to match your layout. Current values calibrated for ~1000px content width.
+        vector-effect="non-scaling-stroke" keeps stroke at 1.4px regardless of stretch.
+        -->
+
+        <!-- Arrow to left cloud: CORE / RRID -->
+        <line x1="43" y1="10" x2="29" y2="1.5"
+            stroke="#6b7480" stroke-width="1.4"
+            vector-effect="non-scaling-stroke"/>
+        <polyline points="27,3.5 29,1 31,3.5"
+                fill="none" stroke="#6b7480" stroke-width="1.4"
+                stroke-linecap="round" stroke-linejoin="round"
+                vector-effect="non-scaling-stroke"/>
+
+        <!-- Arrow to center cloud: PIDINST -->
+        <line x1="43" y1="10" x2="50" y2="1.5"
+            stroke="#6b7480" stroke-width="1.4"
+            vector-effect="non-scaling-stroke"/>
+        <polyline points="48,3.5 50,1 52,3.5"
+                fill="none" stroke="#6b7480" stroke-width="1.4"
+                stroke-linecap="round" stroke-linejoin="round"
+                vector-effect="non-scaling-stroke"/>
+
+        <!-- Arrow to right cloud: DataCite -->
+        <line x1="43" y1="10" x2="73" y2="1.5"
+            stroke="#6b7480" stroke-width="1.4"
+            vector-effect="non-scaling-stroke"/>
+        <polyline points="71,3.5 73,1 75,3.5"
+                fill="none" stroke="#6b7480" stroke-width="1.4"
+                stroke-linecap="round" stroke-linejoin="round"
+                vector-effect="non-scaling-stroke"/>
+    </svg>
     </div>
     {%- endif -%}
 
@@ -137,7 +192,7 @@
       </a>
     </div>
 
-    {%- comment -%} Step pips (1‑4) aligned to their workflow columns {%- endcomment -%}
+    {%- comment -%} Step pips (1-4) aligned to workflow columns {%- endcomment -%}
     <div class="iphd-pips">
       <span class="iphd-pip-wrap iphd-col--mic iphd-col--ghost"></span>
       <span class="iphd-pip-wrap iphd-col--hw  iphd-col--ghost"></span>
@@ -158,7 +213,7 @@
     <div class="iphd-row-label">System<br>Architecture</div>
 
     <div class="iphd-arch__grid">
-      {%- comment -%} Row 1 — client pills (centered on their column) {%- endcomment -%}
+      {%- comment -%} Row 1 — client pills {%- endcomment -%}
       <a class="iphd-pill iphd-col--cap" href="{{ iphd.mmp_url }}" target="_blank" rel="noopener noreferrer">MMP<br>Frontend</a>
       <a class="iphd-pill iphd-col--srch" href="{{ iphd.foundry_url }}">Foundry<br>Client</a>
 
@@ -170,7 +225,7 @@
         <div class="iphd-app__label">Web Application</div>
       </div>
 
-      {%- comment -%} Row 3 — service cells, one per workflow column {%- endcomment -%}
+      {%- comment -%} Row 3 — service cells {%- endcomment -%}
       <a class="iphd-svc iphd-col--prepub" href="{{ iphd.prepub_url }}">
         <span>Pre-publication<br>metadata services</span>
         {%- include iphd-architecture/_doc.html label="NGM" -%}

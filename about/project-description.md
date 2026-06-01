@@ -84,5 +84,3 @@ Broader impact is embedded in every layer of our platform—tools, people, and c
     {% endtablerow %}
   {% endfor %}
 </table>
-
-* **2025:** *Imaging-PHD: Empowering data reuse and reproducibility through microscopy-community-deﬁned Persistent Hardware Descriptors*, NSF Cyberinfrastructure for Sustained Scientiﬁc Innovation (CSSI). [PDF](/assets/pdfs/Strambio_NSF_CSSI_#2513921_Part 2_AdditionalInfo_Slide Overview.pdf)

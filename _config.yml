@@ -16,7 +16,6 @@
 # Custom variables: accessible in templates via {{ site.myvariable }}.
 
 title: Imaging-PHD
-email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
   The Imaging-PHD project is building a scalable cyberinfrastructure framework to capture, store, and disseminate persistent and machine-actionable metadata describing microscopy hardware configurations at the time of data acquisition
   This project is a proof of concept of clear, standardized records of the equipment used in research. These records, known as Persistent Hardware Descriptors (PHDs), are stored permanently and can be directly linked to scientific data and publications.
@@ -24,7 +23,7 @@ logo: /assets/images/IPHD_logo_small.png
 baseurl: "/imaging-phd" # site subpath (relative to organization GitHub)
 url: "https://Persistent-Hardware-Descriptor-Project.github.io/imaging-phd" # the base hostname & protocol 
 # github_username:  jcpetitto
-email: caterina.strambio@umassmed.edu
+email: imaging-phd@umassmed.edu
 
 # Build settings
 theme: minima
