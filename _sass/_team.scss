@@ -1,0 +1,169 @@
+/* ================================= */
+/*  TEAM PAGES                        */
+/* ================================= */
+
+/* --- View toggle buttons --- */
+.team-view-toggle {
+  margin-bottom: 2rem;
+}
+
+.toggle-btn {
+  padding: 0.4rem 1rem;
+  border: 2px solid #1B3B5D;
+  background: white;
+  color: #1B3B5D;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-right: 0.5rem;
+  border-radius: 4px;
+}
+
+.toggle-btn.active {
+  background: #1B3B5D;
+  color: white;
+}
+
+/* --- Shared styles --- */
+.team-photo-placeholder {
+  background-color: #d0d8e4;
+}
+
+.team-title {
+  color: #555;
+  font-style: italic;
+  margin: 0.1rem 0 0.4rem;
+}
+
+.team-bio {
+  margin: 0.4rem 0;
+}
+
+.team-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.team-link {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  background-color: #1B3B5D;
+  color: #ffffff !important;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.team-link:hover {
+  background-color: #ffcc00;
+  color: #1B3B5D !important;
+  text-decoration: none;
+}
+
+/* --- List view --- */
+.team-list-item {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.team-list-photo {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.team-list-info h3 {
+  margin: 0 0 0.2rem;
+}
+
+/* --- Grid view --- */
+.team-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.team-card {
+  width: calc(33% - 1rem);
+  background: #f0f4f8;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+
+.team-card-photo {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  display: block;
+}
+
+.team-card-info h3 {
+  margin: 0 0 0.2rem;
+  font-size: 1rem;
+}
+
+.team-card .team-links {
+  justify-content: center;
+}
+
+/* --- Individual member profile page --- */
+.member-profile {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.member-photo {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.member-title {
+  font-size: 1.1rem;
+  color: #555;
+  font-style: italic;
+  margin: 0.2rem 0;
+}
+
+.member-affiliation {
+  color: #777;
+  font-size: 0.95rem;
+  margin-bottom: 0.8rem;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .team-card {
+    width: 100%;
+  }
+
+  .team-list-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .team-links {
+    justify-content: center;
+  }
+
+  .member-profile {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}

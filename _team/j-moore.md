@@ -1,11 +1,11 @@
 ---
-name: "David Grunwald"
+name: "Josh Moore"
 title: ""
 sc: true
-affiliation: "UMass Chan Medical School"
-photo: /assets/images/team/d-grunwald.jpg
-email: "david.grunwald@umassmed.edu"
-github: "https://github.com/dgrundwald"
+affiliation: "German BioImaging; OME"
+email: "josh@openmicroscopy.org"
+github: "https://github.com/joshmoore"
+
 ---
 
 Full bio goes here. This can be as long as needed.

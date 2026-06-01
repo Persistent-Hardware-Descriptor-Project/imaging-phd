@@ -1,11 +1,9 @@
 ---
-name: "David Grunwald"
+name: "Aleksander Drozdz"
 title: ""
-sc: true
-affiliation: "UMass Chan Medical School"
-photo: /assets/images/team/d-grunwald.jpg
-email: "david.grunwald@umassmed.edu"
-github: "https://github.com/dgrundwald"
+sc: false
+affiliation: "SciCrunch, Inc."
+email: "aleksander@scicrunch.com"
 ---
 
 Full bio goes here. This can be as long as needed.

@@ -1,6 +1,7 @@
 ---
 name: "Jane Smith"
-title: "Principal Investigator"
+title: ""
+sc: true
 affiliation: "Department of Imaging Science, University Name"
 photo: /assets/images/team/c-strambio-de-castillia.jpg
 email: "jsmith@institution.edu"
@@ -11,7 +12,10 @@ linkedin: "https://linkedin.com/in/jsmith"
 website: "https://jsmith.lab.edu"
 ---
 
-Full bio goes here. This can be as long as needed.
+Brief Bio
+
+Why IPHD?
+
 
 ## Research Interests
 

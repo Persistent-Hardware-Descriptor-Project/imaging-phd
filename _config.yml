@@ -36,6 +36,9 @@ collections:
   team:
     output: true
     permalink: /about/team/:name/
+  projects:
+    output: true
+    permalink: /projects/:name/
 
 # sets the defaults for each member of a collection
 defaults:
@@ -44,6 +47,12 @@ defaults:
       type: team
     values:
       layout: team-member
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: page
+
 
 # Items or directories excluded from processing
 # exclude:

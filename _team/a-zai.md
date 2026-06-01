@@ -1,11 +1,9 @@
 ---
-name: "David Grunwald"
+name: "Adrian Zai"
 title: ""
 sc: true
 affiliation: "UMass Chan Medical School"
-photo: /assets/images/team/d-grunwald.jpg
-email: "david.grunwald@umassmed.edu"
-github: "https://github.com/dgrundwald"
+email: "adrian.zai@umassmed.edu"
 ---
 
 Full bio goes here. This can be as long as needed.

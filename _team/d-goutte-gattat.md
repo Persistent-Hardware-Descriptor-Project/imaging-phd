@@ -1,11 +1,9 @@
 ---
-name: "David Grunwald"
+name: "Damien Goutte-Gattat"
 title: ""
-sc: true
-affiliation: "UMass Chan Medical School"
-photo: /assets/images/team/d-grunwald.jpg
-email: "david.grunwald@umassmed.edu"
-github: "https://github.com/dgrundwald"
+sc: false
+affiliation: "German BioImaging"
+email: "damien@gerbi-gmb.de"
 ---
 
 Full bio goes here. This can be as long as needed.

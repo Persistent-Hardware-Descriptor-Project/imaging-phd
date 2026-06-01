@@ -1,0 +1,49 @@
+<footer class="site-footer">
+  <div class="footer-wrapper">
+
+    <div class="footer-top">
+
+      <!-- Left: IPHD branding -->
+      <div class="footer-brand">
+        {% if site.logo %}
+          <img src="{{ site.logo | relative_url }}" alt="{{ site.title }} logo" class="footer-logo">
+        {% endif %}
+        <span class="footer-site-title">{{ site.title }}</span>
+      </div>
+
+      <!-- Right: NSF acknowledgment -->
+      <!-- NSF display guidelines require the full-color logo on white backgrounds
+           and the reversed (white) logo on dark backgrounds.
+           This footer uses the reversed version since the background is dark.
+           Logo source: assets/images/nsf_branding/
+           NSF branding guidelines: https://www.nsf.gov/policies/brand        -->
+      <div class="footer-nsf">
+        <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2513921"
+           target="_blank" rel="noopener">
+          <img src="{{ '/assets/images/nsf_branding/USNSF_Logo_Lockup_stacked_RGB_reversed_1200ppi.png' | relative_url }}"
+               alt="National Science Foundation logo"
+               class="footer-nsf-logo">
+        </a>
+        <p class="footer-nsf-text">
+          This material is based upon work supported by the National Science Foundation under
+          <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2513921"
+             target="_blank" rel="noopener">Grant No. 2513921</a>.
+          Any opinions, findings, and conclusions or recommendations expressed in this
+          material are those of the author(s) and do not necessarily reflect the views
+          of the National Science Foundation.
+        </p>
+      </div>
+
+    </div><!-- .footer-top -->
+
+    <div class="footer-bottom">
+      <span class="footer-contact">
+        Contact: <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+      </span>
+      <span class="footer-copy">
+        &copy; {{ site.time | date: '%Y' }} {{ site.title }}
+      </span>
+    </div>
+
+  </div><!-- .footer-wrapper -->
+</footer>

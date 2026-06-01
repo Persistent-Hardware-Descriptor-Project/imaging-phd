@@ -1,11 +1,10 @@
 ---
-name: "David Grunwald"
+name: "Judith Lacoste"
 title: ""
 sc: true
-affiliation: "UMass Chan Medical School"
-photo: /assets/images/team/d-grunwald.jpg
-email: "david.grunwald@umassmed.edu"
-github: "https://github.com/dgrundwald"
+affiliation: "MIA Cellavie"
+email: "jlacoste@miacellavie.com"
+github: "https://github.com/JSDLacoste"
 ---
 
 Full bio goes here. This can be as long as needed.

@@ -1,0 +1,87 @@
+{% comment %}
+  Gantt Chart — Restructured layout
+  Data source: _data/gantt.yml
+
+  Structure:
+    .gantt-outer (flex row)
+    ├── .gantt-labels-col (flex column — objective labels, NOT part of the grid)
+    │     ├── .gantt-labels-header  (spacer matching header row height)
+    │     └── .gantt-obj-label × N  (flex-grow: N = deliverable count)
+    └── .gantt-grid (CSS Grid — ID + title + period columns only)
+          ├── header row
+          └── data rows × total deliverables
+
+  By separating the labels from the grid entirely, the label cells
+  cannot influence grid row heights. flex-grow: N on each label
+  proportionally sizes it to span the correct number of rows.
+  grid-auto-rows sets a consistent row height for perfect alignment.
+
+  To link a deliverable to a project page, add a url to the
+  link: field in _data/gantt.yml for that deliverable.
+{% endcomment %}
+
+<div class="gantt-wrapper">
+  <div class="gantt-outer">
+
+    <!-- ── LEFT: Objective labels (flex column, outside the grid) ── -->
+    <div class="gantt-labels-col">
+
+      <!-- Spacer: matches header row height -->
+      <div class="gantt-labels-header">Obj.</div>
+
+      <!-- One label per objective, sized proportionally by deliverable count -->
+      {% for objective in site.data.gantt.objectives %}
+      {% assign label-height = objective.deliverables.size | times: 36 %}
+        <div class="gantt-obj-label gantt-obj-{{ objective.color }}"
+            style="height: {{ label-height }}px;">
+        <span>{{ objective.label }}</span>
+      </div>
+      {% endfor %}
+
+    </div><!-- .gantt-labels-col -->
+
+    <!-- ── RIGHT: Main grid (ID + title + period cols) ────────────── -->
+    <div class="gantt-grid">
+
+      <!-- Header row -->
+      <div class="gantt-header gantt-header-id"></div>
+      <div class="gantt-header gantt-header-title">Deliverable</div>
+      {% for period in site.data.gantt.periods %}
+      <div class="gantt-header gantt-header-period">{{ period }}</div>
+      {% endfor %}
+
+      <!-- Data rows -->
+      {% for objective in site.data.gantt.objectives %}
+        {% for deliverable in objective.deliverables %}
+
+          <!-- Deliverable ID -->
+          <div class="gantt-del-id gantt-id-{{ objective.color }}">
+            {% if deliverable.link %}
+              <a href="{{ deliverable.link }}">{{ deliverable.id }}</a>
+            {% else %}
+              {{ deliverable.id }}
+            {% endif %}
+          </div>
+
+          <!-- Deliverable title -->
+          <div class="gantt-del-title">{{ deliverable.title }}</div>
+
+          <!-- Timeline cells -->
+          {% for cell in deliverable.cells %}
+            {% if cell.type == "empty" %}
+            <div class="gantt-cell gantt-cell-empty"
+                 style="grid-column: span {{ cell.span }};"></div>
+            {% else %}
+            <div class="gantt-cell gantt-cell-{{ cell.type }} gantt-bar-{{ objective.color }}"
+                 style="grid-column: span {{ cell.span }};">
+              {% if cell.label %}<span class="gantt-cell-label">{{ cell.label }}</span>{% endif %}
+            </div>
+            {% endif %}
+          {% endfor %}
+
+        {% endfor %}
+      {% endfor %}
+
+    </div><!-- .gantt-grid -->
+  </div><!-- .gantt-outer -->
+</div><!-- .gantt-wrapper -->

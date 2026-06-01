@@ -1,11 +1,11 @@
 ---
-name: "David Grunwald"
+name: "Alex Rigano"
 title: ""
-sc: true
+sc: false
 affiliation: "UMass Chan Medical School"
-photo: /assets/images/team/d-grunwald.jpg
-email: "david.grunwald@umassmed.edu"
-github: "https://github.com/dgrundwald"
+photo: 
+email: "alex.rigano@umassmed.edu"
+github: "https://github.com/Akramhar"
 ---
 
 Full bio goes here. This can be as long as needed.

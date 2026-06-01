@@ -1,11 +1,10 @@
 ---
-name: "David Grunwald"
+name: "Koon (Steven) Wong"
 title: ""
-sc: true
+sc: false
 affiliation: "UMass Chan Medical School"
-photo: /assets/images/team/d-grunwald.jpg
-email: "david.grunwald@umassmed.edu"
-github: "https://github.com/dgrundwald"
+email: "koon.wong@umassmed.edu"
+github: "https://github.com/stevenwong-umchan"
 ---
 
 Full bio goes here. This can be as long as needed.

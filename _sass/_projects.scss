@@ -1,0 +1,154 @@
+/* ================================= */
+/*  PROJECTS LISTING                  */
+/* ================================= */
+
+/*
+  Color variables imported from _colors.scss via main.scss.
+  Do not hardcode objective/category hex values here.
+*/
+
+.projects-listing {
+  margin-top: 1.5rem;
+}
+
+/* --- Category block (details/summary) --- */
+.category-block {
+  margin-bottom: 1rem;
+  border: 0.5px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1.2rem;
+  background-color: #1B3B5D;
+  color: #ffffff;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.category-header::-webkit-details-marker {
+  display: none;
+}
+
+.category-header::before {
+  content: '▶';
+  font-size: 0.7rem;
+  margin-right: 0.6rem;
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+
+details[open] .category-header::before {
+  transform: rotate(90deg);
+}
+
+.category-title {
+  font-size: 1rem;
+  font-weight: 500;
+  flex: 1;
+}
+
+.category-count {
+  font-size: 0.75rem;
+  opacity: 0.75;
+  margin-left: 1rem;
+}
+
+.category-description {
+  padding: 0.8rem 1.2rem 0;
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0;
+}
+
+/* --- Category header colors — match Gantt objective colors --- */
+.category-block.category-green .category-header { background-color: $color-obj-green; }
+.category-block.category-red   .category-header { background-color: $color-obj-red; }
+.category-block.category-blue  .category-header { background-color: $color-obj-blue; }
+.category-block.category-grey  .category-header { background-color: $color-obj-grey; }
+
+/* --- Project list inside expanded category --- */
+.project-list {
+  padding: 0.8rem 1.2rem 1rem;
+}
+
+.project-item {
+  padding: 0.8rem 0;
+  border-bottom: 0.5px solid #e0e0e0;
+}
+
+.project-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.project-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.3rem;
+}
+
+.project-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin: 0;
+  color: #1B3B5D;
+}
+
+.project-description {
+  font-size: 0.875rem;
+  color: #555;
+  margin: 0.3rem 0 0.6rem;
+  line-height: 1.5;
+}
+
+/* --- Status badge --- */
+.project-status {
+  font-size: 0.7rem;
+  padding: 2px 7px;
+  border-radius: 10px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.status-active   { background: #e6f4ea; color: #1a7a3a; border: 0.5px solid #aaddbb; }
+.status-complete { background: #e8eef8; color: #1a3a7a; border: 0.5px solid #aabbdd; }
+.status-planned  { background: #f8f4e8; color: #7a5a1a; border: 0.5px solid #ddccaa; }
+
+/* --- Output links --- */
+.project-outputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+}
+
+.output-link {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: #1B3B5D;
+  color: #ffffff !important;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.output-link:hover {
+  background: #ffcc00;
+  color: #1B3B5D !important;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .project-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+}

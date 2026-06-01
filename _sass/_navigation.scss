@@ -1,0 +1,67 @@
+/* ================================= */
+/*  NAVIGATION                        */
+/* ================================= */
+
+/* 1. The Bar Itself (Background) */
+.site-header {
+  background-color: #1B3B5D;
+  /* border-top: none; */
+  /* border-bottom: 3px solid #ffcc00; */
+}
+
+/* 2. The Site Title (Top Left) */
+.site-title, .site-title:visited {
+  color: #ffffff !important;
+  font-weight: bold;
+}
+
+/* 3. The Links (About, Projects, etc.) */
+.page-link {
+  color: #e0e0e0 !important;
+}
+
+/* 4. Hover Effect */
+.page-link:hover {
+  color: #ffcc00 !important;
+  text-decoration: none;
+}
+
+/* 5. Mobile Menu Icon (Hamburger) */
+.site-nav .menu-icon svg path {
+  fill: #ffffff;
+}
+
+/* --- DROPDOWN NAVIGATION --- */
+.nav-dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #1B3B5D;
+  min-width: 180px;
+  z-index: 1000;
+  border-top: 2px solid #ffcc00;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.nav-dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #e0e0e0 !important;
+  white-space: nowrap;
+}
+
+.dropdown-item:hover {
+  color: #ffcc00 !important;
+  text-decoration: none;
+  background-color: rgba(255,255,255,0.05);
+}
