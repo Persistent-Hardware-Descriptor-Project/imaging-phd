@@ -1,12 +1,12 @@
 // _sass/_pid-diagrams.scss
-// ─────────────────────────────────────────────────────────────────────
+// ---------------------------------------------------------------------
 // Styles for _includes/pid-diagrams.html
 // Three interactive SVG diagrams with cross-highlight system.
 //
 // TO RETHEME: change the four $pid-* color variables below.
-// ─────────────────────────────────────────────────────────────────────
+// ---------------------------------------------------------------------
 
-// ── Color tokens ───────────────────────────────────────────────────────
+// -- Color tokens -------------------------------------------------------
 
 $pid-rrid-facility:   #aecce8;
 $pid-rrid-model:      #7aaed8;
@@ -22,142 +22,181 @@ $pid-stop-text:       #8a2010;
 $pid-highlight:       #ffcc00;
 $pid-dim-opacity:     0.22;
 
-// ── CSS custom properties ─────────────────────────────────────────────
+// -- CSS custom properties ---------------------------------------------
 
 :root {
-  --pid-rrid-facility:    #{$pid-rrid-facility};
-  --pid-rrid-model:       #{$pid-rrid-model};
-  --pid-pidinst:          #{$pid-pidinst};
-  --pid-phd:              #{$pid-phd};
-  --pid-stroke:           #{$pid-stroke};
-  --pid-decision-fill:    #{$pid-decision-fill};
-  --pid-decision-stroke:  #{$pid-decision-stroke};
-  --pid-stop:             #{$pid-stop};
-  --pid-highlight:        #{$pid-highlight};
+    --pid-rrid-facility:    #{$pid-rrid-facility};
+    --pid-rrid-model:       #{$pid-rrid-model};
+    --pid-pidinst:          #{$pid-pidinst};
+    --pid-phd:              #{$pid-phd};
+    --pid-stroke:           #{$pid-stroke};
+    --pid-decision-fill:    #{$pid-decision-fill};
+    --pid-decision-stroke:  #{$pid-decision-stroke};
+    --pid-stop:             #{$pid-stop};
+    --pid-highlight:        #{$pid-highlight};
 }
 
-// ── Layout ─────────────────────────────────────────────────────────────
+// -- Layout -------------------------------------------------------------
 
 .pid-diagrams {
-  margin: 2rem 0;
+    max-width: 900px;
+    margin: 2rem auto;
 }
 
 .pid-diagrams text {
-  font-family: inherit;
+    font-family: inherit;
+}
+
+.pid-diagram--concentric svg {
+    max-width: 400px;
+    display: block;
+    margin: 0 auto;
 }
 
 /*
-  Two-column grid layout:
-    Col 1: Flowchart (spans both rows)
-    Col 2 Row 1: Concentric ellipses
-    Col 2 Row 2: Data hierarchy
+    Two-column grid layout:
+        Col 1 Row 1: Concentric ellipses
+        Col 1 Row 2: Data hierarchy
+        Col 2: Flowchart (spans both rows)
 
-  ┌──────────────┬──────────────┐
-  │              │  Concentric  │
-  │  Flowchart   ├──────────────┤
-  │              │  Hierarchy   │
-  └──────────────┴──────────────┘
+    |--------------|--------------|
+    |  Concentric  |              |
+    |--------------|   Flowchart  |
+    |  Hierarchy   |              |
+    |--------------|--------------|
 */
 .pid-diagrams__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
-  gap: 2rem;
-  align-items: start;
+    display: grid;
+    grid-template-columns: 1fr 0.7fr;
+    grid-template-rows: auto auto;
+    gap: 2rem;
+    align-items: start;
 }
 
 .pid-diagram--flowchart {
-  grid-column: 2;
-  grid-row: 1 / 3;     /* span both rows */
-  align-self: center;  /* vertically center the tall flowchart */
+    grid-column: 2;
+    grid-row: 1 / 3;     /* span both rows */
+    align-self: center;  /* vertically center the tall flowchart */
 }
 
 .pid-diagram--concentric {
-  grid-column: 1;
-  grid-row: 1;
+    grid-column: 1;
+    grid-row: 1;
 }
 
 .pid-diagram--hierarchy {
-  grid-column: 1;
-  grid-row: 2;
+    grid-column: 1;
+    grid-row: 2;
+}
+
+/*
+    Two-column grid layout:
+        Row 1: Flowchart (spans both columns)
+        Col 1 Row 2: Concentric ellipses
+        Col 2 Row 2: Data hierarchy
+
+    |-----------------------------|
+    |          Flowchart          |
+    |-----------------------------|
+    |  Concentric  |  Hierarchy   |
+    |-----------------------------|
+
+    For use with pid-diagrams-horiz.html
+    Needs tinkering with if used; not sure if it will be used.
+*/
+.pid-diagrams-horiz__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 2rem;
+    align-items: start;
+}
+
+.pid-diagram--flowchart-horiz {
+    grid-column: 1 / 3; /* span both columns */
+    grid-row: 1;         
+    align-self: center;
+}
+
+.pid-diagram--concentric-horiz {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.pid-diagram--hierarchy-horiz {
+    grid-column: 2;
+    grid-row: 2;
 }
 
 .pid-diagram {
-  &__title {
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-align: center;
-    color: #777;
-    margin: 0 0 0.4rem;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-  }
+    &__title {
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-align: center;
+        color: #777;
+        margin: 0 0 0.4rem;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+    }
 
-  svg {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
+    svg {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
 }
 
-// ── Cross-highlight system ─────────────────────────────────────────────
+// -- Cross-highlight system ---------------------------------------------
 
 [data-concept] {
-  cursor: pointer;
-  transition: opacity 0.18s ease, filter 0.18s ease;
+    cursor: pointer;
+    transition: opacity 0.18s ease, filter 0.18s ease;
 }
 
 // Dim non-highlighted, non-ancestor elements when a highlight is active
 .pid-diagrams.has-highlight [data-concept]:not(.is-highlighted):not(.is-ancestor) {
-  opacity: $pid-dim-opacity;
-  filter: saturate(0.2);
+    opacity: $pid-dim-opacity;
+    filter: saturate(0.2);
 }
 
 // Glow on the directly highlighted concept
 [data-concept].is-highlighted {
-  opacity: 1 !important;
-  filter: drop-shadow(0 0 5px #{$pid-highlight})
-          drop-shadow(0 0 10px rgba($pid-highlight, 0.6)) !important;
+    opacity: 1 !important;
+    filter: drop-shadow(0 0 5px #{$pid-highlight})
+                    drop-shadow(0 0 10px rgba($pid-highlight, 0.6)) !important;
 }
 
 // Ancestor elements in the hierarchy diagram: fully visible, no glow.
 // Only applies to elements in .pid-diagram--hierarchy (set via JS).
 [data-concept].is-ancestor {
-  opacity: 1 !important;
-  filter: none !important;
+    opacity: 1 !important;
+    filter: none !important;
 }
 
 [data-trigger] {
-    cursor: pointer;
-    transition: opacity 0.18s ease, filter 0.18s ease;
+        cursor: pointer;
+        transition: opacity 0.18s ease, filter 0.18s ease;
 }
 
 // Dim data-trigger elements when a different concept is active
 .pid-diagrams.has-highlight [data-trigger]:not(.is-ancestor) {
-    opacity: $pid-dim-opacity;
-    filter: saturate(0.2);
+        opacity: $pid-dim-opacity;
+        filter: saturate(0.2);
 }
 
-// ── SVG base styles ────────────────────────────────────────────────────
-
-.pid-diagrams text {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  pointer-events: none;
-}
-
-// ── Responsive: stack all three on narrow viewports ───────────────────
+// -- Responsive: stack all three on narrow viewports -------------------
 
 @media (max-width: 640px) {
-  .pid-diagrams__grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-  }
+    .pid-diagrams__grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
 
-  .pid-diagram--flowchart,
-  .pid-diagram--concentric,
-  .pid-diagram--hierarchy {
-    grid-column: 1;
-    grid-row: auto;
-    align-self: auto;
-  }
+    .pid-diagram--flowchart,
+    .pid-diagram--concentric,
+    .pid-diagram--hierarchy {
+        grid-column: 1;
+        grid-row: auto;
+        align-self: auto;
+    }
 }

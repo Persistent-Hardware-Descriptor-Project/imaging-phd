@@ -15,332 +15,487 @@
         phd            — Hardware Descriptor PHD (innermost / step 4)
 
     To visually edit the SVGs, use Inkscape (or Illustrator) to edit the individual SVGs and then open in a text file to update the values below. Note: visual editors may add extraneous markup and/or do not maintain variable names, so use the SVG produced in the editor to GUIDE, NOT fully replace, the SVGs below (UNLESS you have familiarity with setting up the editor to "play nice" with variables, etc.; currently, I (JP) am not aware of how / if this is possible).
-  ---------------------------------------------------------------------
+    Inkscape applies transform matrices to groups rather than updating raw coordinates. The data-concept attributes are preserved and the interaction system works normally. Colors restored to var(--pid-...) references.
+    ---------------------------------------------------------------------
 {% endcomment %}
 
 <div class="pid-diagrams" id="pid-diagrams">
-  <div class="pid-diagrams__grid">
+    <div class="pid-diagrams__grid">
 
-    {%- comment -%} -- Diagram 1: Concentric Ellipses -- {%- endcomment -%}
-    <div class="pid-diagram pid-diagram--concentric">
-        <p class="pid-diagram__title">PID Hierarchy</p>
-        <p class="pid-diagram__caption">Capable of assigning PID in different tiers.</p>
-        <svg viewBox="0 0 500 310" role="img" aria-label="Concentric ellipses showing PID hierarchy from Facility RRID outermost to Hardware Descriptor PID innermost" xmlns="http://www.w3.org/2000/svg">
+        {%- comment -%} -- Diagram 1: Concentric Ellipses -- {%- endcomment -%}
+        <div class="pid-diagram pid-diagram--concentric">
+            <p class="pid-diagram__title">PID Hierarchy</p>
+            <p class="pid-diagram__caption">Capable of assigning PID in different tiers.</p>
+            <svg viewBox="0 0 500 310" role="img" aria-label="Concentric ellipses showing PID hierarchy from Facility RRID outermost to Hardware Descriptor PID innermost" xmlns="http://www.w3.org/2000/svg">
+                <!-- Ring 1: Facility RRID — outermost -->
+                <g data-concept="rrid-facility" data-level="1">
+                    <ellipse cx="250" cy="155" rx="245" ry="146" fill="var(--pid-rrid-facility)" stroke="var(--pid-stroke)" stroke-width="2"/>
+                    <text x="250" y="34" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="700" fill="#0a2040">
+                    Facility PID
+                    </text>
+                </g>
 
-            <!-- Shadow ellipses — depth effect at base -->
-            <ellipse cx="250" cy="300" rx="238" ry="11" fill="rgba(10,32,64,0.10)"/>
-            <ellipse cx="250" cy="302" rx="188" ry="8"  fill="rgba(10,32,64,0.08)"/>
-            <ellipse cx="250" cy="304" rx="139" ry="5"  fill="rgba(10,32,64,0.06)"/>
-            <ellipse cx="250" cy="305" rx="92"  ry="3"  fill="rgba(10,32,64,0.05)"/>
+                <!-- Ring 2: Model RRID -->
+                <g data-concept="rrid-model" data-level="2">
+                    <ellipse cx="250" cy="166" rx="194" ry="110" fill="var(--pid-rrid-model)" stroke="var(--pid-stroke)" stroke-width="2"/>
+                    <text x="250" y="78" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="700" fill="#0a2040">
+                        Model PID
+                    </text>
+                </g>
 
-            <!-- Ring 1: Facility RRID — outermost -->
-            <g data-concept="rrid-facility" data-level="1">
-                <ellipse cx="250" cy="155" rx="245" ry="146" fill="var(--pid-rrid-facility)" stroke="var(--pid-stroke)" stroke-width="2"/>
-                <text x="250" y="30" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="700" fill="#0a2040">
-                1. Facility PID
-                </text>
+                <!-- Ring 3: Instance PIDINST -->
+                <g data-concept="pidinst" data-level="3">
+                    <ellipse cx="250" cy="175" rx="144" ry="78" fill="var(--pid-pidinst)" stroke="var(--pid-stroke)" stroke-width="2"/>
+                    <text x="250" y="118" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="700" fill="#ffffff">
+                        Instance PID
+                    </text>
+                </g>
+
+                <!-- Ring 4: Hardware Descriptor PHD — innermost -->
+                <g data-concept="phd" data-level="4">
+                    <ellipse cx="250" cy="183" rx="96" ry="52" fill="var(--pid-phd)" stroke="var(--pid-stroke)" stroke-width="2"/>
+                    <text x="250" y="173" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="700" fill="#ffffff">
+                        Hardware
+                    </text>
+                    <text x="250" y="188" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="700" fill="#ffffff">
+                        Descriptor PID
+                    </text>
+                </g>
+            </svg>
+        </div>
+    {%- comment -%} -- Diagram 2: Data Hierarchy Cascade -- {%- endcomment -%}
+        <div class="pid-diagram pid-diagram--hierarchy">
+            <p class="pid-diagram__title">Data Structure</p>
+            <p class="pid-diagram__caption">FAIR image data through concatenated for core facilities and instruments.</p>
+
+            <svg viewBox="0 0 445 230" role="img" aria-label="Cascading hierarchy showing how PIDs relate to data structure levels" xmlns="http://www.w3.org/2000/svg">
+
+                <!-- Dashed drop lines from each box center to PID bar -->
+                <line x1="47.069595"  y1="39.482193"  x2="47.069595"  y2="177.66554" stroke="var(--pid-rrid-facility)" stroke-width="1.21389" stroke-dasharray="4, 3"/>
+                <line x1="124.55788"  y1="83.897949"  x2="124.55788"  y2="178.64955" stroke="var(--pid-rrid-model)"    stroke-width="1.22963" stroke-dasharray="4, 3"/>
+                <line x1="211.22453"  y1="127.32973"  x2="211.22453"  y2="178.64955" stroke="var(--pid-pidinst)" stroke-width="1.27528" stroke-dasharray="4, 3"/>
+                <line x1="308.34338"  y1="143.68492"  x2="308.34338"  y2="178.26131" stroke="var(--pid-phd)" stroke-width="1.04677" stroke-dasharray="4, 3"/>
+
+                <!-- Box 1: Core Facility (RRID) -->
+                <g data-concept="rrid-facility"  data-level="1" transform="matrix(0.75375863,0,0,0.84078179,4.1343597,-7.5137912)">
+                    <rect x="7.8030295" y="16.675098" width="104.33743" height="40.521873" rx="3.8643491"
+                        fill="var(--pid-rrid-facility)" stroke="var(--pid-stroke)" stroke-width="1.10605"/>
+                    <text x="60.463745" y="29.984009" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="#0a2040">Core Facility</text>
+                    <text x="60.463745" y="45.984009" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="600" fill="#0a2040">(RRID)</text>
+                </g>
+
+                <!-- Box 2: Instrument Model (RRID) -->
+                <g data-concept="rrid-model" data-level="2" transform="matrix(0.80282694,0,0,0.80282694,27.199987,-18.317123)">
+                    <rect x="47.929935" y="84.833984" width="151.31604" height="42.236076" rx="5.6042976" fill="var(--pid-rrid-model)" stroke="var(--pid-stroke)" stroke-width="1.35987"/>
+                    <text x="123" y="99" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="#0a2040">Instrument Model</text>
+                    <text x="123" y="115" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="600" fill="#0a2040">(RRID)</text>
+                </g>
+
+                <!-- Box 3: Instrument Instance (PIDINST) -->
+                <g data-concept="pidinst"  data-level="3" transform="matrix(0.78510622,0,0,0.78510622,81.617048,-27.808083)">
+                    <rect x="87.961334" y="153.88138" width="162.07733" height="43.157295" rx="6.0028644" fill="var(--pid-pidinst)" stroke="var(--pid-stroke)" stroke-width="1.42266"/>
+                    <text x="169" y="169" text-anchor="middle" dominant-baseline="central"
+                        font-size="13" font-weight="700" fill="#ffffff">Instrument Instance</text>
+                    <text x="169" y="185" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="600" fill="#ffffff">(PIDINST)</text>
+                </g>
+
+                <!-- Box 4: Hardware Configuration (PHD) -->
+                <g data-concept="phd" transform="matrix(0.86113741,0,0,0.86113741,119.93761,-59.920213)">
+                    <rect x="127.97364" y="227.82973" width="184.68492" height="39.19664" rx="6.8401823"
+                        fill="var(--pid-phd)" stroke="var(--pid-stroke)" stroke-width="1.44728"/>
+                    <text x="221" y="241" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="#ffffff">Hardware Configuration</text>
+                    <text x="219" y="257" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="600" fill="#ffffff">(PHD)</text>
+                </g>
+
+                <!-- PID Reference Bar background -->
+                <rect x="4.6553221" y="178.65422" width="368.87872" height="43.99065" rx="5.0950098" fill="#f0f4f8" stroke="#cccccc" stroke-width="1.00935"/>
+
+                <!-- Bar section: Facility RRID -->
+                <g data-concept="rrid-facility" transform="translate(0.55787589,-89.350447)">
+                    <rect x="10" y="270" width="86" height="40" rx="4"
+                        fill="var(--pid-rrid-facility)" opacity="0.85"/>
+                    <text x="53" y="286" text-anchor="middle" dominant-baseline="central" font-size="9" font-weight="700" fill="#0a2040">RRID:</text>
+                    <text x="53" y="298" text-anchor="middle" dominant-baseline="central" font-size="8" fill="#0a2040">SRC_facility</text>
+                </g>
+
+                <!-- Bar section: Model RRID — level 2 -->
+                <g data-concept="rrid-model" data-level="2" transform="translate(0.55787589,-89.350447)">
+                    <rect x="100" y="270" width="86" height="40" rx="4"
+                        fill="var(--pid-rrid-model)" opacity="0.85"/>
+                    <text x="143" y="286" text-anchor="middle" dominant-baseline="central" font-size="9" font-weight="700" fill="#0a2040">RRID:</text>
+                    <text x="143" y="298" text-anchor="middle" dominant-baseline="central" font-size="8" fill="#0a2040">SRC_model</text>
+                </g>
+
+                <!-- Bar section: PIDINST — level 3 -->
+                <g data-concept="pidinst" data-level="3"
+                    transform="translate(0.55787589,-89.350447)">
+                    <rect x="190" y="270" width="86" height="40" rx="4" fill="var(--pid-pidinst)" opacity="0.85"/>
+                    <text x="233" y="286" text-anchor="middle" dominant-baseline="central" font-size="9" font-weight="700" fill="#ffffff">PIDINST:</text>
+                    <text x="233" y="298" text-anchor="middle" dominant-baseline="central" font-size="8" fill="#ffffff">10.83185/…</text>
+                </g>
+
+                <!-- Bar section: PHD — level 4 -->
+                <g data-concept="phd" data-level="4"
+                    transform="translate(0.55787589,-89.350447)">
+                    <rect x="280" y="270" width="86" height="40" rx="4"
+                        fill="var(--pid-phd)" opacity="0.85"/>
+                    <text x="323" y="286" text-anchor="middle" dominant-baseline="central" font-size="9" font-weight="700" fill="#ffffff">PHD-ID:</text>
+                    <text x="323" y="298" text-anchor="middle" dominant-baseline="central"
+                        font-size="8" fill="#ffffff">10.83185/…</text>
+                </g>
+            <g id="layer2">
+            <g
+            id="g2"
+            transform="matrix(0.22592931,0,0,0.2149196,354.25316,98.73896)">
+            <text
+                xml:space="preserve"
+                transform="translate(-424.38245,-918.26666)"
+                id="text15-7"
+                style="font-weight:800;font-size:13.3333px;font-family:'-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect15-4);display:inline;fill:#000000;stroke:#1a4a88;stroke-width:1.5"><tspan
+                x="517.44727"
+                y="498.97714"
+                id="tspan20"><tspan
+                    style="font-weight:bold;font-size:42.6667px;font-family:Arial;stroke:none"
+                    id="tspan2">Image data</tspan></tspan></text>
+            <text
+                xml:space="preserve"
+                transform="translate(-410.58634,-844.8036)"
+                id="text15-7-5"
+                style="font-weight:800;font-size:18.6667px;line-height:1;font-family:'-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect15-4-2);display:inline;fill:#000000;stroke:#1a4a88;stroke-width:1.5"><tspan
+                x="517.44727"
+                y="475.24178"
+                id="tspan32"><tspan
+                    style="font-weight:normal;font-family:Arial;stroke:none"
+                    id="tspan31">Name
+        </tspan></tspan><tspan
+                x="517.44727"
+                y="494.12456"
+                id="tspan34"><tspan
+                    style="font-weight:normal;font-family:Arial;stroke:none"
+                    id="tspan33">AcquisitionDate
+        </tspan></tspan><tspan
+                x="517.44727"
+                y="513.00734"
+                id="tspan37"><tspan
+                    style="font-weight:bold;font-family:Arial;fill:#0000ff;stroke:none"
+                    id="tspan35">Instrument PID</tspan><tspan
+                    style="font-weight:normal;font-family:Arial;stroke:none"
+                    id="tspan36">
+        </tspan></tspan><tspan
+                x="517.44727"
+                y="531.89016"
+                id="tspan40"><tspan
+                    style="font-weight:bold;font-family:Sans;fill:#ff0000;stroke:none"
+                    id="tspan38">Experiment</tspan><tspan
+                    style="font-weight:normal;font-family:Arial;stroke:none"
+                    id="tspan39">
+        </tspan></tspan><tspan
+                x="517.44727"
+                y="550.77297"
+                id="tspan44"><tspan
+                    style="font-weight:bold;font-family:Sans;fill:#008000;stroke:none"
+                    id="tspan41">Sample</tspan><tspan
+                    style="font-weight:normal;font-family:Arial;stroke:none"
+                    id="tspan43">
+        </tspan></tspan><tspan
+                x="517.44727"
+                y="569.65578"
+                id="tspan46"><tspan
+                    style="font-weight:normal;font-family:Arial;stroke:none"
+                    id="tspan45">DimensionOrder
+        </tspan></tspan><tspan
+                x="517.44727"
+                y="588.53859"
+                id="tspan48"><tspan
+                    style="font-weight:normal;font-family:Arial;stroke:none"
+                    id="tspan47">PixelSize
+        </tspan></tspan><tspan
+                x="517.44727"
+                y="607.42141"
+                id="tspan50"><tspan
+                    style="font-weight:normal;font-family:Arial;stroke:none"
+                    id="tspan49">LightSourceSettings/Power</tspan></tspan></text>
+            <g
+                id="g58-7"
+                transform="matrix(3.7795276,0,0,3.7795276,-381.61698,-875.56833)"
+                style="display:inline">
+                <path
+                d="m 119.48671,188.70894 c 0.0417,0 0.0935,7.39785 0.11499,16.43967 l 0.0391,16.43966 0.61102,1.24943 c 0.99689,2.03846 2.64578,3.55029 4.74262,4.34839 l 0.86091,0.32768 h 32.1567 c 30.98864,0 32.18557,-0.01 32.95159,-0.26927 2.11291,-0.71576 4.00058,-2.33402 4.93381,-4.22966 l 0.48585,-0.9869 0.0369,-38.07651 0.0369,-38.0765 -0.44109,-0.94816 c -0.40755,-0.87604 -1.1249,-1.63195 -9.43103,-9.93809 -8.4822,-8.4822 -9.04708,-9.01685 -10.00161,-9.46636 l -1.01167,-0.47642 -24.13559,-0.0746 c -13.27458,-0.041 -24.59085,-0.0228 -25.14727,0.0404 -2.21166,0.25143 -4.71377,2.01122 -5.80332,4.08161 -0.98929,1.87986 -0.91707,-0.52862 -0.91707,30.58084 m 3.68521,61.39261 c -0.28641,-0.7727 -0.28882,-1.14734 -0.28882,-44.93447 v -44.15524 l 0.4769,-0.96871 c 0.50465,-1.0251 2.99169,-2.63831 2.99169,-2.63831 h 22.97939 22.9794 l 0.0723,7.22622 c 0.0794,7.94092 0.0524,7.6923 1.02309,9.40652 0.89978,1.58894 2.61234,3.02589 4.42238,3.71066 0.81993,0.31019 1.02625,0.31944 8.10512,0.36334 l 7.26377,0.0451 -0.0376,35.79968 -0.0375,35.79968 -0.34442,0.65036 c -0.58103,1.09717 -1.12083,1.6658 -2.06979,2.18035 l -0.90986,0.49335 -31.50634,0.0222 c -17.32849,0.0122 -31.71237,-0.0273 -31.96419,-0.0877 z m 55.9058,-75.6341 c -1.26488,-0.3955 -2.27505,-1.27826 -2.82155,-2.46566 -0.32923,-0.71533 -0.333,-0.78816 -0.37441,-7.21988 -0.023,-3.57349 -0.01,-6.4676 0.0289,-6.43134 0.43792,0.40807 16.27193,16.25364 16.27193,16.28382 0,0.0226 -2.81281,0.0367 -6.25069,0.0314 -4.71544,-0.007 -6.39891,-0.056 -6.85419,-0.19838 z"
+                style="fill:#000000;stroke:none;stroke-opacity:1"
+                id="path1-7-3" />
             </g>
-
-            <!-- Ring 2: Model RRID -->
-            <g data-concept="rrid-model" data-level="2">
-                <ellipse cx="250" cy="166" rx="194" ry="110" fill="var(--pid-rrid-model)" stroke="var(--pid-stroke)" stroke-width="2"/>
-                <text x="250" y="74" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="700" fill="#0a2040">
-                    2. Model PID
-                </text>
+            <image
+                width="186.48698"
+                height="191.08643"
+                preserveAspectRatio="none"
+                xlink:href="images/image_data_ex.png"
+                id="image1"
+                x="121.693"
+                y="-224.73706"
+                style="display:inline" />
             </g>
-
-            <!-- Ring 3: Instance PIDINST -->
-            <g data-concept="pidinst" data-level="3">
-                <ellipse cx="250" cy="175" rx="144" ry="78" fill="var(--pid-pidinst)" stroke="var(--pid-stroke)" stroke-width="2"/>
-                <text x="250" y="113" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="700" fill="#ffffff">
-                    3. Instance PID
-                </text>
+            <g
+            id="g1"
+            transform="matrix(0.22866928,0,0,0.21752605,177.851,151.93655)"
+            style="stroke-width:1.01005;stroke-dasharray:2.02009, 1.01005;stroke-dashoffset:0">
+            <g
+                id="g58"
+                transform="matrix(3.7795276,0,0,3.7795276,40.769098,-994.29133)"
+                style="display:inline;stroke-width:0.267241;stroke-dasharray:0.534482, 0.267241;stroke-dashoffset:0">
+                <path
+                d="m 119.48671,188.70894 c 0.0417,0 0.0935,7.39785 0.11499,16.43967 l 0.0391,16.43966 0.61102,1.24943 c 0.99689,2.03846 2.64578,3.55029 4.74262,4.34839 l 0.86091,0.32768 h 32.1567 c 30.98864,0 32.18557,-0.01 32.95159,-0.26927 2.11291,-0.71576 4.00058,-2.33402 4.93381,-4.22966 l 0.48585,-0.9869 0.0369,-38.07651 0.0369,-38.0765 -0.44109,-0.94816 c -0.40755,-0.87604 -1.1249,-1.63195 -9.43103,-9.93809 -8.4822,-8.4822 -9.04708,-9.01685 -10.00161,-9.46636 l -1.01167,-0.47642 -24.13559,-0.0746 c -13.27458,-0.041 -24.59085,-0.0228 -25.14727,0.0404 -2.21166,0.25143 -4.71377,2.01122 -5.80332,4.08161 -0.98929,1.87986 -0.91707,-0.52862 -0.91707,30.58084 m 3.68521,61.39261 c -0.28641,-0.7727 -0.28882,-1.14734 -0.28882,-44.93447 v -44.15524 l 0.4769,-0.96871 c 0.50465,-1.0251 2.99169,-2.63831 2.99169,-2.63831 h 22.97939 22.9794 l 0.0723,7.22622 c 0.0794,7.94092 0.0524,7.6923 1.02309,9.40652 0.89978,1.58894 2.61234,3.02589 4.42238,3.71066 0.81993,0.31019 1.02625,0.31944 8.10512,0.36334 l 7.26377,0.0451 -0.0376,35.79968 -0.0375,35.79968 -0.34442,0.65036 c -0.58103,1.09717 -1.12083,1.6658 -2.06979,2.18035 l -0.90986,0.49335 -31.50634,0.0222 c -17.32849,0.0122 -31.71237,-0.0273 -31.96419,-0.0877 z m 55.9058,-75.6341 c -1.26488,-0.3955 -2.27505,-1.27826 -2.82155,-2.46566 -0.32923,-0.71533 -0.333,-0.78816 -0.37441,-7.21988 -0.023,-3.57349 -0.01,-6.4676 0.0289,-6.43134 0.43792,0.40807 16.27193,16.25364 16.27193,16.28382 0,0.0226 -2.81281,0.0367 -6.25069,0.0314 -4.71544,-0.007 -6.39891,-0.056 -6.85419,-0.19838 z"
+                style="fill:#000000;stroke:none;stroke-width:0.267241;stroke-dasharray:0.534482, 0.267241;stroke-dashoffset:0;stroke-opacity:1"
+                id="path1-7" />
             </g>
-
-            <!-- Ring 4: Hardware Descriptor PHD — innermost -->
-            <g data-concept="phd" data-level="4">
-                <ellipse cx="250" cy="183" rx="96" ry="52" fill="var(--pid-phd)" stroke="var(--pid-stroke)" stroke-width="2"/>
-                <text x="250" y="177" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="#ffffff">
-                    4. Hardware
-                </text>
-                <text x="250" y="193" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="#ffffff">
-                    Descriptor PID
-                </text>
+            <g
+                id="g59"
+                transform="matrix(4.7562807,0,0,4.7562807,-147.83069,-625.49568)"
+                style="display:inline;stroke-width:0.21236;stroke-dasharray:0.424721, 0.21236;stroke-dashoffset:0">
+                <path
+                d="m 145.99003,98.652927 c -1.61607,-0.64442 -1.68847,-3.01511 -0.1194,-3.90951 0.22949,-0.13082 1.16137,-0.21452 2.93756,-0.26386 l 2.60144,-0.0723 0.0438,-0.6818 c 0.0403,-0.62654 0.014,-0.68931 -0.32518,-0.77442 -0.31238,-0.0784 -0.36903,-0.17458 -0.36903,-0.62653 v -0.5339 l 5.87944,-0.0308 c 6.25299,-0.0327 6.10904,-0.0482 6.11388,0.65829 0.002,0.2338 -0.13776,0.38173 -0.50363,0.5346 -0.43541,0.18193 -0.50583,0.27877 -0.50583,0.69565 0,0.76498 0.16362,0.83117 2.05473,0.83117 h 1.70787 l -0.0386,-3.64925 -0.0386,-3.64924 -8.80586,-0.0373 c -7.94146,-0.0336 -8.83168,-0.0606 -9.06891,-0.27532 -0.22377,-0.2025 -0.26305,-0.47355 -0.26305,-1.81492 0,-0.86728 0.0673,-1.70267 0.14961,-1.85642 0.14546,-0.2718 0.39972,-0.27955 9.17036,-0.27955 h 9.02075 l 0.43602,-0.63373 c 0.55611,-0.80828 1.19619,-1.34656 2.10705,-1.77194 0.57985,-0.2708 0.96791,-0.33775 1.96413,-0.33888 1.09517,-0.001 1.34501,0.0503 2.11965,0.4374 1.6709,0.83496 2.57351,2.27681 2.77991,4.4407 0.23633,2.47771 1.16045,4.75708 2.62135,6.46566 0.89439,1.04601 1.72957,1.67272 3.12663,2.34614 0.8672,0.41801 1.28181,0.52371 2.38465,0.60791 1.49505,0.11415 1.81769,0.24078 2.32857,0.91392 0.78824,1.03857 0.56629,2.33467 -0.52046,3.03934 l -0.60328,0.39117 -19.01218,-0.009 c -12.27266,-0.006 -19.14022,-0.0602 -19.37341,-0.1532 z m 25.08091,-11.52673 c 1.08948,-0.49488 1.66476,-1.54465 1.45493,-2.65496 -0.31849,-1.68526 -2.23256,-2.52703 -3.65253,-1.60631 -0.79602,0.51615 -1.10148,1.07707 -1.10148,2.02269 0,0.98834 0.48358,1.76453 1.36571,2.19209 0.77613,0.37618 1.18586,0.38604 1.93337,0.0465 z m 6.87457,-3.68031 c -0.49027,-2.40874 -2.33273,-4.74744 -4.51048,-5.72533 l -1.09852,-0.49327 0.0702,-1.34249 c 0.0904,-1.72779 -0.13119,-2.85001 -0.86431,-4.37763 -0.44049,-0.91787 -0.8433,-1.48362 -1.62067,-2.27626 -0.56897,-0.58015 -1.14576,-1.05481 -1.28175,-1.05481 -0.2547,0 -0.29819,0.0806 -1.40387,2.60144 -0.669,1.52528 -0.98926,1.87087 -1.7381,1.87561 -0.43181,0.003 -2.14335,-0.58722 -2.89719,-0.99863 -0.12442,-0.0679 -1.32759,-0.5913 -2.6737,-1.1631 -1.34612,-0.5718 -2.6824,-1.14012 -2.96953,-1.26293 -0.67905,-0.29045 -1.05201,-0.91716 -0.95771,-1.60934 0.0395,-0.28984 0.33044,-1.11231 0.64657,-1.8277 0.31612,-0.7154 1.56684,-3.62216 2.77936,-6.45947 1.21253,-2.83732 2.31944,-5.26269 2.45981,-5.38972 0.59267,-0.53636 1.13273,-0.44846 3.55807,0.57912 1.26345,0.5353 2.62236,1.11912 3.01981,1.29737 0.39744,0.17825 1.24291,0.53624 1.87882,0.79554 1.47871,0.60295 1.96579,1.05366 1.97649,1.82894 0.004,0.31769 -0.0971,0.7808 -0.22551,1.02912 -0.12841,0.24833 -0.23348,0.54629 -0.23348,0.66214 0,0.11585 0.56907,0.58726 1.26459,1.04759 1.98006,1.31047 4.02362,3.45483 5.15024,5.40425 0.7966,1.3784 0.79136,1.36747 1.30685,2.72427 0.83151,2.18855 1.01075,3.26728 1.01221,6.09172 0.001,2.12146 -0.0501,2.73887 -0.31749,3.8299 -0.44244,1.80515 -1.34465,4.07305 -1.90626,4.79176 -0.23839,0.30509 -0.24713,0.29319 -0.42447,-0.57809 z m -17.57536,-5.93605 c -0.79489,-0.34525 -2.32324,-0.99945 -3.39633,-1.45376 -1.07309,-0.45432 -2.03238,-0.89279 -2.13174,-0.97438 -0.34496,-0.28326 -0.17383,-1.1877 0.52591,-2.77949 0.38263,-0.87043 0.77087,-1.60766 0.86275,-1.63829 0.0919,-0.0306 0.44299,0.0713 0.78025,0.2266 1.18698,0.54642 1.66937,0.75417 1.75115,0.75417 0.0454,0 0.42581,0.15812 0.8453,0.35137 0.41949,0.19326 1.60817,0.70819 2.64152,1.1443 1.03335,0.4361 1.89666,0.87957 1.91847,0.98547 0.0218,0.10591 -0.28517,0.94048 -0.68218,1.85459 -0.67331,1.5503 -1.10842,2.17542 -1.50522,2.16252 -0.0906,-0.003 -0.815,-0.28784 -1.60988,-0.6331 z m 10.62255,-22.3431 c -0.11924,-0.0708 -0.44442,-0.22463 -0.72263,-0.34195 -4.3595,-1.83844 -5.28113,-2.26318 -5.31979,-2.45167 -0.0246,-0.11973 0.0832,-0.49894 0.23941,-0.84269 0.15624,-0.34375 0.44222,-0.98271 0.63551,-1.41989 0.3913,-0.88501 0.62275,-1.1278 1.21996,-1.27968 0.32007,-0.0814 0.51442,-0.3175 0.91252,-1.10851 0.30042,-0.59692 0.61196,-1.02533 0.76717,-1.05495 0.14374,-0.0274 1.13715,0.32469 2.20759,0.78251 1.51984,0.65002 1.9638,0.90229 2.02633,1.1514 0.0456,0.18154 -0.0865,0.73527 -0.30639,1.285 -0.35565,0.88899 -0.36808,0.98628 -0.15592,1.22071 0.12679,0.14011 0.23053,0.48342 0.23053,0.76293 0,0.53097 -1.13593,3.32299 -1.37844,3.38809 -0.0765,0.0205 -0.23662,-0.0206 -0.35585,-0.0913 z"
+                style="display:inline;fill:#050205;stroke-width:0.21236;stroke-dasharray:0.424721, 0.21236;stroke-dashoffset:0"
+                id="path1" />
             </g>
+            <text
+                xml:space="preserve"
+                style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.6667px;line-height:1.1;font-family:Arial;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;writing-mode:lr-tb;direction:ltr;fill:#000000;stroke:none;stroke-width:1.01005;stroke-dasharray:2.02009, 1.01005;stroke-dashoffset:0"
+                x="520.43402"
+                y="-484.03525"
+                id="text21-1"><tspan
+                style="line-height:1.1;fill:#0000ff;stroke-width:1.01005;stroke-dasharray:2.02009, 1.01005;stroke-dashoffset:0"
+                id="tspan42"
+                x="520.43402"
+                y="-484.03525">Instrument PID</tspan><tspan
+                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:1.1;font-family:Arial;stroke-width:1.01005;stroke-dasharray:2.02009, 1.01005;stroke-dashoffset:0"
+                x="520.43402"
+                y="-463.50189"
+                id="tspan23">Name</tspan><tspan
+                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:1.1;font-family:Arial;stroke-width:1.01005;stroke-dasharray:2.02009, 1.01005;stroke-dashoffset:0"
+                x="520.43402"
+                y="-442.96851"
+                id="tspan26">Owner</tspan><tspan
+                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:1.1;font-family:Arial;stroke-width:1.01005;stroke-dasharray:2.02009, 1.01005;stroke-dashoffset:0"
+                x="520.43402"
+                y="-422.43515"
+                id="tspan27">Manufacturer</tspan><tspan
+                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:1.1;font-family:Arial;stroke-width:1.01005;stroke-dasharray:2.02009, 1.01005;stroke-dashoffset:0"
+                x="520.43402"
+                y="-401.90176"
+                id="tspan28">Model</tspan><tspan
+                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:1.1;font-family:Arial;stroke-width:1.01005;stroke-dasharray:2.02009, 1.01005;stroke-dashoffset:0"
+                x="520.43402"
+                y="-381.36841"
+                id="tspan29">Description</tspan></text>
+            <text
+                xml:space="preserve"
+                transform="translate(11.788178,-589.17086)"
+                id="text15-76"
+                style="font-weight:800;font-size:13.3333px;font-family:'-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect15);display:inline;fill:#000000;stroke:#1a4a88;stroke-width:1.01005;stroke-dasharray:2.02009, 1.01005;stroke-dashoffset:0"><tspan
+                x="517.44727"
+                y="498.97714"
+                id="tspan52"><tspan
+                    style="font-weight:bold;font-size:42.6667px;font-family:Arial;fill:#0000ff;stroke:none"
+                    id="tspan51">Instrument</tspan></tspan></text>
+            </g>
+            <g
+            id="g61"
+            transform="matrix(0.66686721,0,0,0.23761872,288.78419,21.753321)"
+            style="display:inline">
+            <path
+                style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:7.92711;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+                d="M 61.202586,97.032935 131.51122,21.017594"
+                id="path59" />
+            <path
+                style="display:inline;fill:none;fill-opacity:1;stroke:#999999;stroke-width:3.76818;stroke-dasharray:11.3045, 3.76818;stroke-dashoffset:0;stroke-opacity:1"
+                d="M 61.202596,97.032935 73.344214,83.905818 131.51121,21.017593"
+                id="path59-2" />
+            </g>
+        </g>
+            </svg>
+        </div>
+
+        {%- comment -%} -- Diagram 3: Registration Flowchart -- {%- endcomment -%}
+        <div class="pid-diagram pid-diagram--flowchart">
+            <p class="pid-diagram__title">Registration Process</p>
+            <p class="pid-diagram__caption">Flexible PID recommendations based on the requirements of different use cases and scientific domains.</p>
+            <svg viewBox="0 0 290 450"
+        width="290"
+        height="450"
+        role="img"
+        aria-label="Flowchart showing the PID registration process"
+        xmlns="http://www.w3.org/2000/svg">
+
+        <title>Registration Process</title>
+
+        <!-- Arrow down: box1 → box2 -->
+        <g transform="translate(-28)">
+            <line x1="120" y1="43" x2="120" y2="67" stroke="var(--pid-stroke)" stroke-width="1.5"/>
+            <polyline points="115,74 120,81 125,74"
+                fill="none" stroke="var(--pid-stroke)"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                transform="translate(0,-14)"/>
+        </g>
+
+        <!-- Arrow down: box2 → diamond1 -->
+        <g transform="translate(-28,-22)">
+            <line x1="120" y1="131" x2="120" y2="154" stroke="var(--pid-stroke)" stroke-width="1.5"/>
+            <polyline points="115,149 120,156 125,149"
+                fill="none" stroke="var(--pid-stroke)"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                transform="translate(0,-2)"/>
+        </g>
+
+        <!-- Arrow right: diamond1 → STOP1 -->
+        <g transform="translate(-24.348792,-23.067277)">
+            <line x1="178" y1="182" x2="233" y2="182" stroke="var(--pid-stroke)" stroke-width="1.5"/>
+            <polyline points="228,177 235,182 228,187"
+                fill="none" stroke="var(--pid-stroke)"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                transform="translate(-2)"/>
+        </g>
+        <text x="178.65121" y="152.93272" text-anchor="middle"
+            font-size="11" font-weight="600" fill="#555">No</text>
+
+        <!-- Arrow down: diamond1 → box3 -->
+        <g transform="translate(-28,-26)">
+            <line x1="120" y1="210" x2="120" y2="234" stroke="var(--pid-stroke)" stroke-width="1.5"/>
+            <polyline points="115,227 120,234 125,227"
+                fill="none" stroke="var(--pid-stroke)"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+
+        <!-- Arrow down: box3 → diamond2 -->
+        <g transform="translate(-28,-36)">
+            <line x1="120" y1="284" x2="120" y2="307" stroke="var(--pid-stroke)" stroke-width="1.5"/>
+            <polyline points="115,302 120,309 125,302"
+                fill="none" stroke="var(--pid-stroke)"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                transform="translate(0,-2)"/>
+        </g>
+
+        <!-- Arrow right: diamond2 → STOP2 -->
+        <g transform="translate(-24.610715,115.6081)">
+            <line x1="178" y1="182" x2="233" y2="182" stroke="var(--pid-stroke)" stroke-width="1.5"/>
+            <polyline points="228,177 235,182 228,187"
+                fill="none" stroke="var(--pid-stroke)"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                transform="translate(-2)"/>
+        </g>
+        <text x="178.38928" y="291.60809" text-anchor="middle"
+            font-size="11" font-weight="600" fill="#555">No</text>
+
+        <!-- Arrow down: diamond2 → box4 -->
+        <g transform="translate(-28,-40.864315)">
+            <line x1="120" y1="363" x2="120" y2="387" stroke="var(--pid-stroke)" stroke-width="1.5"/>
+            <polyline points="115,380 120,387 125,380"
+                fill="none" stroke="var(--pid-stroke)"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+
+        <!-- Arrow down: box4 → STOP3 -->
+        <g transform="translate(-28.276718,-50.701525)">
+            <line x1="120" y1="437" x2="120" y2="461" stroke="var(--pid-stroke)" stroke-width="1.5"/>
+            <polyline points="115,456 120,463 125,456"
+                fill="none" stroke="var(--pid-stroke)"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                transform="translate(0,-2)"/>
+        </g>
+
+        <!-- Box 1: Register Core Facility RRID -->
+        <g data-concept="rrid-facility" transform="translate(-26.395706)">
+            <rect x="31.582405" y="4.9367008" width="173.6266" height="38.626598" rx="8.6813297"
+                fill="var(--pid-rrid-facility)" stroke="var(--pid-stroke)" stroke-width="1.3734"/>
+            <text x="118.87012" y="17.669224" text-anchor="middle" dominant-baseline="central"
+                font-size="12" font-weight="700" fill="#0a2040">
+                <tspan x="118.87012" y="17.669224">1. Register Core Facility</tspan>
+                <tspan x="118.87012" y="32.669224">(RRID)</tspan>
+            </text>
+        </g>
+
+        <!-- Box 2: Register Model RRID -->
+        <g data-concept="rrid-model" transform="translate(-22.613655,-12)">
+            <rect x="27.800354" y="81.59967" width="173.6266" height="38.626595" rx="8.6813297"
+                fill="var(--pid-rrid-model)" stroke="var(--pid-stroke)" stroke-width="1.3734"/>
+            <text x="114.56971" y="93.316566" text-anchor="middle" dominant-baseline="central"
+                font-size="12" font-weight="700" fill="#0a2040">
+                <tspan x="114.56971" y="93.316566">2. Register Model</tspan>
+                <tspan x="114.56971" y="108.31657">(RRID)</tspan>
+            </text>
+        </g>
+
+        <!-- Decision diamond 1: Need instance PID? -->
+        <g data-trigger="rrid-model"
+            transform="matrix(1.0011478,0,0,0.99998215,-28.765626,0.00283653)">
+            <polygon points="120,156 178,182 120,208 62,182"
+                fill="var(--pid-decision-fill)" stroke="var(--pid-decision-stroke)" stroke-width="1.5"
+                transform="matrix(1.0600807,0,0,0.95700426,-6.5109284,-15.309791)"/>
+            <text x="120.5347" y="150.35234" text-anchor="middle" dominant-baseline="central"
+                font-size="10.5" fill="#2b3340">
+                <tspan x="120.5347" y="150.35234">Need</tspan>
+                <tspan x="120.5347" y="163.68571">instance PID?</tspan>
+            </text>
+        </g>
+
+        <!-- STOP 1 -->
+        <g data-trigger="rrid-model" transform="translate(126.88981,-319.07236)">
+            <rect x="82.761528" y="462.94055" width="73.670937" height="31.297939" rx="15.655074"
+                fill="var(--pid-stop)" stroke="var(--pid-stroke)" stroke-width="1.38106"/>
+            <text x="119.5091" y="479.60544" text-anchor="middle" dominant-baseline="central"
+                font-size="13" font-weight="800" fill="#8a2010">STOP</text>
+        </g>
+
+        <!-- Box 3: Register Instance PID -->
+        <g data-concept="pidinst" transform="translate(-35.380785,-23.723952)">
+            <rect x="39.936699" y="233.93671" width="173.6266" height="38.626595" rx="8.6813297"
+                fill="var(--pid-pidinst)" stroke="var(--pid-stroke)" stroke-width="1.3734"/>
+            <text x="126.91887" y="247" text-anchor="middle" dominant-baseline="central"
+                font-size="12" font-weight="700" fill="#ffffff">
+                <tspan x="126.91887" y="247">3. Register Instance</tspan>
+                <tspan x="126.91887" y="262">(PID)</tspan>
+            </text>
+        </g>
+
+        <!-- Decision diamond 2: Need descriptor PID? -->
+        <g data-trigger="pidinst" transform="translate(-31.451901,-36.244959)">
+            <polygon points="62,335 120,309 178,335 120,361"
+                fill="var(--pid-decision-fill)" stroke="var(--pid-decision-stroke)" stroke-width="1.5"
+                transform="matrix(1.062112,0,0,0.95632106,-3.8376444,13.503685)"/>
+            <text x="124" y="324" text-anchor="middle" dominant-baseline="central"
+                font-size="10.5" fill="#2b3340">
+                <tspan x="124" y="324">Need</tspan>
+                <tspan x="124" y="337.125">descriptor PID?</tspan>
+            </text>
+        </g>
+
+        <!-- STOP 2 -->
+        <g data-trigger="pidinst" transform="translate(126.62789,-180.39698)">
+            <rect x="82.761528" y="462.94055" width="73.670937" height="31.297939" rx="15.655074"
+                fill="var(--pid-stop)" stroke="var(--pid-stroke)" stroke-width="1.38106"/>
+            <text x="119.5091" y="479.60544" text-anchor="middle" dominant-baseline="central"
+                font-size="13" font-weight="800" fill="#8a2010">STOP</text>
+        </g>
+
+        <!-- Box 4: Register Descriptor PID -->
+        <g data-concept="phd" transform="translate(-28)">
+            <rect x="32.909981" y="347.06345" width="173.6266" height="38.626595" rx="8.6813297"
+                fill="var(--pid-phd)" stroke="var(--pid-stroke)" stroke-width="1.3734"/>
+            <text x="119.5768" y="358.78033" text-anchor="middle" dominant-baseline="central"
+                font-size="12" font-weight="700" fill="#ffffff">
+                <tspan x="119.5768" y="358.78033">4. Register Descriptor</tspan>
+                <tspan x="119.5768" y="373.78033">(PID)</tspan>
+            </text>
+        </g>
+
+        <!-- STOP 3 (final) -->
+        <g data-trigger="phd" transform="translate(-28,-50.521055)">
+            <rect x="82.761528" y="462.94055" width="73.670937" height="31.297939" rx="15.655074"
+                fill="var(--pid-stop)" stroke="var(--pid-stroke)" stroke-width="1.38106"/>
+            <text x="119.5091" y="479.60544" text-anchor="middle" dominant-baseline="central"
+                font-size="13" font-weight="800" fill="#8a2010">STOP</text>
+        </g>
+
         </svg>
-    </div>
-{%- comment -%} -- Diagram 2: Data Hierarchy Cascade -- {%- endcomment -%}
-    <div class="pid-diagram pid-diagram--hierarchy">
-        <p class="pid-diagram__title">Data Structure</p>
-        <p class="pid-diagram__caption">FAIR image data through concatenated for core facilities and instruments.</p>
-        {%- comment -%}
-            This SVG was edited in Inkscape — Inkscape applies transform
-            matrices to groups rather than updating raw coordinates.
-            The data-concept attributes are preserved and the interaction
-            system works normally. Colors restored to var(--pid-...) references.
-        {%- endcomment -%}
-
-        <svg viewBox="0 0 400 230" role="img" aria-label="Cascading hierarchy showing how PIDs relate to data structure levels" xmlns="http://www.w3.org/2000/svg">
-
-            <!-- Dashed drop lines from each box center to PID bar -->
-            <line x1="47.069595"  y1="39.482193"  x2="47.069595"  y2="177.66554" stroke="var(--pid-rrid-facility)" stroke-width="1.21389" stroke-dasharray="4, 3"/>
-            <line x1="124.55788"  y1="83.897949"  x2="124.55788"  y2="178.64955" stroke="var(--pid-rrid-model)"    stroke-width="1.22963" stroke-dasharray="4, 3"/>
-            <line x1="211.22453"  y1="127.32973"  x2="211.22453"  y2="178.64955" stroke="var(--pid-pidinst)" stroke-width="1.27528" stroke-dasharray="4, 3"/>
-            <line x1="308.34338"  y1="143.68492"  x2="308.34338"  y2="178.26131" stroke="var(--pid-phd)" stroke-width="1.04677" stroke-dasharray="4, 3"/>
-
-            <!-- Box 1: Core Facility (RRID) -->
-            <g data-concept="rrid-facility"  data-level="1" transform="matrix(0.75375863,0,0,0.84078179,4.1343597,-7.5137912)">
-                <rect x="7.8030295" y="16.675098" width="104.33743" height="40.521873" rx="3.8643491"
-                    fill="var(--pid-rrid-facility)" stroke="var(--pid-stroke)" stroke-width="1.10605"/>
-                <text x="60.463745" y="29.984009" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="#0a2040">Core Facility</text>
-                <text x="60.463745" y="45.984009" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="600" fill="#0a2040">(RRID)</text>
-            </g>
-
-            <!-- Box 2: Instrument Model (RRID) -->
-            <g data-concept="rrid-model" data-level="2" transform="matrix(0.80282694,0,0,0.80282694,27.199987,-18.317123)">
-                <rect x="47.929935" y="84.833984" width="151.31604" height="42.236076" rx="5.6042976" fill="var(--pid-rrid-model)" stroke="var(--pid-stroke)" stroke-width="1.35987"/>
-                <text x="123" y="99" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="#0a2040">Instrument Model</text>
-                <text x="123" y="115" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="600" fill="#0a2040">(RRID)</text>
-            </g>
-
-            <!-- Box 3: Instrument Instance (PIDINST) -->
-            <g data-concept="pidinst"  data-level="3" transform="matrix(0.78510622,0,0,0.78510622,81.617048,-27.808083)">
-                <rect x="87.961334" y="153.88138" width="162.07733" height="43.157295" rx="6.0028644" fill="var(--pid-pidinst)" stroke="var(--pid-stroke)" stroke-width="1.42266"/>
-                <text x="169" y="169" text-anchor="middle" dominant-baseline="central"
-                    font-size="13" font-weight="700" fill="#ffffff">Instrument Instance</text>
-                <text x="169" y="185" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="600" fill="#ffffff">(PIDINST)</text>
-            </g>
-
-            <!-- Box 4: Hardware Configuration (PHD) -->
-            <g data-concept="phd" transform="matrix(0.86113741,0,0,0.86113741,119.93761,-59.920213)">
-                <rect x="127.97364" y="227.82973" width="184.68492" height="39.19664" rx="6.8401823"
-                    fill="var(--pid-phd)" stroke="var(--pid-stroke)" stroke-width="1.44728"/>
-                <text x="221" y="241" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="#ffffff">Hardware Configuration</text>
-                <text x="219" y="257" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="600" fill="#ffffff">(PHD)</text>
-            </g>
-
-            <!-- PID Reference Bar background -->
-            <rect x="4.6553221" y="178.65422" width="368.87872" height="43.99065" rx="5.0950098" fill="#f0f4f8" stroke="#cccccc" stroke-width="1.00935"/>
-
-            <!-- Bar section: Facility RRID -->
-            <g data-concept="rrid-facility" transform="translate(0.55787589,-89.350447)">
-                <rect x="10" y="270" width="86" height="40" rx="4"
-                    fill="var(--pid-rrid-facility)" opacity="0.85"/>
-                <text x="53" y="286" text-anchor="middle" dominant-baseline="central" font-size="9" font-weight="700" fill="#0a2040">RRID:</text>
-                <text x="53" y="298" text-anchor="middle" dominant-baseline="central" font-size="8" fill="#0a2040">SRC_facility</text>
-            </g>
-
-            <!-- Bar section: Model RRID — level 2 -->
-            <g data-concept="rrid-model" data-level="2" transform="translate(0.55787589,-89.350447)">
-                <rect x="100" y="270" width="86" height="40" rx="4"
-                    fill="var(--pid-rrid-model)" opacity="0.85"/>
-                <text x="143" y="286" text-anchor="middle" dominant-baseline="central" font-size="9" font-weight="700" fill="#0a2040">RRID:</text>
-                <text x="143" y="298" text-anchor="middle" dominant-baseline="central" font-size="8" fill="#0a2040">SRC_model</text>
-            </g>
-
-            <!-- Bar section: PIDINST — level 3 -->
-            <g data-concept="pidinst" data-level="3"
-                transform="translate(0.55787589,-89.350447)">
-                <rect x="190" y="270" width="86" height="40" rx="4" fill="var(--pid-pidinst)" opacity="0.85"/>
-                <text x="233" y="286" text-anchor="middle" dominant-baseline="central" font-size="9" font-weight="700" fill="#ffffff">PIDINST:</text>
-                <text x="233" y="298" text-anchor="middle" dominant-baseline="central" font-size="8" fill="#ffffff">10.83185/…</text>
-            </g>
-
-            <!-- Bar section: PHD — level 4 -->
-            <g data-concept="phd" data-level="4"
-                transform="translate(0.55787589,-89.350447)">
-                <rect x="280" y="270" width="86" height="40" rx="4"
-                    fill="var(--pid-phd)" opacity="0.85"/>
-                <text x="323" y="286" text-anchor="middle" dominant-baseline="central" font-size="9" font-weight="700" fill="#ffffff">PHD-ID:</text>
-                <text x="323" y="298" text-anchor="middle" dominant-baseline="central"
-                    font-size="8" fill="#ffffff">10.83185/…</text>
-            </g>
-        </svg>
-    </div>
-
-    {%- comment -%} -- Diagram 3: Registration Flowchart -- {%- endcomment -%}
-    <div class="pid-diagram pid-diagram--flowchart">
-        <p class="pid-diagram__title">Registration Process</p>
-        <p class="pid-diagram__caption">Flexible PID recommendations based on the requirements of different use cases and scientific domains.</p>
-        <svg viewBox="0 0 290 450"
-    width="290"
-    height="450"
-    role="img"
-    aria-label="Flowchart showing the PID registration process"
-    xmlns="http://www.w3.org/2000/svg">
-
-    <title>Registration Process</title>
-
-    <!-- Arrow down: box1 → box2 -->
-    <g transform="translate(-28)">
-        <line x1="120" y1="43" x2="120" y2="67" stroke="var(--pid-stroke)" stroke-width="1.5"/>
-        <polyline points="115,74 120,81 125,74"
-            fill="none" stroke="var(--pid-stroke)"
-            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-            transform="translate(0,-14)"/>
-    </g>
-
-    <!-- Arrow down: box2 → diamond1 -->
-    <g transform="translate(-28,-22)">
-        <line x1="120" y1="131" x2="120" y2="154" stroke="var(--pid-stroke)" stroke-width="1.5"/>
-        <polyline points="115,149 120,156 125,149"
-            fill="none" stroke="var(--pid-stroke)"
-            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-            transform="translate(0,-2)"/>
-    </g>
-
-    <!-- Arrow right: diamond1 → STOP1 -->
-    <g transform="translate(-24.348792,-23.067277)">
-        <line x1="178" y1="182" x2="233" y2="182" stroke="var(--pid-stroke)" stroke-width="1.5"/>
-        <polyline points="228,177 235,182 228,187"
-            fill="none" stroke="var(--pid-stroke)"
-            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-            transform="translate(-2)"/>
-    </g>
-    <text x="178.65121" y="152.93272" text-anchor="middle"
-        font-size="11" font-weight="600" fill="#555">No</text>
-
-    <!-- Arrow down: diamond1 → box3 -->
-    <g transform="translate(-28,-26)">
-        <line x1="120" y1="210" x2="120" y2="234" stroke="var(--pid-stroke)" stroke-width="1.5"/>
-        <polyline points="115,227 120,234 125,227"
-            fill="none" stroke="var(--pid-stroke)"
-            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </g>
-
-    <!-- Arrow down: box3 → diamond2 -->
-    <g transform="translate(-28,-36)">
-        <line x1="120" y1="284" x2="120" y2="307" stroke="var(--pid-stroke)" stroke-width="1.5"/>
-        <polyline points="115,302 120,309 125,302"
-            fill="none" stroke="var(--pid-stroke)"
-            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-            transform="translate(0,-2)"/>
-    </g>
-
-    <!-- Arrow right: diamond2 → STOP2 -->
-    <g transform="translate(-24.610715,115.6081)">
-        <line x1="178" y1="182" x2="233" y2="182" stroke="var(--pid-stroke)" stroke-width="1.5"/>
-        <polyline points="228,177 235,182 228,187"
-            fill="none" stroke="var(--pid-stroke)"
-            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-            transform="translate(-2)"/>
-    </g>
-    <text x="178.38928" y="291.60809" text-anchor="middle"
-        font-size="11" font-weight="600" fill="#555">No</text>
-
-    <!-- Arrow down: diamond2 → box4 -->
-    <g transform="translate(-28,-40.864315)">
-        <line x1="120" y1="363" x2="120" y2="387" stroke="var(--pid-stroke)" stroke-width="1.5"/>
-        <polyline points="115,380 120,387 125,380"
-            fill="none" stroke="var(--pid-stroke)"
-            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </g>
-
-    <!-- Arrow down: box4 → STOP3 -->
-    <g transform="translate(-28.276718,-50.701525)">
-        <line x1="120" y1="437" x2="120" y2="461" stroke="var(--pid-stroke)" stroke-width="1.5"/>
-        <polyline points="115,456 120,463 125,456"
-            fill="none" stroke="var(--pid-stroke)"
-            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-            transform="translate(0,-2)"/>
-    </g>
-
-    <!-- Box 1: Register Core Facility RRID -->
-    <g data-concept="rrid-facility" transform="translate(-26.395706)">
-        <rect x="31.582405" y="4.9367008" width="173.6266" height="38.626598" rx="8.6813297"
-            fill="var(--pid-rrid-facility)" stroke="var(--pid-stroke)" stroke-width="1.3734"/>
-        <text x="118.87012" y="17.669224" text-anchor="middle" dominant-baseline="central"
-            font-size="12" font-weight="700" fill="#0a2040">
-            <tspan x="118.87012" y="17.669224">1. Register Core Facility</tspan>
-            <tspan x="118.87012" y="32.669224">(RRID)</tspan>
-        </text>
-    </g>
-
-    <!-- Box 2: Register Model RRID -->
-    <g data-concept="rrid-model" transform="translate(-22.613655,-12)">
-        <rect x="27.800354" y="81.59967" width="173.6266" height="38.626595" rx="8.6813297"
-            fill="var(--pid-rrid-model)" stroke="var(--pid-stroke)" stroke-width="1.3734"/>
-        <text x="114.56971" y="93.316566" text-anchor="middle" dominant-baseline="central"
-            font-size="12" font-weight="700" fill="#0a2040">
-            <tspan x="114.56971" y="93.316566">2. Register Model</tspan>
-            <tspan x="114.56971" y="108.31657">(RRID)</tspan>
-        </text>
-    </g>
-
-    <!-- Decision diamond 1: Need instance PID? -->
-    <g data-trigger="rrid-model"
-        transform="matrix(1.0011478,0,0,0.99998215,-28.765626,0.00283653)">
-        <polygon points="120,156 178,182 120,208 62,182"
-            fill="var(--pid-decision-fill)" stroke="var(--pid-decision-stroke)" stroke-width="1.5"
-            transform="matrix(1.0600807,0,0,0.95700426,-6.5109284,-15.309791)"/>
-        <text x="120.5347" y="150.35234" text-anchor="middle" dominant-baseline="central"
-            font-size="10.5" fill="#2b3340">
-            <tspan x="120.5347" y="150.35234">Need</tspan>
-            <tspan x="120.5347" y="163.68571">instance PID?</tspan>
-        </text>
-    </g>
-
-    <!-- STOP 1 -->
-    <g data-trigger="rrid-model" transform="translate(126.88981,-319.07236)">
-        <rect x="82.761528" y="462.94055" width="73.670937" height="31.297939" rx="15.655074"
-            fill="var(--pid-stop)" stroke="var(--pid-stroke)" stroke-width="1.38106"/>
-        <text x="119.5091" y="479.60544" text-anchor="middle" dominant-baseline="central"
-            font-size="13" font-weight="800" fill="#8a2010">STOP</text>
-    </g>
-
-    <!-- Box 3: Register Instance PID -->
-    <g data-concept="pidinst" transform="translate(-35.380785,-23.723952)">
-        <rect x="39.936699" y="233.93671" width="173.6266" height="38.626595" rx="8.6813297"
-            fill="var(--pid-pidinst)" stroke="var(--pid-stroke)" stroke-width="1.3734"/>
-        <text x="126.91887" y="247" text-anchor="middle" dominant-baseline="central"
-            font-size="12" font-weight="700" fill="#ffffff">
-            <tspan x="126.91887" y="247">3. Register Instance</tspan>
-            <tspan x="126.91887" y="262">(PID)</tspan>
-        </text>
-    </g>
-
-    <!-- Decision diamond 2: Need descriptor PID? -->
-    <g data-trigger="pidinst" transform="translate(-31.451901,-36.244959)">
-        <polygon points="62,335 120,309 178,335 120,361"
-            fill="var(--pid-decision-fill)" stroke="var(--pid-decision-stroke)" stroke-width="1.5"
-            transform="matrix(1.062112,0,0,0.95632106,-3.8376444,13.503685)"/>
-        <text x="124" y="324" text-anchor="middle" dominant-baseline="central"
-            font-size="10.5" fill="#2b3340">
-            <tspan x="124" y="324">Need</tspan>
-            <tspan x="124" y="337.125">descriptor PID?</tspan>
-        </text>
-    </g>
-
-    <!-- STOP 2 -->
-    <g data-trigger="pidinst" transform="translate(126.62789,-180.39698)">
-        <rect x="82.761528" y="462.94055" width="73.670937" height="31.297939" rx="15.655074"
-            fill="var(--pid-stop)" stroke="var(--pid-stroke)" stroke-width="1.38106"/>
-        <text x="119.5091" y="479.60544" text-anchor="middle" dominant-baseline="central"
-            font-size="13" font-weight="800" fill="#8a2010">STOP</text>
-    </g>
-
-    <!-- Box 4: Register Descriptor PID -->
-    <g data-concept="phd" transform="translate(-28)">
-        <rect x="32.909981" y="347.06345" width="173.6266" height="38.626595" rx="8.6813297"
-            fill="var(--pid-phd)" stroke="var(--pid-stroke)" stroke-width="1.3734"/>
-        <text x="119.5768" y="358.78033" text-anchor="middle" dominant-baseline="central"
-            font-size="12" font-weight="700" fill="#ffffff">
-            <tspan x="119.5768" y="358.78033">4. Register Descriptor</tspan>
-            <tspan x="119.5768" y="373.78033">(PID)</tspan>
-        </text>
-    </g>
-
-    <!-- STOP 3 (final) -->
-    <g data-trigger="phd" transform="translate(-28,-50.521055)">
-        <rect x="82.761528" y="462.94055" width="73.670937" height="31.297939" rx="15.655074"
-            fill="var(--pid-stop)" stroke="var(--pid-stroke)" stroke-width="1.38106"/>
-        <text x="119.5091" y="479.60544" text-anchor="middle" dominant-baseline="central"
-            font-size="13" font-weight="800" fill="#8a2010">STOP</text>
-    </g>
-
-    </svg>
-    </div>
-
+        </div>
     </div>
 </div>
 
