@@ -4,4 +4,4 @@ title: About
 permalink: /about/
 ---
 
-Overview of the IPHD project.
+{% include pid-diagrams.html %}
