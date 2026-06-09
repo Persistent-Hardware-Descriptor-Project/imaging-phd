@@ -1,0 +1,440 @@
+{% comment %}
+  ---------------------------------------------------------------------
+  PID Hierarchy Diagrams — three synchronized interactive SVGs
+  Drop this file at  _includes/pid-diagrams.html
+  Render with:       {% include pid-diagrams.html %}
+  Diagram colors controlled by: _sass/_pid-diagrams.scss
+
+  Hovering any colored element highlights the same concept across
+  all three diagrams simultaneously.
+
+    Four concepts:
+        rrid-facility  — Core Facility RRID (outermost / step 1)
+        rrid-model     — Instrument Model RRID (second / step 2)
+        pidinst        — Instance PIDINST (third / step 3)
+        phd            — Hardware Descriptor PHD (innermost / step 4)
+
+    To visually edit the SVGs, use Inkscape (or Illustrator) to edit the individual SVGs and then open in a text file to update the values below. Note: visual editors may add extraneous markup and/or do not maintain variable names, so use the SVG produced in the editor to GUIDE, NOT fully replace, the SVGs below (UNLESS you have familiarity with setting up the editor to "play nice" with variables, etc.; currently, I (JP) am not aware of how / if this is possible).
+  ---------------------------------------------------------------------
+{% endcomment %}
+
+<div class="pid-diagrams" id="pid-diagrams">
+  <div class="pid-diagrams-horiz__grid ">
+
+    {%- comment -%} -- Diagram 1: Concentric Ellipses -- {%- endcomment -%}
+    <div class="pid-diagram pid-diagram--concentric-horiz">
+        <p class="pid-diagram__title">PID Hierarchy</p>
+        <p class="pid-diagram__caption">Capable of assigning PID in different tiers.</p>
+        <svg viewBox="0 0 500 310" role="img" aria-label="Concentric ellipses showing PID hierarchy from Facility RRID outermost to Hardware Descriptor PID innermost" xmlns="http://www.w3.org/2000/svg">
+
+            <!-- Shadow ellipses — depth effect at base -->
+            <ellipse cx="250" cy="300" rx="238" ry="11" fill="rgba(10,32,64,0.10)"/>
+            <ellipse cx="250" cy="302" rx="188" ry="8"  fill="rgba(10,32,64,0.08)"/>
+            <ellipse cx="250" cy="304" rx="139" ry="5"  fill="rgba(10,32,64,0.06)"/>
+            <ellipse cx="250" cy="305" rx="92"  ry="3"  fill="rgba(10,32,64,0.05)"/>
+
+            <!-- Ring 1: Facility RRID — outermost -->
+            <g data-concept="rrid-facility" data-level="1">
+                <ellipse cx="250" cy="155" rx="245" ry="146" fill="var(--pid-rrid-facility)" stroke="var(--pid-stroke)" stroke-width="2"/>
+                <text x="250" y="30" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="700" fill="#0a2040">
+                1. Facility PID
+                </text>
+            </g>
+
+            <!-- Ring 2: Model RRID -->
+            <g data-concept="rrid-model" data-level="2">
+                <ellipse cx="250" cy="166" rx="194" ry="110" fill="var(--pid-rrid-model)" stroke="var(--pid-stroke)" stroke-width="2"/>
+                <text x="250" y="74" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="700" fill="#0a2040">
+                    2. Model PID
+                </text>
+            </g>
+
+            <!-- Ring 3: Instance PIDINST -->
+            <g data-concept="pidinst" data-level="3">
+                <ellipse cx="250" cy="175" rx="144" ry="78" fill="var(--pid-pidinst)" stroke="var(--pid-stroke)" stroke-width="2"/>
+                <text x="250" y="113" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="700" fill="#ffffff">
+                    3. Instance PID
+                </text>
+            </g>
+
+            <!-- Ring 4: Hardware Descriptor PHD — innermost -->
+            <g data-concept="phd" data-level="4">
+                <ellipse cx="250" cy="183" rx="96" ry="52" fill="var(--pid-phd)" stroke="var(--pid-stroke)" stroke-width="2"/>
+                <text x="250" y="177" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="#ffffff">
+                    4. Hardware
+                </text>
+                <text x="250" y="193" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="#ffffff">
+                    Descriptor PID
+                </text>
+            </g>
+        </svg>
+    </div>
+{%- comment -%} -- Diagram 2: Data Hierarchy Cascade -- {%- endcomment -%}
+    <div class="pid-diagram pid-diagram--hierarchy-horiz">
+        <p class="pid-diagram__title">Data Structure</p>
+        <p class="pid-diagram__caption">FAIR image data through concatenated for core facilities and instruments.</p>
+        {%- comment -%}
+            This SVG was edited in Inkscape — Inkscape applies transform
+            matrices to groups rather than updating raw coordinates.
+            The data-concept attributes are preserved and the interaction
+            system works normally. Colors restored to var(--pid-...) references.
+        {%- endcomment -%}
+
+        <svg viewBox="0 0 400 230" role="img" aria-label="Cascading hierarchy showing how PIDs relate to data structure levels" xmlns="http://www.w3.org/2000/svg">
+
+            <!-- Dashed drop lines from each box center to PID bar -->
+            <line x1="47.069595"  y1="39.482193"  x2="47.069595"  y2="177.66554" stroke="var(--pid-rrid-facility)" stroke-width="1.21389" stroke-dasharray="4, 3"/>
+            <line x1="124.55788"  y1="83.897949"  x2="124.55788"  y2="178.64955" stroke="var(--pid-rrid-model)"    stroke-width="1.22963" stroke-dasharray="4, 3"/>
+            <line x1="211.22453"  y1="127.32973"  x2="211.22453"  y2="178.64955" stroke="var(--pid-pidinst)" stroke-width="1.27528" stroke-dasharray="4, 3"/>
+            <line x1="308.34338"  y1="143.68492"  x2="308.34338"  y2="178.26131" stroke="var(--pid-phd)" stroke-width="1.04677" stroke-dasharray="4, 3"/>
+
+            <!-- Box 1: Core Facility (RRID) -->
+            <g data-concept="rrid-facility"  data-level="1" transform="matrix(0.75375863,0,0,0.84078179,4.1343597,-7.5137912)">
+                <rect x="7.8030295" y="16.675098" width="104.33743" height="40.521873" rx="3.8643491"
+                    fill="var(--pid-rrid-facility)" stroke="var(--pid-stroke)" stroke-width="1.10605"/>
+                <text x="60.463745" y="29.984009" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="#0a2040">Core Facility</text>
+                <text x="60.463745" y="45.984009" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="600" fill="#0a2040">(RRID)</text>
+            </g>
+
+            <!-- Box 2: Instrument Model (RRID) -->
+            <g data-concept="rrid-model" data-level="2" transform="matrix(0.80282694,0,0,0.80282694,27.199987,-18.317123)">
+                <rect x="47.929935" y="84.833984" width="151.31604" height="42.236076" rx="5.6042976" fill="var(--pid-rrid-model)" stroke="var(--pid-stroke)" stroke-width="1.35987"/>
+                <text x="123" y="99" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="#0a2040">Instrument Model</text>
+                <text x="123" y="115" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="600" fill="#0a2040">(RRID)</text>
+            </g>
+
+            <!-- Box 3: Instrument Instance (PIDINST) -->
+            <g data-concept="pidinst"  data-level="3" transform="matrix(0.78510622,0,0,0.78510622,81.617048,-27.808083)">
+                <rect x="87.961334" y="153.88138" width="162.07733" height="43.157295" rx="6.0028644" fill="var(--pid-pidinst)" stroke="var(--pid-stroke)" stroke-width="1.42266"/>
+                <text x="169" y="169" text-anchor="middle" dominant-baseline="central"
+                    font-size="13" font-weight="700" fill="#ffffff">Instrument Instance</text>
+                <text x="169" y="185" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="600" fill="#ffffff">(PIDINST)</text>
+            </g>
+
+            <!-- Box 4: Hardware Configuration (PHD) -->
+            <g data-concept="phd" transform="matrix(0.86113741,0,0,0.86113741,119.93761,-59.920213)">
+                <rect x="127.97364" y="227.82973" width="184.68492" height="39.19664" rx="6.8401823"
+                    fill="var(--pid-phd)" stroke="var(--pid-stroke)" stroke-width="1.44728"/>
+                <text x="221" y="241" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="#ffffff">Hardware Configuration</text>
+                <text x="219" y="257" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="600" fill="#ffffff">(PHD)</text>
+            </g>
+
+            <!-- PID Reference Bar background -->
+            <rect x="4.6553221" y="178.65422" width="368.87872" height="43.99065" rx="5.0950098" fill="#f0f4f8" stroke="#cccccc" stroke-width="1.00935"/>
+
+            <!-- Bar section: Facility RRID -->
+            <g data-concept="rrid-facility" transform="translate(0.55787589,-89.350447)">
+                <rect x="10" y="270" width="86" height="40" rx="4"
+                    fill="var(--pid-rrid-facility)" opacity="0.85"/>
+                <text x="53" y="286" text-anchor="middle" dominant-baseline="central" font-size="9" font-weight="700" fill="#0a2040">RRID:</text>
+                <text x="53" y="298" text-anchor="middle" dominant-baseline="central" font-size="8" fill="#0a2040">SRC_facility</text>
+            </g>
+
+            <!-- Bar section: Model RRID — level 2 -->
+            <g data-concept="rrid-model" data-level="2" transform="translate(0.55787589,-89.350447)">
+                <rect x="100" y="270" width="86" height="40" rx="4"
+                    fill="var(--pid-rrid-model)" opacity="0.85"/>
+                <text x="143" y="286" text-anchor="middle" dominant-baseline="central" font-size="9" font-weight="700" fill="#0a2040">RRID:</text>
+                <text x="143" y="298" text-anchor="middle" dominant-baseline="central" font-size="8" fill="#0a2040">SRC_model</text>
+            </g>
+
+            <!-- Bar section: PIDINST — level 3 -->
+            <g data-concept="pidinst" data-level="3"
+                transform="translate(0.55787589,-89.350447)">
+                <rect x="190" y="270" width="86" height="40" rx="4" fill="var(--pid-pidinst)" opacity="0.85"/>
+                <text x="233" y="286" text-anchor="middle" dominant-baseline="central" font-size="9" font-weight="700" fill="#ffffff">PIDINST:</text>
+                <text x="233" y="298" text-anchor="middle" dominant-baseline="central" font-size="8" fill="#ffffff">10.83185/…</text>
+            </g>
+
+            <!-- Bar section: PHD — level 4 -->
+            <g data-concept="phd" data-level="4"
+                transform="translate(0.55787589,-89.350447)">
+                <rect x="280" y="270" width="86" height="40" rx="4"
+                    fill="var(--pid-phd)" opacity="0.85"/>
+                <text x="323" y="286" text-anchor="middle" dominant-baseline="central" font-size="9" font-weight="700" fill="#ffffff">PHD-ID:</text>
+                <text x="323" y="298" text-anchor="middle" dominant-baseline="central"
+                    font-size="8" fill="#ffffff">10.83185/…</text>
+            </g>
+        </svg>
+    </div>
+
+    {%- comment -%} -- Diagram 3: Registration Flowchart -- {%- endcomment -%}
+    <div class="pid-diagram pid-diagram--flowchart-horiz">
+        <p class="pid-diagram__title">Registration Process</p>
+        <p class="pid-diagram__caption">Flexible PID recommendations based on the requirements of different use cases and scientific domains.</p>
+        <svg viewBox="0 0 630 130" width="630" height="130" role="img" aria-label="Flowchart showing the PID registration process" xmlns="http://www.w3.org/2000/svg">
+
+    <title>Registration Process</title>
+
+    <!-- ── Horizontal connectors (main flow) ── -->
+
+    <g transform="matrix(0.98578534,0,0,1.2157911,150.4898,7.9034627)">
+        <line x1="120" y1="43" x2="120" y2="67" stroke="var(--pid-stroke)" stroke-width="1.5"/>
+        <polyline points="115,74 120,81 125,74"
+            fill="none" stroke="var(--pid-stroke)"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+            transform="matrix(1.0140476,0,0,0.82936444,-1.6857077,-0.10978151)"/>
+    </g>
+
+    <g transform="matrix(0.71686785,0,0,1.0224576,-35.392795,-153.13062)">
+        <line x1="195.73531" y1="182" x2="232.0042" y2="182" stroke="var(--pid-stroke)" stroke-width="1.21808"/>
+        <polyline points="228,177 235,182 228,187"
+            fill="none" stroke="var(--pid-stroke)"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+            transform="translate(-2)"/>
+    </g>
+
+    <g transform="matrix(0.71686785,0,0,1.0224576,166.68365,-153.13062)">
+        <line x1="195.73531" y1="182" x2="232.0042" y2="182" stroke="var(--pid-stroke)" stroke-width="1.21808"/>
+        <polyline points="228,177 235,182 228,187"
+            fill="none" stroke="var(--pid-stroke)"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+            transform="translate(-2)"/>
+    </g>
+
+    <g transform="matrix(0.71686785,0,0,1.0224576,267.68365,-153.13062)">
+        <line x1="195.73531" y1="182" x2="232.0042" y2="182" stroke="var(--pid-stroke)" stroke-width="1.21808"/>
+        <polyline points="228,177 235,182 228,187"
+            fill="none" stroke="var(--pid-stroke)"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+            transform="translate(-2)"/>
+    </g>
+
+    <g transform="matrix(0.98578534,0,0,1.2157911,355.45068,7.9034638)">
+        <line x1="120" y1="43" x2="120" y2="67" stroke="var(--pid-stroke)" stroke-width="1.5"/>
+        <polyline points="115,74 120,81 125,74"
+            fill="none" stroke="var(--pid-stroke)"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+            transform="matrix(1.0140476,0,0,0.82936444,-1.6857077,-0.10978151)"/>
+    </g>
+
+    <g transform="matrix(0.71686785,0,0,1.0224576,373.0053,-153.13062)">
+        <line x1="195.73531" y1="182" x2="232.0042" y2="182" stroke="var(--pid-stroke)" stroke-width="1.21808"/>
+        <polyline points="228,177 235,182 228,187"
+            fill="none" stroke="var(--pid-stroke)"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+            transform="translate(-2)"/>
+    </g>
+
+    <g transform="matrix(0.98578534,0,0,1.2157911,464.2189,7.9034638)">
+        <line x1="120" y1="43" x2="120" y2="67" stroke="var(--pid-stroke)" stroke-width="1.5"/>
+        <polyline points="115,74 120,81 125,74"
+            fill="none" stroke="var(--pid-stroke)"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+            transform="matrix(1.0140476,0,0,0.82936444,-1.6857077,-0.10978151)"/>
+    </g>
+
+    <!-- ── Branch arrows to STOPs ── -->
+
+    <!-- Diamond1 → STOP1 -->
+    <g transform="matrix(0.71686785,0,0,1.0224576,61.42662,-153.13062)">
+        <line x1="195.73531" y1="182" x2="232.0042" y2="182" stroke="var(--pid-stroke)" stroke-width="1.21808"/>
+        <polyline points="228,177 235,182 228,187"
+            fill="none" stroke="var(--pid-stroke)"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+            transform="translate(-2)"/>
+    </g>
+
+    <!-- Diamond2 → STOP2 -->
+    <g transform="matrix(0.71686785,0,0,1.0224576,166.68365,-153.13062)">
+        <line x1="195.73531" y1="182" x2="232.0042" y2="182" stroke="var(--pid-stroke)" stroke-width="1.21808"/>
+        <polyline points="228,177 235,182 228,187"
+            fill="none" stroke="var(--pid-stroke)"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+            transform="translate(-2)"/>
+    </g>
+
+    <!-- "No" labels -->
+    <text x="280.17645" y="75.554024" text-anchor="middle"
+        font-size="11" font-weight="600" fill="#555">No</text>
+    <text x="486.80652" y="76.484322" text-anchor="middle"
+        font-size="11" font-weight="600" fill="#555">No</text>
+
+    <!-- ── Box 1: Register Core Facility RRID ── -->
+    <g data-concept="rrid-facility" transform="translate(-26.395706,1.2066642)">
+        <rect x="31.508709" y="4.8630056" width="99.385933" height="53.773987" rx="4.9692969"
+            fill="var(--pid-rrid-facility)" stroke="var(--pid-stroke)" stroke-width="1.22601"/>
+        <text x="80.987808" y="16.653599" text-anchor="middle" dominant-baseline="central"
+            font-size="12" font-weight="700" fill="#0a2040">
+            <tspan x="80.987808" y="16.653599">Register</tspan>
+            <tspan x="80.987808" y="31.653599">Core Facility</tspan>
+            <tspan x="80.987808" y="46.653599">(RRID)</tspan>
+        </text>
+    </g>
+
+    <!-- ── Box 2: Register Model RRID ── -->
+    <g data-concept="rrid-model" transform="translate(105.39495,-75.456308)">
+        <rect x="27.627235" y="81.426552" width="69.504379" height="53.972839" rx="3.475219"
+            fill="var(--pid-rrid-model)" stroke="var(--pid-stroke)" stroke-width="1.02716"/>
+        <text x="61.922394" y="93.316574" text-anchor="middle" dominant-baseline="central"
+            font-size="12" font-weight="700" fill="#0a2040">
+            <tspan x="61.922394" y="93.316574">Register</tspan>
+            <tspan x="61.922394" y="108.31657">Model</tspan>
+            <tspan x="61.922394" y="123.31657">(RRID)</tspan>
+        </text>
+    </g>
+
+    <!-- ── Decision diamond 1: Need instance PID? ── -->
+    <g data-trigger="rrid-model"
+        transform="matrix(1.0011478,0,0,0.99998215,170.76483,-130.16821)">
+        <polygon points="178,182 120,208 62,182 120,156"
+            fill="var(--pid-decision-fill)" stroke="var(--pid-decision-stroke)" stroke-width="1.5"
+            transform="matrix(0.67377016,0,0,1.1304133,17.054411,-42.60744)"/>
+        <text x="98.995079" y="150.85385" text-anchor="middle" dominant-baseline="central"
+            font-size="10.5" fill="#2b3340">
+            <tspan x="98.995079" y="150.85385">Need</tspan>
+            <tspan x="98.995079" y="164.18723">instance</tspan>
+            <tspan x="98.995079" y="177.5206">PID?</tspan>
+        </text>
+    </g>
+
+    <!-- ── STOP 1 ── -->
+    <g data-trigger="rrid-model" transform="translate(148.29243,-372.43357)">
+        <rect x="90.910828" y="462.85806" width="56.823551" height="31.462898" rx="12.075006"
+            fill="var(--pid-stop)" stroke="var(--pid-stroke)" stroke-width="1.21611"/>
+        <text x="119.23471" y="479.60544" text-anchor="middle" dominant-baseline="central"
+            font-size="13" font-weight="800" fill="#8a2010">STOP</text>
+    </g>
+
+    <!-- ── Box 3: Register Instance PID ── -->
+    <g data-concept="pidinst" transform="translate(288.97314,-242.85816)">
+        <rect x="45.63726" y="248.84354" width="73.701653" height="53.942574" rx="3.6850822"
+            fill="var(--pid-pidinst)" stroke="var(--pid-stroke)" stroke-width="1.05743"/>
+        <text x="82.373825" y="260.71841" text-anchor="middle" dominant-baseline="central"
+            font-size="12" font-weight="700" fill="#ffffff">
+            <tspan x="82.373825" y="260.71841">Register</tspan>
+            <tspan x="82.373825" y="275.71841">Instance</tspan>
+            <tspan x="82.373825" y="290.71841">(PID)</tspan>
+        </text>
+    </g>
+
+    <!-- ── Decision diamond 2: Need descriptor PID? ── -->
+    <g data-trigger="pidinst"
+        transform="matrix(1.0011478,0,0,0.99998215,376.11602,-130.16821)">
+        <polygon points="120,208 62,182 120,156 178,182"
+            fill="var(--pid-decision-fill)" stroke="var(--pid-decision-stroke)" stroke-width="1.5"
+            transform="matrix(0.67377016,0,0,1.1304133,17.054411,-42.60744)"/>
+        <text x="98.995079" y="150.85385" text-anchor="middle" dominant-baseline="central"
+            font-size="10.5" fill="#2b3340">
+            <tspan x="98.995079" y="150.85385">Need</tspan>
+            <tspan x="98.995079" y="164.18723">descriptor</tspan>
+            <tspan x="98.995079" y="177.5206">PID?</tspan>
+        </text>
+    </g>
+
+    <!-- ── STOP 2 ── -->
+    <g data-trigger="pidinst" transform="translate(354.42232,-372.43357)">
+        <rect x="90.910828" y="462.85806" width="56.823551" height="31.462898" rx="12.075006"
+            fill="var(--pid-stop)" stroke="var(--pid-stroke)" stroke-width="1.21611"/>
+        <text x="119.23471" y="479.60544" text-anchor="middle" dominant-baseline="central"
+            font-size="13" font-weight="800" fill="#8a2010">STOP</text>
+    </g>
+
+    <!-- ── Box 4: Register Descriptor PID ── -->
+    <g data-concept="phd" transform="translate(402.18956,-345.10475)">
+        <rect x="139.07631" y="351.12378" width="83.486359" height="53.875271" rx="4.1743178"
+            fill="var(--pid-phd)" stroke="var(--pid-stroke)" stroke-width="1.12473"/>
+        <text x="180.36246" y="362.96503" text-anchor="middle" dominant-baseline="central"
+            font-size="12" font-weight="700" fill="#ffffff">
+            <tspan x="180.36246" y="362.96503">Register</tspan>
+            <tspan x="180.36246" y="377.96503">Descriptor</tspan>
+            <tspan x="180.36246" y="392.96503">(PID)</tspan>
+        </text>
+    </g>
+
+    <!-- ── STOP 3 (final) ── -->
+    <g data-trigger="phd" transform="translate(463.19054,-372.43357)">
+        <rect x="90.910828" y="462.85806" width="56.823551" height="31.462898" rx="12.075006"
+            fill="var(--pid-stop)" stroke="var(--pid-stroke)" stroke-width="1.21611"/>
+        <text x="119.23471" y="479.60544" text-anchor="middle" dominant-baseline="central"
+            font-size="13" font-weight="800" fill="#8a2010">STOP</text>
+    </g>
+
+</svg>
+    </div>
+
+    </div>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('pid-diagrams');
+  if (!root) return;
+
+/*  -- Cross-highlight system ---------------------------------------
+    setHighlight(concept) adds .is-highlighted to every element
+        sharing data-concept="concept" across all three diagrams, and
+        adds .has-highlight to the root so non-highlighted elements dim.
+
+    Concept → level mapping for the concentric abd hierarchy diagrams.
+        Level 1 = outermost/most encompassing, level 4 = innermost.
+        When hovering level N, all elements at levels 1..(N-1) in the
+        hierarchy diagram get .is-ancestor — visible but not glowing.
+
+    To add tooltips later:
+        1. Add data-tooltip="..." to any [data-concept] element
+        2. In setHighlight(), read el.dataset.tooltip and show a
+           positioned <div class="pid-tooltip"> near the cursor.
+
+    To add click-to-reveal later:
+        1. Add data-detail="section-id" to any [data-concept] element
+        2. Add a click listener that populates a detail panel.
+    ------------------------------------------------------------------- */
+    var ancestorDiagrams = root.querySelectorAll(
+        '.pid-diagram--hierarchy, .pid-diagram--concentric'
+    );
+    var conceptLevels = {
+        'rrid-facility': 1,
+        'rrid-model':    2,
+        'pidinst':       3,
+        'phd':           4
+    };
+    function setHighlight(concept) {
+        clearHighlight();
+        root.classList.add('has-highlight');
+
+        // Glow on matching [data-concept] elements across all diagrams
+        root.querySelectorAll('[data-concept="' + concept + '"]').forEach(function (el) {
+            el.classList.add('is-highlighted');
+        });
+
+        // [data-trigger] elements for this concept stay visible but don't glow
+        root.querySelectorAll('[data-trigger="' + concept + '"]').forEach(function (el) {
+            el.classList.add('is-ancestor');
+        });
+
+        // In concentric + hierarchy diagrams: all levels above the hovered
+        // level stay visible (not dimmed) to communicate containment
+        var hoveredLevel = conceptLevels[concept] || 0;
+        if (hoveredLevel > 1) {
+            Object.keys(conceptLevels).forEach(function (c) {
+                if (conceptLevels[c] < hoveredLevel) {
+                    ancestorDiagrams.forEach(function (diagram) {
+                        diagram.querySelectorAll('[data-concept="' + c + '"]').forEach(function (el) {
+                            el.classList.add('is-ancestor');
+                        });
+                    });
+                }
+            });
+        }
+    }
+
+    function clearHighlight() {
+        root.classList.remove('has-highlight');
+        root.querySelectorAll('.is-highlighted, .is-ancestor').forEach(function (el) {
+            el.classList.remove('is-highlighted', 'is-ancestor');
+        });
+    }
+
+    root.querySelectorAll('[data-concept]').forEach(function (el) {
+        el.addEventListener('mouseenter', function () { setHighlight(el.dataset.concept); });
+        el.addEventListener('mouseleave', clearHighlight);
+    });
+
+    // data-trigger elements fire the highlight but never receive it themselves
+    root.querySelectorAll('[data-trigger]').forEach(function (el) {
+        el.addEventListener('mouseenter', function () { setHighlight(el.dataset.trigger); });
+        el.addEventListener('mouseleave', clearHighlight);
+    });
+})();
+</script>

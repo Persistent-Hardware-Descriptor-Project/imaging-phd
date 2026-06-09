@@ -48,7 +48,7 @@ graph LR
 </div>
 
 
-Our technical design promotes long-term reuse, community adoption, and the scalability of reproducible research.
+## The technical design promotes long-term reuse, community adoption, and the scalability of reproducible research.
 
 {% assign rows = page.merits %}
 
@@ -67,7 +67,7 @@ Our technical design promotes long-term reuse, community adoption, and the scala
   {% endfor %}
 </table>
 
-Broader impact is embedded in every layer of our platform—tools, people, and community.
+## Broader impact is embedded in every layer of the platform—tools, people, and community.
 
 {% assign rows = page.impacts %}
 
