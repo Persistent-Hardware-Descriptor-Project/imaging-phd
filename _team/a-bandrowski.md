@@ -1,24 +1,15 @@
 ---
 name: "Anita Bandrowski"
-title: ""
+title: "Key Senior Personnel"
 sc: true
+main-team: [3]
+secondary-teams: [2]
+position: "Co-Founder and CEO"
 affiliation: "SciCrunch, Inc.; University of California San Diego"
+photo: assets/images/team/a-bandrowky-headshot.jpg
 email: "abandrowski@ucsd.edu"
 github: "https://github.com/bandrow"
+orcid: "0000-0002-5497-0243"
 ---
 
-Full bio goes here. This can be as long as needed.
-
-## Research Interests
-
-- Interest one
-- Interest two
-
-## Selected Publications
-
-- Author A, **Smith J**. (2024). Title. *Journal*. [DOI](https://doi.org)
-
-## Education
-
-- **Ph.D.**, Field, University, Year
-- **M.S.**, Field, University, Year
+As a person passionate about reproducibility in science and a PID provider, I see where small bits of standardization make huge impact. PHD has the potential to organize and improve reproducibility for an entire field!
