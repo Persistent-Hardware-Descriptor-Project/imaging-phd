@@ -1,10 +1,15 @@
 ---
 name: "Koon (Steven) Wong"
-title: ""
+title: 
 sc: false
+main-team: [3]
+secondary-teams: [2]
+position: "Director"
 affiliation: "UMass Chan Medical School"
+department: "Research Informatics Systems"
 email: "koon.wong@umassmed.edu"
 github: "https://github.com/stevenwong-umchan"
+photo: assets/images/team/k-wong-headshot.jpeg
 ---
 
 Full bio goes here. This can be as long as needed.

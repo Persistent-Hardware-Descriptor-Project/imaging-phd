@@ -5,14 +5,14 @@
 /* --- Page content wrapper --- */
 /* Restores padding for normal page content */
 .page-content .wrapper {
-  max-width: 100%;
-  padding-left: 2rem;
-  padding-right: 2rem;
+    max-width: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 /* Header wrapper always full width */
 .site-header .wrapper {
-  max-width: 100%;
+    max-width: 100%;
 }
 
 /* --- Full-bleed sections --- */
@@ -21,12 +21,12 @@
 /* content. This is the standard "full bleed in a padded  */
 /* container" technique.                                  */
 .bg-gray {
-  background-color: #f0f4f8;
-  margin-left: -2rem;
-  margin-right: -2rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  border-radius: 0;
+    background-color: #f0f4f8;
+    margin-left: -2rem;
+    margin-right: -2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-radius: 0;
 }
 
 .bg-white {
@@ -36,56 +36,60 @@
 /* --- Feature rows --- */
 /* Used for image+text paired sections on the home page   */
 .feature-row {
-  display: flex;
-  align-items: center;
-  padding: 3rem 2rem;
-  gap: 2rem;
+    display: flex;
+    align-items: center;
+    padding: 3rem 2rem;
+    gap: 2rem;
 }
 
 /* Image on Left (Default) */
 .feature-row.left {
-  flex-direction: row;
+    flex-direction: row;
 }
 
 /* Image on Right */
 .feature-row.right {
-  flex-direction: row-reverse;
+    flex-direction: row-reverse;
+}
+
+/* Image container */
+.feature-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Image styling */
 .feature-image img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 4px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-.feature-image {
-  flex: 1;
+    max-width: 100%;
+    max-height: 350px;
+    border-radius: 4px;
+    /* box-shadow: 0 4px 6px rgba(0,0,0,0.1); */
 }
 
 .feature-text {
-  flex: 1;
+    flex: 1;
 }
 
 /* --- Responsive --- */
 @media (max-width: 768px) {
-  .feature-row.left,
-  .feature-row.right {
-    flex-direction: column;
-    text-align: center;
-  }
+    .feature-row.left,
+    .feature-row.right {
+        flex-direction: column;
+        text-align: center;
+    }
 
   /* Restore full-bleed on mobile */
-  .bg-gray {
-    margin-left: -1rem;
-    margin-right: -1rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
+    .bg-gray {
+        margin-left: -1rem;
+        margin-right: -1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
 
-  .page-content .wrapper {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
+    .page-content .wrapper {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
 }

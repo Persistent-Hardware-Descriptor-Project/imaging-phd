@@ -1,9 +1,12 @@
 ---
 name: "Aleksander Drozdz"
-title: ""
+title: "Team Member"
 sc: false
+main-team: [3]
+secondary-teams: [2]
 affiliation: "SciCrunch, Inc."
 email: "aleksander@scicrunch.com"
+orcid: "0009-0006-2560-4099"
 ---
 
 Full bio goes here. This can be as long as needed.

@@ -1,24 +1,12 @@
 ---
 name: "Jocelyn Petitto"
-title: ""
+title: "Team Member"
 sc: false
+main-team: [4]
+secondary-teams: [1,2,3]
+position: "Bioinformatician III"
 affiliation: "UMass Chan Medical"
+department: "RNA Therapeutic Institute"
 email: "jocelyn.petitto@umassmed.edu"
 github: "https://github.com/jcpetitto"
 ---
-
-Full bio goes here. This can be as long as needed.
-
-## Research Interests
-
-- Interest one
-- Interest two
-
-## Selected Publications
-
-- Author A, **Smith J**. (2024). Title. *Journal*. [DOI](https://doi.org)
-
-## Education
-
-- **Ph.D.**, Field, University, Year
-- **M.S.**, Field, University, Year

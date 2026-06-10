@@ -1,11 +1,16 @@
 ---
 name: "Alex Rigano"
-title: ""
+title: "Team Member"
 sc: false
+main-team: [1]
+secondary-teams: [1,3]
+position: "Software Engineer; Director of Operations"
 affiliation: "UMass Chan Medical School"
-photo: 
+department: "Program in Molecular Medicine; BioImage DMS Core"
+photo: assets/images/team/a-rigano-headshot.jpg
 email: "alex.rigano@umassmed.edu"
 github: "https://github.com/Akramhar"
+website: "https://www.umassmed.edu/research/cores/bioimage-dms-core/"
 ---
 
 Full bio goes here. This can be as long as needed.

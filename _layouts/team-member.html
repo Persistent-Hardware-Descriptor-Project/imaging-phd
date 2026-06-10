@@ -16,8 +16,15 @@ layout: default
     <div class="member-details">
       <h1>{{ page.name }}</h1>
       <p class="member-title">{{ page.title }}</p>
+      
       {% if page.affiliation %}
         <p class="member-affiliation">{{ page.affiliation }}</p>
+      {% endif %}
+      {% if page.department %}
+        <p class="member-department">{{ page.department }}</p>
+      {% endif %}
+      {% if page.position %}
+        <p class="member-position">{{ page.position }}</p>
       {% endif %}
 
       <div class="member-links">

@@ -1,8 +1,12 @@
 ---
 name: "Josh Moore"
-title: ""
+title: "Key Senior Personnel"
 sc: true
-affiliation: "German BioImaging; OME"
+main-team: [1]
+secondary-teams: [2]
+position: "Technical Director"
+affiliation: "Open Source Collective - Open Microscopy Environment Project; German BioImaging"
+photo: assets/images/team/j-moore-headshot.jpg
 email: "josh@openmicroscopy.org"
 github: "https://github.com/joshmoore"
 
