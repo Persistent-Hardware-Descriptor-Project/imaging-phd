@@ -1,0 +1,93 @@
+// _sass/_resources.scss
+// Styles for resources.md — resource link list with logo + text rows.
+
+.resource-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid $color-obj-grey-support;
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    // Fixed-width logo column
+    .resource-logo {
+        flex: 0 0 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        a {
+            display: block;
+            line-height: 0;
+        }
+
+        img {
+            // Explicit constraints so SVGs with viewBox-only sizing still render.
+            // width/height attrs on the <img> give the browser intrinsic dimensions;
+            // these CSS rules scale them down to fit while preserving aspect ratio.
+            display: block;
+            width: 180px;
+            height: auto;
+            //height: 44px;
+            object-fit: contain;
+            object-position: left center;
+        }
+    }
+
+    // Placeholder holds column width when there is no logo,
+    // keeping text-column alignment consistent across all rows.
+    .resource-logo-placeholder {
+        flex: 0 0 180px;
+    }
+
+    // Text column
+    .resource-text {
+        flex: 1;
+        min-width: 0;
+
+        .resource-title {
+            font-weight: 600;
+            font-size: 1rem;
+            line-height: 1.3;
+
+            a {
+                color: $color-nav;
+                text-decoration: none;
+
+                &:hover {
+                    color: $color-obj-blue;
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        .resource-desc {
+            margin-top: 0.2rem;
+            font-size: 0.875rem;
+            color: $color-obj-grey;
+            line-height: 1.4;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .resource-list li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .resource-list .resource-logo,
+    .resource-list .resource-logo-placeholder {
+        flex: none;
+    }
+}
