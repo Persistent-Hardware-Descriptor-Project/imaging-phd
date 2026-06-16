@@ -1,0 +1,58 @@
+// _sass/_iphd-workflow.scss
+// Styles for _includes/iphd-architecture.html — the SVG-based IPHD
+// workflow diagram. Replaces the old _iphd-architecture.scss, which
+// styled the previous CSS-Grid version of this include.
+//
+// The SVG itself is purely structural/visual (geometry, fills,
+// strokes). All *interactive* styling — the hover lift/highlight on
+// the five "cloud" shapes (Register RRID, Register PIDINST,
+// Register PHD-ID, Publication Cloud, and Facility Profile) — lives
+// here, since the inline SVG is part of the page DOM and these
+// selectors reach it directly.
+//
+// Each cloud is wrapped in <g class="iphd-cloud-group" data-cloud="...">,
+// and its dashed outline path carries class="iphd-cloud-shape".
+
+.iphd-workflow-diagram {
+  // Design tokens — mirrors the palette used elsewhere on the site
+  // (see _colors.scss). Pulled in here as custom properties so the
+  // hover treatment can be tuned without hunting through the SVG.
+  --iphd-cloud-hover-stroke: #2b3340; // matches --d-ink
+  --iphd-cloud-hover-shadow: rgba(0, 0, 0, 0.12);
+
+  display: block;
+  width: 100%;
+
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .iphd-cloud-group {
+    cursor: pointer;
+    transition: transform 0.15s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  .iphd-cloud-shape {
+    transition: stroke 0.15s ease, filter 0.15s ease;
+  }
+
+  .iphd-cloud-group:hover .iphd-cloud-shape {
+    // !important is needed here because Inkscape writes stroke color
+    // as part of each path's inline style="..." attribute, which has
+    // higher specificity than this class selector.
+    stroke: var(--iphd-cloud-hover-stroke) !important;
+    filter: drop-shadow(0 4px 6px var(--iphd-cloud-hover-shadow));
+  }
+
+  // Logo links inside the clouds shouldn't show the default SVG <a>
+  // focus/visited styling beyond the cursor.
+  .iphd-cloud-group a {
+    cursor: pointer;
+  }
+}
