@@ -8,4 +8,4 @@ permalink: /getting-started/
 
 Welcome to the documentation for the Persistent Hardware Descriptors...
 
-{% include iphd-architecture.html %}
+{% include iphd-workflow.html %}
