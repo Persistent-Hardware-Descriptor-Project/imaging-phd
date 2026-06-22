@@ -120,7 +120,7 @@ sections:
     <img src="{{ page.featured_focus.image | relative_url }}" alt="Nature Focus Cover">
   </div>
   <div class="featured-focus-content">
-    <span class="featured-focus-badge">Focus Issue</span>
+    <span class="featured-focus-badge">Nature Methods > Focus Issue</span>
     <h3 class="featured-focus-title">{{ page.featured_focus.title }}</h3>    
     <p class="featured-focus-description">
       {{ page.featured_focus.description }}
