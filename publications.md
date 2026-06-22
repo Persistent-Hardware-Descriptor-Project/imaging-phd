@@ -2,6 +2,15 @@
 layout: page
 title: Publications
 permalink: /publications/
+featured_focus:
+  title: "Reporting and reproducibility in microscopy"
+  journal: "Nature Methods"
+  volume: "18"
+  issue: "12"
+  year: "2021"
+  description: "This Focus issue features a series of papers offering guidelines and tools for improving the tracking and reporting of microscopy metadata with an emphasis on reproducibility and data re-use."
+  url: "https://www.nature.com/collections/djiciihhjh"
+  image: "assets/images/MicroscopeModeling_attr_Thao_Do.png" # Path to your graphic
 sections:
   - heading: "Data Management and Sharing"
     publications:
@@ -105,6 +114,26 @@ sections:
         doi_label: "10.1093/gigascience/giac058"
         doi_url: "https://doi.org/10.1093/gigascience/giac058"
 ---
+
+<div class="featured-focus-container">
+  <div class="featured-focus-graphic">
+    <img src="{{ page.featured_focus.image | relative_url }}" alt="Nature Focus Cover">
+  </div>
+  <div class="featured-focus-content">
+    <span class="featured-focus-badge">Focus Issue</span>
+    <h3 class="featured-focus-title">{{ page.featured_focus.title }}</h3>    
+    <p class="featured-focus-description">
+      {{ page.featured_focus.description }}
+    </p>
+    <div class="featured-focus-citation">
+      <p>
+        <strong>Citation:</strong> {{ page.featured_focus.title }}. <i>{{ page.featured_focus.journal }}</i> <strong>{{ page.featured_focus.volume }}</strong> ({{ page.featured_focus.issue }}), ({{ page.featured_focus.year }}).
+      </p>
+      <a href="{{ page.featured_focus.url }}" target="_blank">View Full Collection →</a>
+    </div>
+  </div>
+
+</div>
 
 {% for section in page.sections %}
 <div>
