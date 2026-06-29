@@ -1,0 +1,47 @@
+---
+layout: default
+---
+
+<article class="post project-page">
+
+    <header class="post-header">
+        <h1 class="post-title">{{ page.title | escape }}</h1>
+
+        <div class="project-meta">
+            {%- if page.status %}
+            <span class="project-status status-{{ page.status }}">{{ page.status }}</span>
+            {%- endif %}
+
+            {%- if page.categories %}
+            <span class="project-categories">
+                {%- assign all_categories = site.data.categories -%}
+                {%- for cat_id in page.categories -%}
+                    {%- assign cat = all_categories | where: "id", cat_id | first -%}
+                    {%- if cat %}
+                    <span class="project-category category-{{ cat.color }}">{{ cat.title }}</span>
+                    {%- endif %}
+                {%- endfor %}
+            </span>
+            {%- endif %}
+        </div>
+    </header>
+
+    <div class="post-content">
+        {{ content }}
+    </div>
+
+    {%- if page.outputs %}
+    <div class="project-outputs">
+        {%- for output in page.outputs %}
+        <a href="{{ output.url }}" class="output-link" target="_blank" rel="noopener noreferrer">
+            {{ output.label }} ↗
+        </a>
+        {%- endfor %}
+    </div>
+    {%- endif %}
+    <div class="project-nav">
+        <a href="{{ '/projects/' | relative_url }}" class="project-return">
+            ← Return to Projects
+        </a>
+    </div>
+</article>

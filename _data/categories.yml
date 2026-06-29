@@ -10,25 +10,25 @@
   order: 1
   color: green
   description: |
-    "A vendor-friendly metadata schema and protocol enabling automatic transfer of detailed hardware configuration data from microscopy instrument manufacturers to researchers."
+    A vendor-friendly metadata schema and protocol enabling automatic transfer of detailed hardware configuration data from microscopy instrument manufacturers to researchers.
 
 - id: cat-2
   title: "Micro-Meta Platform Frontend (MMPF)"
   order: 2
   color: red
   description: |
-    "A user-centric Graphical User Interface (GUI) designed for authoring, reviewing, and editing NGM-encoded hardware descriptors."
+    A user-centric Graphical User Interface (GUI) designed for authoring, reviewing, and editing NGM-encoded hardware descriptors.
 
 - id: cat-3
   title: "Micro-Meta Platform Backend (MMPB)"
   order: 3
   color: blue
   description: |
-    "A scalable service infrastructure that manages PIDs creation, metadata deposition, and interlinking of hardware descriptors with data and publications and post publication exploration, citation and data annotation. MMPB will incorporate exploratory Large Language Model (LLM) techniques to extract metadata from unstructured instrument technical documents, enhancing metadata completeness and quality."
+    A scalable service infrastructure that manages PIDs creation, metadata deposition, and interlinking of hardware descriptors with data and publications and post publication exploration, citation and data annotation. MMPB will incorporate exploratory Large Language Model (LLM) techniques to extract metadata from unstructured instrument technical documents, enhancing metadata completeness and quality.
 
 - id: cat-4
   title: "Coordinated Testing, Validation, Outreach and Dissemination"
   order: 4
   color: grey
   description: |
-    "Actively engaging research scientists, core-facility staff, and data librarians to obtain early feedback during software development to ensure usability; implementing targeted education and training on FAIR practices, persistent identifiers (PIDs), and metadata registries at venues and organizations specifically selected to maximize impact; and creating technical documentation for microscopy hardware to support future community learning."
+    Actively engaging research scientists, core-facility staff, and data librarians to obtain early feedback during software development to ensure usability; implementing targeted education and training on FAIR practices, persistent identifiers (PIDs), and metadata registries at venues and organizations specifically selected to maximize impact; and creating technical documentation for microscopy hardware to support future community learning.

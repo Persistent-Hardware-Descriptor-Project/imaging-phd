@@ -27,14 +27,23 @@ permalink: /projects/
         {% for project in category_projects %}
         <div class="project-item">
           <div class="project-header">
-            <h3 class="project-title">{{ project.title }}</h3>
+            <h3 class="project-title">
+                {% unless project.content == blank %}
+                    <a href="{{ project.url | relative_url }}">{{ project.title }}</a>
+                {% endunless %}
+            </h3>
             {% if project.status %}
             <span class="project-status status-{{ project.status }}">{{ project.status }}</span>
             {% endif %}
           </div>
           {% if project.description %}
-          <p class="project-description">{{ project.description }}</p>
+            <p class="project-description">{{ project.description }}</p>
           {% endif %}
+          {% unless project.content == blank %}
+            <a href="{{ project.url | relative_url }}" class="project-read-more">
+                View project →
+            </a>
+          {% endunless %}
           {% if project.outputs %}
           <div class="project-outputs">
             {% for output in project.outputs %}

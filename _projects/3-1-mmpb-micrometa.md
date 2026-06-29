@@ -12,6 +12,7 @@ title: "Project Title"
 description: "A short description — one or two sentences. Appears in the listing card."
 categories: [cat-1]
 status: "active"   # active | complete | planned
+
 # Output links — delete any you don't need
 outputs:
   - label: "GitHub"
