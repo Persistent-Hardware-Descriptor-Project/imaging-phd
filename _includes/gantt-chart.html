@@ -18,6 +18,11 @@
 
   To link a deliverable to a project page, add a url to the
   link: field in _data/gantt.yml for that deliverable.
+
+  Objective labels carry data-color matching the category color in
+  categories.yml. Clicking a label scrolls to and opens the
+  corresponding category accordion — see the JS at the bottom of
+  projects.md.
 {% endcomment %}
 
 <div class="gantt-wrapper">
@@ -29,13 +34,15 @@
       <!-- Spacer: matches header row height -->
       <div class="gantt-labels-header">Obj.</div>
 
-      <!-- One label per objective, sized proportionally by deliverable count -->
+      <!-- One label per objective, sized proportionally by deliverable count.
+           data-color links this label to the matching category accordion.    -->
       {% for objective in site.data.gantt.objectives %}
       {% assign label-height = objective.deliverables.size | times: 36 %}
         <div class="gantt-obj-label gantt-obj-{{ objective.color }}"
-            style="height: {{ label-height }}px;">
-        <span>{{ objective.label }}</span>
-      </div>
+             data-color="{{ objective.color }}"
+             style="height: {{ label-height }}px;">
+          <span>{{ objective.label }}</span>
+        </div>
       {% endfor %}
 
     </div><!-- .gantt-labels-col -->

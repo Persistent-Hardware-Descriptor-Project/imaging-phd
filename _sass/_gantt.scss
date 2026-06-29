@@ -96,6 +96,11 @@ $gantt-min-col-width: 28px;
   flex-grow: 0;
   box-sizing: border-box;
   /* height set via inline style in template: N × row_height */
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(1.12);
+  }
 }
 
 /* ── RIGHT: Main grid ─────────────────────────────────────────── */

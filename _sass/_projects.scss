@@ -95,10 +95,24 @@ details[open] .category-header::before {
 }
 
 .project-title {
-  font-size: 0.95rem;
-  font-weight: 500;
-  margin: 0;
-  color: #1B3B5D;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin: 0;
+    color: #1B3B5D;
+
+    a {
+        color: inherit;
+        text-decoration: none;
+
+        &:visited {
+            color: inherit;
+        }
+
+        &:hover {
+            color: $color-obj-blue;
+            text-decoration: underline;
+        }
+    }
 }
 
 .project-description {
@@ -106,6 +120,24 @@ details[open] .category-header::before {
   color: #555;
   margin: 0.3rem 0 0.6rem;
   line-height: 1.5;
+}
+
+.project-read-more {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $color-nav;
+    text-decoration: none;
+
+    &:hover {
+        color: $color-obj-blue;
+        text-decoration: underline;
+    }
+
+    &:visited {
+            color: inherit;
+    }
 }
 
 /* --- Status badge --- */
@@ -116,6 +148,20 @@ details[open] .category-header::before {
   font-weight: 500;
   white-space: nowrap;
 }
+
+/* --- Project description image --- */
+/* Used in individual project page bodies via <div class="proj-desc-img"> */
+.proj-desc-img {
+    width: fit-content;     /* shrinks to the image's intrinsic width */
+    margin: 1.5rem auto;    /* centres within the content column */
+
+    img {
+        display: block;     /* removes the inline descender gap beneath the image */
+        max-width: 100%;    /* prevents overflow on narrow screens */
+        height: auto;       /* preserves aspect ratio */
+    }
+}
+
 
 .status-active   { background: #e6f4ea; color: #1a7a3a; border: 0.5px solid #aaddbb; }
 .status-complete { background: #e8eef8; color: #1a3a7a; border: 0.5px solid #aabbdd; }
