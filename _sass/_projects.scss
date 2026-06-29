@@ -149,6 +149,20 @@ details[open] .category-header::before {
   white-space: nowrap;
 }
 
+/* --- Project description image --- */
+/* Used in individual project page bodies via <div class="proj-desc-img"> */
+.proj-desc-img {
+    width: fit-content;     /* shrinks to the image's intrinsic width */
+    margin: 1.5rem auto;    /* centres within the content column */
+
+    img {
+        display: block;     /* removes the inline descender gap beneath the image */
+        max-width: 100%;    /* prevents overflow on narrow screens */
+        height: auto;       /* preserves aspect ratio */
+    }
+}
+
+
 .status-active   { background: #e6f4ea; color: #1a7a3a; border: 0.5px solid #aaddbb; }
 .status-complete { background: #e8eef8; color: #1a3a7a; border: 0.5px solid #aabbdd; }
 .status-planned  { background: #f8f4e8; color: #7a5a1a; border: 0.5px solid #ddccaa; }

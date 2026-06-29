@@ -14,6 +14,8 @@ categories: [cat-1]
 status: "active"   # active | complete | planned
 # Output links — delete any you don't need
 outputs:
+  - label: "Website"
+    url: "http://www.somesite.com"
   - label: "GitHub"
     url: "https://github.com/placeholder"
   - label: "Publication"
@@ -25,3 +27,10 @@ outputs:
 Project description goes here. This body content appears on the individual project
 page at /projects/short-project-name/ but not in the listing card (which uses the
 `description` field above instead).
+
+<!---
+<div class="proj-desc-img">
+    <img src="{{ '/assets/images/projects/1-1-NGM-schema.svg' | relative_url }}"
+     alt="Image showing tools representing the ability to fit different data because of the shared data schema." />
+</div>
+--->

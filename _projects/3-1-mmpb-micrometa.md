@@ -1,28 +1,23 @@
 ---
-# INSTRUCTIONS
-# ------------
-# Copy this file, rename it using the convention: short-project-name.md
-# Fill in all fields below. Delete any lines you don't need.
-# For categories: use the id(s) from _data/categories.yml
-# For a single category:   categories: [cat-1]
-# For multiple categories: categories: [cat-1, cat-2]
-
 layout: project
-title: "Project Title"
+title: "Micro-Meta App"
 description: "A short description — one or two sentences. Appears in the listing card."
-categories: [cat-1]
+categories: [cat-3]
 status: "active"   # active | complete | planned
 
 # Output links — delete any you don't need
 outputs:
+  - label: "Website"
+    url: "https://wu-bimac.github.io/MicroMetaApp.github.io/"
   - label: "GitHub"
-    url: "https://github.com/placeholder"
-  - label: "Publication"
-    url: "https://doi.org/placeholder"
+    url: "https://github.com/WU-BIMAC/MicroMetaApp-React"
+  - label: "Micro-Meta App: an interactive tool for collecting microscopy metadata based on community specifications"
+    url: "https://www.nature.com/articles/s41592-021-01315-z"
   - label: "Documentation"
-    url: "https://placeholder.org"
+    url: "https://micrometaapp-docs.readthedocs.io/en/latest/index.html"
 ---
 
-Project description goes here. This body content appears on the individual project
-page at /projects/short-project-name/ but not in the listing card (which uses the
-`description` field above instead).
+<div class="proj-desc-img">
+    <img src="{{ 'assets/images/logos/micrometaapp-banner-bg_no outline_CS_v05_SMALL.png' | relative_url }}"
+     alt="Micro-Meta App banner" />
+</div>
