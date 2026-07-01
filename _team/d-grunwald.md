@@ -10,6 +10,5 @@ department: "RNA Therapeutic Institute"
 photo: /assets/images/team/d-grunwald-headshot.jpg
 email: "david.grunwald@umassmed.edu"
 github: "https://github.com/dgrundwald"
-website1: "https://www.umassmed.edu/grunwaldlab/"
-website2: "https://profiles.umassmed.edu/display/132339"
+website: "https://www.umassmed.edu/grunwaldlab/"
 ---
