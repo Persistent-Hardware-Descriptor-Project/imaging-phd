@@ -4,7 +4,7 @@ title: Team Members
 permalink: /about/team-members/
 ---
 
-Our team brings together expertise in microscopy, bioinformatics, and cyberinfrastructure. 
+Our team brings together expertise in molecular cell biology, microscopy, bioimage-informatics, and cyberinfrastructure. 
 
 
 {% assign sc_members = site.team | where_exp: "member", "member.sc == true" %}
