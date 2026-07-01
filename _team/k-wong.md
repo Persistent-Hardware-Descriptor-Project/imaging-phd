@@ -1,6 +1,6 @@
 ---
 name: "Koon (Steven) Wong"
-title: 
+title: "Team Member"
 sc: false
 main-team: [3]
 secondary-teams: [2]
