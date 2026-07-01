@@ -9,6 +9,7 @@ affiliation: "UMass Chan Medical School"
 department: "Research Informatics Systems"
 email: "koon.wong@umassmed.edu"
 github: "https://github.com/stevenwong-umchan"
+website: "https://www.linkedin.com/in/stevenwong-sds/"
 photo: assets/images/team/k-wong-headshot.jpeg
 ---
 
