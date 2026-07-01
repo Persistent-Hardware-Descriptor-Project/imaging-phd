@@ -17,10 +17,10 @@ website: "https://jsmith.lab.edu"
 ---
 
 <!-- 
+Please add a bio and reason why you are excited to be part of the Imaging-PHD project.
 
-Brief Bio
-
-Why IPHD?
+Optionally also add additional biographical information as described below.
+When you are done, do not forget to remove the comment-out markers (an < followed by ! and 2 dashes at the beginning and 2 dashes and an > at the end).
 
 
 ## Research Interests
