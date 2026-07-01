@@ -15,8 +15,10 @@ title: Home
     <img src="assets/images/IPHD_imaging_data.png" alt="Nature cover for fluorescence microscopy and metadata">
   </div>
   <div class="feature-text">
-    <h2>Microscopy Metadata</h2>
-    <p>In microscopy experiments, image metadata can be subdivided as follows: (1) experimental and sample metadata; (2) microscopy metadata; and (3) analysis metadata. In turn, microscopy metadata (pink boxes) can be subdivided into two categories: (1) provenance metadata, which includes information that documents microscope hardware specifications, image acquisition settings and image structure; and (2) quality-control metadata, which includes metrics that quantitatively assess the performance of the microscope at the time of image acquisition and the quality of image data. </p>
+    <h2>Persistent Identifiers Help Keep Track of Microscopy Metadata</h2>
+    <p>Microscopy metadata rarely lives in one place. It's scattered across lab notebooks, Electronic Lab Notebooks, image file headers, instrument hardware specifications, quality-control logs, and image analysis log files. Connecting these fragments is essential: Persistent Identifiers (PIDs) link data to the research resources used to produce it, and to the people and publications that resulted from the work. 
+      A typical imaging experiment can be subdivided into experimentation and sample preparation, image acquisition, and post-acquisition bioimage processing and analysis. Each phase produces essential image metadata, which can accordingly be subdivided into: (1) experimental and sample metadata; (2) microscopy metadata; and (3) analysis metadata. In turn, microscopy metadata can be subdivided into three categories: (1) provenance metadata, which documents microscope hardware specifications and image acquisition settings; (2) metadata describing the structure of the pixel data (xyz dimension, pixel size, dimensionality); and (3) quality-control metadata, which includes metrics that quantitatively assess microscope performance at the time of image acquisition and the quality of the resulting image data.
+      This project tackles a key piece of that puzzle: connecting image data to the scientific instrument that produced it through an Instrument Persistent Identifier [PIDINST](https://www.pidinst.org/), which in turn links to a standardized, machine-readable description of the instrument's hardware configuration, which is called a Persistent Hardware Descriptor (PHD).</p>
   </div>
 </div>
 
@@ -25,7 +27,7 @@ title: Home
     <img src="assets/images/IPHD_data_dag.png" alt="Interaction diagram of data and research">
   </div>
   <div class="feature-text">
-    <h2>The Persistent Identification of Instruments supports FAIR principles </h2>
+    <h2>The Persistent Identification of Instruments Supports FAIR Principles </h2>
     <p>Scientific instruments generate the data that drives discovery — but only if we can reliably track which instrument produced what data, and where and by whom it was used. Persistent Identifiers (PIDs) give each instrument a unique, permanent label, making it possible to link instruments to samples, datasets, publications, and the facilities that support research. This improves reproducibility, enables proper credit to core facilities, and supports the FAIR data principles — making science more transparent, trustworthy, and accessible.</p>
   </div>
 </div>
