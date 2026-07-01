@@ -12,7 +12,7 @@ title: Home
 
 <div class="feature-row left bg-gray">
   <div class="feature-image">
-    <img src="assets/images/IPHD_imaging_data.png" alt="Nature cover for fluorescence microscopy and metadata">
+    <img src="assets/images/IPHD_imaging_data.png" alt="Figure describing image metadata fragmentation">
   </div>
   <div class="feature-text">
     <h2>Persistent Identifiers Help Keep Track of Microscopy Metadata</h2>
