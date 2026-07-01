@@ -16,6 +16,8 @@ linkedin: "https://linkedin.com/in/jsmith"
 website: "https://jsmith.lab.edu"
 ---
 
+<!-- 
+
 Brief Bio
 
 Why IPHD?
@@ -33,4 +35,6 @@ Why IPHD?
 ## Education
 
 - **Ph.D.**, Field, University, Year
-- **M.S.**, Field, University, Year
+- **M.S.**, Field, University, Year 
+
+-->
