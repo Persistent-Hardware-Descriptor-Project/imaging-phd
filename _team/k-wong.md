@@ -1,6 +1,6 @@
 ---
 name: "Koon (Steven) Wong"
-title: 
+title: "Team Member"
 sc: false
 main-team: [3]
 secondary-teams: [2]
@@ -9,10 +9,18 @@ affiliation: "UMass Chan Medical School"
 department: "Research Informatics Systems"
 email: "koon.wong@umassmed.edu"
 github: "https://github.com/stevenwong-umchan"
+linkedin: "https://www.linkedin.com/in/stevenwong-sds/"
 photo: assets/images/team/k-wong-headshot.jpeg
 ---
 
+<!-- 
+Please add a bio and reason why you are excited to be part of the Imaging-PHD project.
+Optionally also add additional biographical information as described below.
+When you are done, do not forget to remove the comment-out markers (an < followed by ! and 2 dashes at the beginning and 2 dashes and an > at the end).
+
 Full bio goes here. This can be as long as needed.
+
+Other suggested information is
 
 ## Research Interests
 
@@ -27,3 +35,5 @@ Full bio goes here. This can be as long as needed.
 
 - **Ph.D.**, Field, University, Year
 - **M.S.**, Field, University, Year
+
+-->
