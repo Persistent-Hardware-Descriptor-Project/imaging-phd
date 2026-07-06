@@ -73,28 +73,28 @@ details[open] .category-header::before {
 .category-block.category-grey  .category-header { background-color: $color-obj-grey; }
 
 /* --- Project list inside expanded category --- */
-.project-list {
+.deliverable-list {
   padding: 0.8rem 1.2rem 1rem;
 }
 
-.project-item {
+.deliverable-item {
   padding: 0.8rem 0;
   border-bottom: 0.5px solid #e0e0e0;
 }
 
-.project-item:last-child {
+.deliverable-item:last-child {
   border-bottom: none;
   padding-bottom: 0;
 }
 
-.project-header {
+.deliverable-header {
   display: flex;
   align-items: center;
   gap: 0.8rem;
   margin-bottom: 0.3rem;
 }
 
-.project-title {
+.deliverable-title {
     font-size: 0.95rem;
     font-weight: 500;
     margin: 0;
@@ -115,14 +115,14 @@ details[open] .category-header::before {
     }
 }
 
-.project-description {
+.deliverable-description {
   font-size: 0.875rem;
   color: #555;
   margin: 0.3rem 0 0.6rem;
   line-height: 1.5;
 }
 
-.project-read-more {
+.deliverable-read-more {
     display: inline-block;
     margin-top: 0.5rem;
     font-size: 0.875rem;
@@ -141,7 +141,7 @@ details[open] .category-header::before {
 }
 
 /* --- Status badge --- */
-.project-status {
+.deliverable-status {
   font-size: 0.7rem;
   padding: 2px 7px;
   border-radius: 10px;
@@ -150,8 +150,8 @@ details[open] .category-header::before {
 }
 
 /* --- Project description image --- */
-/* Used in individual project page bodies via <div class="proj-desc-img"> */
-.proj-desc-img {
+/* Used in individual project page bodies via <div class="deliv-desc-img"> */
+.deliv-desc-img {
     width: fit-content;     /* shrinks to the image's intrinsic width */
     margin: 1.5rem auto;    /* centres within the content column */
 
@@ -168,7 +168,7 @@ details[open] .category-header::before {
 .status-planned  { background: #f8f4e8; color: #7a5a1a; border: 0.5px solid #ddccaa; }
 
 /* --- Output links --- */
-.project-outputs {
+.deliverable-outputs {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
@@ -192,7 +192,7 @@ details[open] .category-header::before {
 
 /* --- Responsive --- */
 @media (max-width: 768px) {
-  .project-header {
+  .deliverable-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.3rem;

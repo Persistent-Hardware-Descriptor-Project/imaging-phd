@@ -1,6 +1,6 @@
 ---
 name: "Jocelyn Petitto"
-title: "Team Member"
+role: "Team Member"
 sc: false
 main-team: [4]
 secondary-teams: [1,2,3]

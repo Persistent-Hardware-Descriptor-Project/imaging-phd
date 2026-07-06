@@ -1,6 +1,6 @@
 ---
 name: "Judith Lacoste"
-title: "Key Senior Personnel"
+role: "Key Senior Personnel"
 sc: true
 main-team: [4]
 secondary-teams: [1,2,3]

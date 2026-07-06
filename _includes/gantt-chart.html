@@ -25,7 +25,13 @@
   projects.md.
 {% endcomment %}
 
-<div class="gantt-wrapper">
+<div class="gantt-controls">
+  <button type="button" id="gantt-compact-toggle" class="gantt-toggle-btn" aria-pressed="false">
+    Compact view
+  </button>
+</div>
+
+<div class="gantt-wrapper" id="gantt-wrapper">
   <div class="gantt-outer">
 
     <!-- ── LEFT: Objective labels (flex column, outside the grid) ── -->
@@ -40,6 +46,7 @@
       {% assign label-height = objective.deliverables.size | times: 36 %}
         <div class="gantt-obj-label gantt-obj-{{ objective.color }}"
              data-color="{{ objective.color }}"
+             data-deliverable-count="{{ objective.deliverables.size }}"
              style="height: {{ label-height }}px;">
           <span>{{ objective.label }}</span>
         </div>
@@ -47,7 +54,7 @@
 
     </div><!-- .gantt-labels-col -->
 
-    <!-- ── RIGHT: Main grid (ID + title + period cols) ────────────── -->
+    <!-- RIGHT: Main grid (ID + title + period cols) -->
     <div class="gantt-grid">
 
       <!-- Header row -->
@@ -63,15 +70,17 @@
 
           <!-- Deliverable ID -->
           <div class="gantt-del-id gantt-id-{{ objective.color }}">
-            {% if deliverable.link %}
-              <a href="{{ deliverable.link }}">{{ deliverable.id }}</a>
-            {% else %}
-              {{ deliverable.id }}
-            {% endif %}
+            <a href="#deliverable-{{ deliverable.id }}"
+               class="gantt-jump-link"
+               data-target="deliverable-{{ deliverable.id }}">{{ deliverable.id }}</a>
           </div>
 
           <!-- Deliverable title -->
-          <div class="gantt-del-title">{{ deliverable.title }}</div>
+          <div class="gantt-del-title">
+            <a href="#deliverable-{{ deliverable.id }}"
+               class="gantt-jump-link gantt-title-link"
+               data-target="deliverable-{{ deliverable.id }}">{{ deliverable.title }}</a>
+          </div>
 
           <!-- Timeline cells -->
           {% for cell in deliverable.cells %}
@@ -79,7 +88,8 @@
             <div class="gantt-cell gantt-cell-empty"
                  style="grid-column: span {{ cell.span }};"></div>
             {% else %}
-            <div class="gantt-cell gantt-cell-{{ cell.type }} gantt-bar-{{ objective.color }}"
+            <div class="gantt-cell gantt-cell-{{ cell.type }} gantt-bar-{{ objective.color }} gantt-jump-link"
+                 data-target="deliverable-{{ deliverable.id }}"
                  style="grid-column: span {{ cell.span }};">
               {% if cell.label %}<span class="gantt-cell-label">{{ cell.label }}</span>{% endif %}
             </div>

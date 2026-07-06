@@ -111,8 +111,11 @@ $gantt-min-col-width: 28px;
     40px
     minmax(120px, max-content)
     repeat(8, minmax(50px, max-content));
-  grid-auto-rows: $gantt-row-height;
+  grid-auto-rows: var(--gantt-row-height, #{$gantt-row-height});
   flex: 1;
+}
+.gantt-wrapper {
+  --gantt-row-height: #{$gantt-row-height};
 }
 
 /* --- Header cells --- */
@@ -244,5 +247,43 @@ $gantt-min-col-width: 28px;
 
 /* --- Alternating row shading on title column only --- */
 .gantt-del-title:nth-of-type(even) {
-  background-color: #f7f9fc;
+    background-color: #f7f9fc;
+}
+
+.gantt-controls {
+    display: flex;
+    justify-content: flex-end;
+    max-width: fit-content;
+    margin: 0 auto;
+}
+
+.gantt-toggle-btn {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border: 1px solid #1B3B5D;
+    border-radius: 4px;
+    background: #ffffff;
+    color: #1B3B5D;
+    cursor: pointer;
+    margin-bottom: 0.4rem;
+
+    &:hover { background: #f0f4f8; }
+    &[aria-pressed="true"] { background: #1B3B5D; color: #ffffff; }
+}
+
+.gantt-compact {
+    .gantt-del-id,
+    .gantt-del-title,
+    .gantt-cell-label {
+        display: none;
+    }
+    .gantt-del-id, .gantt-del-title {
+        padding: 0;
+        border-left: none;
+        border-right: none;
+    }
+    .gantt-obj-label {
+        font-size: 0.6rem;
+    }
 }

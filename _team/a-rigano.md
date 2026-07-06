@@ -1,6 +1,6 @@
 ---
 name: "Alex Rigano"
-title: "Team Member"
+role: "Team Member"
 sc: false
 main-team: [1]
 secondary-teams: [1,3]

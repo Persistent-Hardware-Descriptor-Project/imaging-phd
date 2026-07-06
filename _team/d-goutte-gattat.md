@@ -1,6 +1,6 @@
 ---
 name: "Damien Goutte-Gattat"
-title: "Team Member"
+role: "Team Member"
 sc: false
 main-team: [1]
 secondary-teams: [2,3]

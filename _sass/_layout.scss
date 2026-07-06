@@ -4,15 +4,24 @@
 
 /* --- Page content wrapper --- */
 /* Restores padding for normal page content */
-.page-content .wrapper {
+.page-content {
+    .wrapper {
     max-width: 100%;
     padding-left: 2rem;
     padding-right: 2rem;
+
+        @media (max-width: 768px) {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+    }
 }
 
 /* Header wrapper always full width */
-.site-header .wrapper {
-    max-width: 100%;
+.site-header {
+    .wrapper {
+        max-width: 100%;
+    }
 }
 
 /* --- Full-bleed sections --- */
@@ -27,69 +36,105 @@
     padding-left: 2rem;
     padding-right: 2rem;
     border-radius: 0;
-}
 
-.bg-white {
-  background-color: #ffffff;
-}
-
-/* --- Feature rows --- */
-/* Used for image+text paired sections on the home page   */
-.feature-row {
-    display: flex;
-    align-items: center;
-    padding: 3rem 2rem;
-    gap: 2rem;
-}
-
-/* Image on Left (Default) */
-.feature-row.left {
-    flex-direction: row;
-}
-
-/* Image on Right */
-.feature-row.right {
-    flex-direction: row-reverse;
-}
-
-/* Image container */
-.feature-image {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Image styling */
-.feature-image img {
-    max-width: 100%;
-    max-height: 350px;
-    border-radius: 4px;
-    /* box-shadow: 0 4px 6px rgba(0,0,0,0.1); */
-}
-
-.feature-text {
-    flex: 1;
-}
-
-/* --- Responsive --- */
-@media (max-width: 768px) {
-    .feature-row.left,
-    .feature-row.right {
-        flex-direction: column;
-        text-align: center;
-    }
-
-  /* Restore full-bleed on mobile */
-    .bg-gray {
+    @media (max-width: 768px) {
         margin-left: -1rem;
         margin-right: -1rem;
         padding-left: 1rem;
         padding-right: 1rem;
     }
+}
 
-    .page-content .wrapper {
-        padding-left: 1rem;
-        padding-right: 1rem;
+.bg-white {
+    background-color: #ffffff;
+}
+
+/* --- Feature rows --- */
+/* Image+text paired sections on the home page.
+ *
+ * Grid, not Flexbox — a plain Flexbox version (align-items: stretch) was
+ * tried first, but an image's own intrinsic aspect ratio still counts
+ * toward a Flex/Grid row's auto-height calculation. In practice that let
+ * a naturally "tall" image dictate the row height instead of the text,
+ * which is the opposite of what we want (text should drive the height;
+ * the image should never be able to exceed it).
+ *
+ * position: relative on .feature-row is REQUIRED, not optional — it's
+ * what makes this row the containing block for the absolutely-positioned
+ * .feature-image below. Without it, the image positions itself against
+ * whatever positioned ancestor it finds further up the page instead.
+ */
+.feature-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    padding: 3rem 2rem;
+    gap: 2rem;
+
+    &.left  { grid-template-areas: "image text"; }
+    &.right { grid-template-areas: "text image"; }
+
+    @media (max-width: 768px) {
+        &.left,
+        &.right {
+            grid-template-columns: 1fr;
+            grid-template-areas:
+                "image"
+                "text";
+            text-align: center;
+        }
+    }
+}
+
+.feature-text {
+    grid-area: text;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;   // vertically centers short text within a taller row
+
+    @media (max-width: 768px) {
+        align-items: center;
+    }
+}
+
+.feature-image {
+    grid-area: image;
+
+    // Desktop: pull the image OUT of grid track sizing entirely via
+    // absolute positioning, so its own intrinsic size can never
+    // influence — or exceed — the row height. .feature-text becomes
+    // the sole driver of row height; the image is stretched to fill
+    // exactly that resulting box via `inset: 0`.
+    @media (min-width: 769px) {
+        position: absolute;
+        inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    // Mobile: image and text stack in separate rows, so there's nothing
+    // for the image to match heights with — falls back to normal,
+    // in-flow, natural-aspect-ratio sizing.
+    @media (max-width: 768px) {
+        display: flex;
+        justify-content: center;
+    }
+
+    img {
+        display: block;
+        border-radius: 4px;
+        /* box-shadow: 0 4px 6px rgba(0,0,0,0.1); */
+
+        @media (min-width: 769px) {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;   // fits within the box on whichever dimension is limiting; never distorts, never overflows
+        }
+
+        @media (max-width: 768px) {
+                    max-width: 100%;
+                    height: auto;
+        }
     }
 }

@@ -1,0 +1,59 @@
+---
+layout: default
+---
+
+<article class="post deliverable-page">
+
+    <header class="post-header">
+        <h1 class="post-title">{{ page.title | escape }}</h1>
+
+        <div class="deliverable-meta">
+            {%- if page.status %}
+            <span class="deliverable-status status-{{ page.status }}">{{ page.status }}</span>
+            {%- endif %}
+
+            {%- if page.objective %}
+            {%- assign obj = site.objectives | where: "id", page.objective | first %}
+            {%- if obj %}
+            <span class="deliverable-categories">
+                <span class="deliverable-category category-{{ obj.color }}">{{ obj.title }}</span>
+            </span>
+            {%- endif %}
+            {%- endif %}
+        </div>
+    </header>
+
+    <div class="post-content">
+        {{ content }}
+    </div>
+
+    {%- if page.subdeliverables %}
+    <div class="subdeliverable-section">
+        <h2 class="subdeliverable-section-title">Sub-deliverables</h2>
+        {%- for sub_id in page.subdeliverables %}
+            {%- assign sub = site.subdeliverables | where: "id", sub_id | first %}
+            {%- if sub %}
+            <div class="subdeliverable-card">
+                <h3><a href="{{ sub.url | relative_url }}">{{ sub.title }}</a></h3>
+                <div class="subdeliverable-preview">{{ sub.content }}</div>
+            </div>
+            {%- endif %}
+        {%- endfor %}
+    </div>
+    {%- endif %}
+
+    {%- if page.outputs %}
+    <div class="deliverable-outputs">
+        {%- for output in page.outputs %}
+        <a href="{{ output.url }}" class="output-link" target="_blank" rel="noopener noreferrer">
+            {{ output.label }} ↗
+        </a>
+        {%- endfor %}
+    </div>
+    {%- endif %}
+    <div class="deliverable-nav">
+        <a href="{{ '/projects/' | relative_url }}" class="deliverable-return">
+            ← Return to Projects
+        </a>
+    </div>
+</article>

@@ -35,11 +35,16 @@ collections:
   team:
     output: true
     permalink: /about/team/:name/
-  projects:
+  deliverables:
     output: true
-    permalink: /projects/:name/
+    permalink: /deliverables/:name/
+  objectives:
+    output: true
+    permalink: /objectives/:name/
+  subdeliverables:
+    output: true
+    permalink: /subdeliverables/:name/
 
-# sets the defaults for each member of a collection
 defaults:
   - scope:
       path: ""
@@ -48,9 +53,19 @@ defaults:
       layout: team-member
   - scope:
       path: ""
-      type: projects
+      type: deliverables
     values:
-      layout: page
+      layout: deliverable
+  - scope:
+      path: ""
+      type: objectives
+    values:
+      layout: objective
+  - scope:
+      path: ""
+      type: subdeliverables
+    values:
+      layout: subdeliverable
 
 
 # Items or directories excluded from processing

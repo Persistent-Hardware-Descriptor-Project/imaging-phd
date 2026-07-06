@@ -1,6 +1,6 @@
 ---
 name: "Josh Moore"
-title: "Key Senior Personnel"
+role: "Key Senior Personnel"
 sc: true
 main-team: [1]
 secondary-teams: [2]

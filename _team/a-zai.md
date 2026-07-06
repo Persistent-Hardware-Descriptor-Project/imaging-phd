@@ -1,6 +1,6 @@
 ---
 name: "Adrian Zai"
-title: "Co-Investigator"
+role: "Co-Investigator"
 sc: true
 main-team: [3]
 secondary-teams: [2]

@@ -1,0 +1,23 @@
+---
+layout: default
+---
+
+<article class="post objective-page">
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title | escape }}</h1>
+  </header>
+
+  {% if page.image %}
+  <div class="category-image"><img src="{{ page.image | relative_url }}" alt="{{ page.title }}"></div>
+  {% endif %}
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+
+  <div class="project-nav">
+    <a href="{{ '/projects/' | relative_url }}" class="project-return">
+      ← Return to Projects
+    </a>
+  </div>
+</article>

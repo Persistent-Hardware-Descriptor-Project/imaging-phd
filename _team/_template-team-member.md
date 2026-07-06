@@ -1,6 +1,6 @@
 ---
 name: "Jane Smith"
-title: ""
+role: ""
 sc: true
 main-team: [1,2,3,4]
 secondary-teams: [1,2,3,4]

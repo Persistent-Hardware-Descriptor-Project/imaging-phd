@@ -1,6 +1,6 @@
 ---
 name: "Caterina Strambio de Castillia"
-title: "Principal Investigator"
+role: "Principal Investigator"
 sc: true
 main-team: [1,2,3,4]
 secondary-teams: [1,2,3,4]

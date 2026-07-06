@@ -1,6 +1,6 @@
 ---
 name: "James Chambers"
-title: "Co-Investigator"
+role: "Co-Investigator"
 sc: true
 main-team: [4]
 secondary-teams: [1,2,3]
