@@ -1,104 +1,103 @@
 {% comment %}
-  Gantt Chart — Restructured layout
-  Data source: _data/gantt.yml
+Gantt Chart
+Data source: _data/gantt.yml
 
-  Structure:
+Structure:
     .gantt-outer (flex row)
     ├── .gantt-labels-col (flex column — objective labels, NOT part of the grid)
     │     ├── .gantt-labels-header  (spacer matching header row height)
-    │     └── .gantt-obj-label × N  (flex-grow: N = deliverable count)
+    │     └── .gantt-obj-label × N  (height set via JS: deliverable count × row height, read from --gantt-row-height)
     └── .gantt-grid (CSS Grid — ID + title + period columns only)
-          ├── header row
-          └── data rows × total deliverables
+            ├── header row
+            ├── .gantt-obj-block × N   (one per objective; display:contents in normal view, so its
+            │                           children are real grid items — see _gantt.scss)
+            └── .gantt-obj-overlay × N (collapsed compact-view row per objective)
 
-  By separating the labels from the grid entirely, the label cells
-  cannot influence grid row heights. flex-grow: N on each label
-  proportionally sizes it to span the correct number of rows.
-  grid-auto-rows sets a consistent row height for perfect alignment.
+    By separating the labels from the grid entirely, the label cells cannot influence grid row heights.
+    grid-auto-rows sets a consistent row height for perfect alignment; JS reads that same height from
+    --gantt-row-height / --gantt-row-height-compact to size each label to match.
 
-  To link a deliverable to a project page, add a url to the
-  link: field in _data/gantt.yml for that deliverable.
+    To link a deliverable to a project page, add a url to the link: field in _data/gantt.yml for that deliverable.
 
-  Objective labels carry data-color matching the category color in
-  categories.yml. Clicking a label scrolls to and opens the
-  corresponding category accordion — see the JS at the bottom of
-  projects.md.
+    Every element is matched to its Objective by data-objective="{{ objective.id }}" — id is the
+    one genuinely stable, unique identifier.
+    Objective labels open the corresponding category accordion — see the JS at the bottom of projects.md.
 {% endcomment %}
 
+{% comment %}
 <div class="gantt-controls">
-  <button type="button" id="gantt-compact-toggle" class="gantt-toggle-btn" aria-pressed="false">
-    Compact view
-  </button>
+    <button type="button" id="gantt-compact-toggle" class="gantt-toggle-btn" aria-pressed="false">
+        Compact view
+    </button>
 </div>
+{% endcomment %}
 
 <div class="gantt-wrapper" id="gantt-wrapper">
-  <div class="gantt-outer">
-
+    <div class="gantt-outer">
     <!-- ── LEFT: Objective labels (flex column, outside the grid) ── -->
     <div class="gantt-labels-col">
-
-      <!-- Spacer: matches header row height -->
-      <div class="gantt-labels-header">Obj.</div>
-
-      <!-- One label per objective, sized proportionally by deliverable count.
-           data-color links this label to the matching category accordion.    -->
-      {% for objective in site.data.gantt.objectives %}
-      {% assign label-height = objective.deliverables.size | times: 36 %}
-        <div class="gantt-obj-label gantt-obj-{{ objective.color }}"
-             data-color="{{ objective.color }}"
-             data-deliverable-count="{{ objective.deliverables.size }}"
-             style="height: {{ label-height }}px;">
-          <span>{{ objective.label }}</span>
-        </div>
-      {% endfor %}
-
-    </div><!-- .gantt-labels-col -->
-
-    <!-- RIGHT: Main grid (ID + title + period cols) -->
-    <div class="gantt-grid">
-
-      <!-- Header row -->
-      <div class="gantt-header gantt-header-id"></div>
-      <div class="gantt-header gantt-header-title">Deliverable</div>
-      {% for period in site.data.gantt.periods %}
-      <div class="gantt-header gantt-header-period">{{ period }}</div>
-      {% endfor %}
-
-      <!-- Data rows -->
-      {% for objective in site.data.gantt.objectives %}
-        {% for deliverable in objective.deliverables %}
-
-          <!-- Deliverable ID -->
-          <div class="gantt-del-id gantt-id-{{ objective.color }}">
-            <a href="#deliverable-{{ deliverable.id }}"
-               class="gantt-jump-link"
-               data-target="deliverable-{{ deliverable.id }}">{{ deliverable.id }}</a>
-          </div>
-
-          <!-- Deliverable title -->
-          <div class="gantt-del-title">
-            <a href="#deliverable-{{ deliverable.id }}"
-               class="gantt-jump-link gantt-title-link"
-               data-target="deliverable-{{ deliverable.id }}">{{ deliverable.title }}</a>
-          </div>
-
-          <!-- Timeline cells -->
-          {% for cell in deliverable.cells %}
-            {% if cell.type == "empty" %}
-            <div class="gantt-cell gantt-cell-empty"
-                 style="grid-column: span {{ cell.span }};"></div>
-            {% else %}
-            <div class="gantt-cell gantt-cell-{{ cell.type }} gantt-bar-{{ objective.color }} gantt-jump-link"
-                 data-target="deliverable-{{ deliverable.id }}"
-                 style="grid-column: span {{ cell.span }};">
-              {% if cell.label %}<span class="gantt-cell-label">{{ cell.label }}</span>{% endif %}
+    <!-- Spacer: matches header row height -->
+        <div class="gantt-labels-header">Obj.</div>
+        <!-- One label per objective; height set via JS on load and on toggle.  -->
+            {% for objective in site.data.gantt.objectives %}
+            <div class="gantt-obj-label gantt-obj-{{ objective.color }}" data-objective="{{ objective.id }}"            data-deliverable-count="{{ objective.deliverables.size }}">
+                <span>{{ objective.label }}</span>
+                <button type="button" class="gantt-obj-expand-toggle" data-objective="{{ objective.id }}" aria-label="Expand {{ objective.label }} deliverables" aria-pressed="false" title="Expand this objective's rows">⤢</button>
             </div>
-            {% endif %}
-          {% endfor %}
-
+            {% endfor %}
+        </div><!-- .gantt-labels-col -->
+    <!-- RIGHT: Main grid (ID + title + biannual period cols) -->
+    <div class="gantt-grid">
+        <!-- Header row -->
+        <div class="gantt-header gantt-header-id"></div>
+        <div class="gantt-header gantt-header-title">Deliverable</div>
+        {% for period in site.data.gantt.periods %}
+            <div class="gantt-header gantt-header-period">{{ period }}</div>
         {% endfor %}
-      {% endfor %}
+        <!-- Data rows -->
+        {% for objective in site.data.gantt.objectives %}
+        <!-- Normal-view rows: real grid items via display:contents pass-through (see .gantt-obj-block in _gantt.scss). Hidden entirely in compact mode unless expanded for this specific objective (.obj-expanded). -->
+            <div class="gantt-obj-block" data-objective="{{ objective.id }}">
+            {% for deliverable in objective.deliverables %}
 
-    </div><!-- .gantt-grid -->
-  </div><!-- .gantt-outer -->
+            <!-- Deliverable ID -->
+            <div class="gantt-del-id gantt-id-{{ objective.color }}">
+                <a href="#deliverable-{{ deliverable.id }}" class="gantt-jump-link" data-target="deliverable-{{ deliverable.id }}">{{ deliverable.id }}</a>
+            </div>
+
+            <!-- Deliverable title -->
+            <div class="gantt-del-title">
+                <a href="#deliverable-{{ deliverable.id }}" class="gantt-jump-link gantt-title-link" data-target="deliverable-{{ deliverable.id }}">{{ deliverable.title }}</a>
+            </div>
+
+            <!-- Timeline cells -->
+            {% for cell in deliverable.cells %}
+                {% if cell.type == "empty" %}
+                    <div class="gantt-cell gantt-cell-empty" style="grid-column: span {{ cell.span }};"></div>
+                {% else %}
+                    <div class="gantt-cell gantt-cell-{{ cell.type }} gantt-bar-{{ objective.color }} gantt-jump-link" data-target="deliverable-{{ deliverable.id }}" style="grid-column: span {{ cell.span }};">
+                    {% if cell.label %}
+                        <span class="gantt-cell-label">{{ cell.label }}</span>
+                    {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+        </div><!-- .gantt-obj-block -->
+
+        <!-- Compact-view overlay: one collapsed row per objective. Each deliverable contributes one 40%-opacity bar per active period; overlapping bars darken naturally via normal alpha compositing — no manual overlap-counting logic needed. Empty periods contribute no elements. -->
+        <div class="gantt-obj-overlay" data-objective="{{ objective.id }}">
+            {% for deliverable in objective.deliverables %}
+                {% assign col_cursor = 0 %}
+                {% for cell in deliverable.cells %}
+                    {% unless cell.type == "empty" %}
+                        <div class="gantt-overlay-bar gantt-bar-{{ objective.color }}" style="left: {{ col_cursor | times: 100 | divided_by: 8.0 }}%; width: {{ cell.span | times: 100 | divided_by: 8.0 }}%;"></div>
+                    {% endunless %}
+                {% assign col_cursor = col_cursor | plus: cell.span %}
+                {% endfor %}
+            {% endfor %}
+            </div><!-- .gantt-obj-overlay -->
+        {% endfor %}
+        </div><!-- .gantt-grid -->
+    </div><!-- .gantt-outer -->
 </div><!-- .gantt-wrapper -->
