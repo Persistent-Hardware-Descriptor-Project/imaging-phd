@@ -49,6 +49,33 @@
         flex: 0 0 180px;
     }
 
+    // Modifier for rows needing two logos side by side instead of one.
+    // Higher specificity than .resource-logo img (two classes vs one),
+    // so this safely overrides the shared rule only for this row —
+    // every other single-logo row is untouched.
+    .resource-logo.resource-logo--dual {
+        a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        img {
+            width: 82px;   // two logos + gap ≈ 172px, fits the existing 180px column
+            height: auto;
+        }
+    }
+
+    // Modifier for logos that are roughly square — capping height (not just
+    // width) keeps them visually in line with the wide/short logos elsewhere
+    // in this list, instead of rendering as a big, tall block.
+    .resource-logo.resource-logo--small img {
+        width: auto;
+        height: 90px;
+        max-width: 100%;
+    }
+
     // Text column
     .resource-text {
         flex: 1;

@@ -22,7 +22,7 @@ permalink: /resources/
       <li>
         <div class="resource-logo">
           <a href="https://zenodo.org/communities/phd-project" target="_blank" rel="noopener noreferrer">
-            <img src="{{ 'assets/images/logos/zenodo-white-1000.png' | relative_url }}" alt="Zenodo logo" />
+            <img src="{{ 'assets/images/logos/zenodo-gradient-1000.png' | relative_url }}" alt="Zenodo logo" />
           </a>
         </div>
         <div class="resource-text">
@@ -59,10 +59,11 @@ permalink: /resources/
         </div>
     </li>
         <li>
-                <div class="resource-logo">
+                <div class="resource-logo resource-logo--dual">
                 <a href="https://github.com/Persistent-Hardware-Descriptor-Project/imaging-phd"
                     target="_blank" rel="noopener noreferrer">
-                    <img src="{{ 'assets/images/logos/github-logo.svg' | relative_url }}" alt="GitHub logo" />
+                    <img src="{{ 'assets/images/IPHD_logo_small.png' | relative_url }}" alt="IPHD small logo" />
+                    <img src="{{ 'assets/images/logos/GitHub_Invertocat_Black_Clearspace.svg' | relative_url }}" alt="GitHub logo" />
                 </a>
                 </div>
                 <div class="resource-text">
@@ -74,7 +75,7 @@ permalink: /resources/
                 </div>
             </li>
             <li>
-                <div class="resource-logo">
+                <div class="resource-logo resource-logo--small">
                 <a href="https://www.pidinst.org/" target="_blank" rel="noopener noreferrer">
                     <img src="{{ 'assets/images/logos/PIDINST-logo.svg' | relative_url }}" alt="PIDINST logo" />
                 </a>

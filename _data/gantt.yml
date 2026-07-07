@@ -30,7 +30,7 @@ periods:
 
 objectives:
 
-  - id: obj-1
+  - obj_id: obj-1
     label: "1 - Definition of NGM"
     color: green
     deliverables:
@@ -85,7 +85,7 @@ objectives:
           - span: 4
             type: active
 
-  - id: obj-2
+  - obj_id: obj-2
     label: "2 - Development of MMPF"
     color: red
     deliverables:
@@ -127,7 +127,7 @@ objectives:
             type: development
             label: "Development"
 
-  - id: obj-3
+  - obj_id: obj-3
     label: "3 - Development of MMPB"
     color: blue
     deliverables:
@@ -183,7 +183,7 @@ objectives:
             type: support
             label: "Support"
 
-  - id: obj-4
+  - obj_id: obj-4
     label: "4 - CTVOD"
     color: grey
     deliverables:
