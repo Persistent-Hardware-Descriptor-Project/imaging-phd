@@ -22,7 +22,7 @@ permalink: /resources/
       <li>
         <div class="resource-logo">
           <a href="https://zenodo.org/communities/phd-project" target="_blank" rel="noopener noreferrer">
-            <img src="{{ 'assets/images/logos/zenodo-logo.svg' | relative_url }}" alt="Zenodo logo" />
+            <img src="{{ 'assets/images/logos/zenodo-white-1000.png' | relative_url }}" alt="Zenodo logo" />
           </a>
         </div>
         <div class="resource-text">
@@ -76,7 +76,7 @@ permalink: /resources/
             <li>
                 <div class="resource-logo">
                 <a href="https://www.pidinst.org/" target="_blank" rel="noopener noreferrer">
-                    <img src="{{ 'assets/images/logos/PIDINST-logo.png' | relative_url }}" alt="PIDINST logo" />
+                    <img src="{{ 'assets/images/logos/PIDINST-logo.svg' | relative_url }}" alt="PIDINST logo" />
                 </a>
                 </div>
                 <div class="resource-text">
