@@ -13,7 +13,7 @@ layout: default
             {%- endif %}
 
             {%- if page.objective %}
-            {%- assign obj = site.objectives | where: "id", page.objective | first %}
+            {%- assign obj = site.objectives | where: "obj_id", page.objective | first %}
             {%- if obj %}
             <span class="deliverable-categories">
                 <span class="deliverable-category category-{{ obj.color }}">{{ obj.title }}</span>

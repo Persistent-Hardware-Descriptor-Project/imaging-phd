@@ -1,5 +1,5 @@
 ---
-id: obj-2
+obj_id: obj-2
 title: "Micro-Meta Platform Frontend (MMPF)"
 order: 2
 color: red

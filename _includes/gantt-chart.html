@@ -19,7 +19,7 @@ Structure:
 
     To link a deliverable to a project page, add a url to the link: field in _data/gantt.yml for that deliverable.
 
-    Every element is matched to its Objective by data-objective="{{ objective.id }}" — id is the
+    Every element is matched to its Objective by data-objective="{{ objective.obj_id }}" — id is the
     one genuinely stable, unique identifier.
     Objective labels open the corresponding category accordion — see the JS at the bottom of projects.md.
 {% endcomment %}
@@ -40,9 +40,9 @@ Structure:
         <div class="gantt-labels-header">Obj.</div>
         <!-- One label per objective; height set via JS on load and on toggle.  -->
             {% for objective in site.data.gantt.objectives %}
-            <div class="gantt-obj-label gantt-obj-{{ objective.color }}" data-objective="{{ objective.id }}"            data-deliverable-count="{{ objective.deliverables.size }}">
+            <div class="gantt-obj-label gantt-obj-{{ objective.color }}" data-objective="{{ objective.obj_id }}"            data-deliverable-count="{{ objective.deliverables.size }}">
                 <span>{{ objective.label }}</span>
-                <button type="button" class="gantt-obj-expand-toggle" data-objective="{{ objective.id }}" aria-label="Expand {{ objective.label }} deliverables" aria-pressed="false" title="Expand this objective's rows">⤢</button>
+                <button type="button" class="gantt-obj-expand-toggle" data-objective="{{ objective.obj_id }}" aria-label="Expand {{ objective.label }} deliverables" aria-pressed="false" title="Expand this objective's rows">⤢</button>
             </div>
             {% endfor %}
         </div><!-- .gantt-labels-col -->
@@ -57,7 +57,7 @@ Structure:
         <!-- Data rows -->
         {% for objective in site.data.gantt.objectives %}
         <!-- Normal-view rows: real grid items via display:contents pass-through (see .gantt-obj-block in _gantt.scss). Hidden entirely in compact mode unless expanded for this specific objective (.obj-expanded). -->
-            <div class="gantt-obj-block" data-objective="{{ objective.id }}">
+            <div class="gantt-obj-block" data-objective="{{ objective.obj_id }}">
             {% for deliverable in objective.deliverables %}
 
             <!-- Deliverable ID -->
@@ -86,7 +86,7 @@ Structure:
         </div><!-- .gantt-obj-block -->
 
         <!-- Compact-view overlay: one collapsed row per objective. Each deliverable contributes one 40%-opacity bar per active period; overlapping bars darken naturally via normal alpha compositing — no manual overlap-counting logic needed. Empty periods contribute no elements. -->
-        <div class="gantt-obj-overlay" data-objective="{{ objective.id }}">
+        <div class="gantt-obj-overlay" data-objective="{{ objective.obj_id }}">
             {% for deliverable in objective.deliverables %}
                 {% assign col_cursor = 0 %}
                 {% for cell in deliverable.cells %}

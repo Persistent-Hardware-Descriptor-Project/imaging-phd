@@ -1,5 +1,5 @@
 ---
-id: obj-3
+obj_id: obj-3
 title: "Micro-Meta Platform Backend (MMPB)"
 order: 3
 color: blue

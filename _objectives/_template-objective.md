@@ -7,7 +7,7 @@
 # This file's standalone page now lives at /objectives/short-name/ (flat,
 # not nested under /projects/ — see the naming-consistency pass).
 
-id: obj-1                # must match objectives[].id in _data/gantt.yml
+obj_id: obj-1                # must match objectives[].id in _data/gantt.yml
 title: "1 - Definition of NGM"
 order: 1
 color: green              # must match objectives[].color in _data/gantt.yml — green | red | blue | grey

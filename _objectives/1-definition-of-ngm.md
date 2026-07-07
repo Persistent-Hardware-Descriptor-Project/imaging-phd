@@ -1,5 +1,5 @@
 ---
-id: obj-1
+obj_id: obj-1
 title: "Next-Generation Metadata (NGM) Framework"
 order: 1
 color: green

@@ -11,11 +11,11 @@ permalink: /projects/
   {% for objective in sorted_objectives %}
     {% assign objective_deliverables = "" | split: "" %}
     {% for deliverable in site.deliverables %}
-      {% if deliverable.objective == objective.id %}
+      {% if deliverable.objective == objective.obj_id %}
         {% assign objective_deliverables = objective_deliverables | push: deliverable %}
       {% endif %}
     {% endfor %}
-    <details class="category-block category-{{ objective.color }}" data-category-id="{{ objective.id }}" data-color="{{ objective.color }}">
+    <details class="category-block category-{{ objective.color }}" data-category-id="{{ objective.obj_id }}" data-color="{{ objective.color }}">
       <summary class="category-header">
         <span class="category-title">{{ objective.title }}</span>
         <span class="category-count">{{ objective_deliverables.size }} deliverable{% if objective_deliverables.size != 1 %}s{% endif %}</span>
