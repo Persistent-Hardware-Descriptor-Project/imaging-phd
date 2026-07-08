@@ -5,8 +5,7 @@ description: "A short description — one or two sentences. Appears in the listi
 deliverable_id: "3-2"
 objective: obj-3
 subdeliverables: []          # e.g. [framework-model-presentation, stakeholder-review]
-status: "active"              # active | complete | planned
-
+status: "planned"    # active | development | support | complete | planned
 # Output links — delete any you don't need
 outputs:
   - label: "Website"

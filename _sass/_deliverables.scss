@@ -166,6 +166,8 @@ details[open] .category-header::before {
 .status-active   { background: #e6f4ea; color: #1a7a3a; border: 0.5px solid #aaddbb; }
 .status-complete { background: #e8eef8; color: #1a3a7a; border: 0.5px solid #aabbdd; }
 .status-planned  { background: #f8f4e8; color: #7a5a1a; border: 0.5px solid #ddccaa; }
+.status-development { background: #e6f4ea; color: #1a7a3a; border: 0.5px solid #aaddbb; }
+.status-support      { background: #e6f4ea; color: #1a7a3a; border: 0.5px solid #bed5c6; }
 
 /* --- Output links --- */
 .deliverable-outputs {
