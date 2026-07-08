@@ -14,6 +14,7 @@ scholar: "https://scholar.google.com/citations?user=XXXXXXX"
 github: "https://github.com/jsmith"
 linkedin: "https://linkedin.com/in/jsmith"
 website: "https://jsmith.lab.edu"
+lab_website: "https://mylab.university.edu"
 ---
 
 <!-- 
