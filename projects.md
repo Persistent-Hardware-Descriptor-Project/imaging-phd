@@ -30,7 +30,7 @@ permalink: /projects/
         {% for deliverable in objective_deliverables %}
         <!-- anchor id matches gantt.yml's link: "#deliverable-<id>" -->
         <details class="deliverable-block" id="deliverable-{{ deliverable.deliverable_id }}">
-          <summary class="deliverable-header">
+          <summary class="deliverable-header deliverable-{{ objective.color }}">
             <span class="deliverable-id-badge">{{ deliverable.deliverable_id }}</span>
             <span class="deliverable-title">{{ deliverable.title }}</span>
             {% if deliverable.status %}
