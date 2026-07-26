@@ -2,6 +2,7 @@
 name: "Caterina Strambio de Castillia"
 role: "Principal Investigator"
 sc: true
+sort-priority: 1
 main-team: [1,2,3,4]
 secondary-teams: [1,2,3,4]
 position: "Assistant Professor; Scientific Director"

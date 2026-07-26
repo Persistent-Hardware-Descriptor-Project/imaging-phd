@@ -2,6 +2,7 @@
 name: "Josh Moore"
 role: "Key Senior Personnel"
 sc: true
+sort-priority: 3
 main-team: [1]
 secondary-teams: [2]
 position: "Technical Director"

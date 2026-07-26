@@ -7,7 +7,7 @@ permalink: /about/team-members/
 Our team brings together expertise in molecular cell biology, microscopy, bioimage-informatics, and cyberinfrastructure. 
 
 
-{% assign sc_members = site.team | where_exp: "member", "member.sc == true" %}
+{% assign sc_members = site.team | where_exp: "member", "member.sc == true" | sort: "sort-priority" %}
 {% assign team_members = site.team | where_exp: "member", "member.sc != true" %}
 
 {% if sc_members.size > 0 %}
@@ -26,7 +26,7 @@ Our team brings together expertise in molecular cell biology, microscopy, bioima
     {% endif %}
     <div class="team-list-info">
       <h3><a href="{{ member.url | relative_url }}">{{ member.name }}</a></h3>
-      <p class="team-title">{{ member.title }}</p>
+      <p class="team-role">{{ member.role }}</p>
       {% if member.bio %}<p class="team-bio">{{ member.bio }}</p>{% endif %}
       <div class="team-links">
         {% if member.email %}<a href="mailto:{{ member.email }}" class="team-link">Email</a>{% endif %}
@@ -56,7 +56,7 @@ Our team brings together expertise in molecular cell biology, microscopy, bioima
       {% endif %}
       <div class="team-list-info">
         <h3><a href="{{ member.url | relative_url }}">{{ member.name }}</a></h3>
-        <p class="team-title">{{ member.title }}</p>
+        <p class="team-role">{{ member.title }}</p>
         {% if member.bio %}<p class="team-bio">{{ member.bio }}</p>{% endif %}
         <div class="team-links">
           {% if member.email %}<a href="mailto:{{ member.email }}" class="team-link">Email</a>{% endif %}

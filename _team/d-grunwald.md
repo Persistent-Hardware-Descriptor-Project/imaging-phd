@@ -2,6 +2,7 @@
 name: "David Grunwald"
 role: "Co-Investigator"
 sc: true
+sort-priority: 2
 main-team: [4]
 secondary-teams: [1,2,3]
 position: "Associate Professor"

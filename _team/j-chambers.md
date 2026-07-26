@@ -2,6 +2,7 @@
 name: "James Chambers"
 role: "Co-Investigator"
 sc: true
+sort-priority: 2
 main-team: [4]
 secondary-teams: [1,2,3]
 position: "Interim Director of Centralized Core Facilities, Light Microscopy and Animal Imaging Director"

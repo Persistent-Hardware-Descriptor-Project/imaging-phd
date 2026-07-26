@@ -2,6 +2,7 @@
 name: "Nate Herzog"
 role: "Co-Investigator"
 sc: true
+sort-priority: 2
 main-team: [3]
 secondary-teams: [2]
 position: "Technical Specialist"

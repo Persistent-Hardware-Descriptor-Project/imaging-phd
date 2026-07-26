@@ -2,6 +2,7 @@
 name: "Judith Lacoste"
 role: "Key Senior Personnel"
 sc: true
+sort-priority: 3
 main-team: [4]
 secondary-teams: [1,2,3]
 position: "Director"

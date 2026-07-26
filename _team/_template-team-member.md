@@ -2,6 +2,7 @@
 name: "Jane Smith"
 role: ""
 sc: true
+sort-priority: 3 # sort order, starts at 1; if more than one record assigned the same value, secondary sorting is on the file name (so if you want precise control, make sure that unique numbers are assigned to each member of a category) # currently only used to sort the SC team members (see layout scripting on "about/team-members.md")
 main-team: [1,2,3,4]
 secondary-teams: [1,2,3,4]
 position: ""

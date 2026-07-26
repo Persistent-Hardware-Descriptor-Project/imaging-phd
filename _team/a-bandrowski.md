@@ -1,6 +1,7 @@
 ---
 name: "Anita Bandrowski"
 role: "Key Senior Personnel"
+sort-priority: 3
 sc: true
 main-team: [3]
 secondary-teams: [2]
