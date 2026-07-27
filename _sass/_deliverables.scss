@@ -87,17 +87,18 @@ details[open] .category-header::before {
     padding-bottom: 0;
 }
 
+
 .deliverable-header {
     display: flex;
     align-items: center;
     gap: 0.2rem;
-    width: 95%;
-    margin: 0.4rem;
+    width: 100%;
+    margin: 0;
     padding: 0.5rem 0.9rem;
-    border-radius: 999px;
-    border: 1.5px solid currentColor;   // picks up whichever objective color is set below
+    color: var(--deliverable-color, inherit);   // opts in explicitly — scoped to itself + real descendants only
     cursor: pointer;
     list-style: none;
+    box-sizing: border-box;
 }
 .deliverable-header::-webkit-details-marker { display: none; }
 
@@ -111,9 +112,20 @@ details[open] .category-header::before {
 details[open] > .deliverable-header::before {
     transform: rotate(90deg);
 }
+details[open] > .deliverable-header {
+    border-bottom: 1.5px solid var(--deliverable-color, #ccc);
+}
 
-// Objective colors — text and border both derive from `color` via currentColor,
-// so this one rule drives the whole pill's appearance
+.deliverable-block {
+    border: 1.5px solid var(--deliverable-color, #ccc);
+    border-radius: 8px;
+    margin: 0.4rem;
+    overflow: hidden;
+}
+// Objective colors
+// Each class sets ONLY a custom property — inert until something explicitly
+// reads it with var(). This is what stops color from leaking into
+// .deliverable-description / .deliverable-body / .deliverable-outputs again.
 .deliverable-green { color: $color-obj-green; }
 .deliverable-red   { color: $color-obj-red; }
 .deliverable-blue  { color: $color-obj-blue; }

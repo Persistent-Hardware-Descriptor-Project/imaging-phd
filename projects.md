@@ -29,8 +29,8 @@ permalink: /projects/
       <div class="deliverable-list">
         {% for deliverable in objective_deliverables %}
         <!-- anchor id matches gantt.yml's link: "#deliverable-<id>" -->
-        <details class="deliverable-block" id="deliverable-{{ deliverable.deliverable_id }}">
-          <summary class="deliverable-header deliverable-{{ objective.color }}">
+    <details class="deliverable-block deliverable-{{ objective.color }}" id="deliverable-{{ deliverable.deliverable_id }}">
+        <summary class="deliverable-header">
             <span class="deliverable-id-badge">{{ deliverable.deliverable_id }}</span>
             <span class="deliverable-title">{{ deliverable.title }}</span>
             {% if deliverable.status %}
@@ -44,7 +44,7 @@ permalink: /projects/
             <div class="deliverable-body">{{ deliverable.content }}</div>
           {% endunless %}
           <a href="{{ deliverable.url | relative_url }}" class="deliverable-read-more">
-            View full deliverable page →
+            ...more details →
           </a>
           {% if deliverable.outputs %}
           <div class="deliverable-outputs">
