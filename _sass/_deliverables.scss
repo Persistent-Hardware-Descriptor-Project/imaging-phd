@@ -1,22 +1,42 @@
-/* ================================= */
-/*  PROJECTS LISTING                  */
-/* ================================= */
+/* =================================================================
+   PROJECTS LISTING
+   =================================================================
+   Styles for the /projects/ accordion: Objective (.category-*)
+   containing Deliverables (.deliverable-*), each optionally
+   containing Sub-deliverables (styled elsewhere, in _subdeliverables
+   if broken out separately).
 
-/*
-    Color variables imported from _colors.scss via main.scss.
-    Do not hardcode objective/category hex values here.
-*/
+   Color variables are imported from _colors.scss via main.scss.
+   Do not hardcode objective/category hex values here — reference
+   $color-obj-* instead.
+   ================================================================= */
 
 .projects-listing {
     margin-top: 1.5rem;
 }
 
-/* --- Category block (details/summary) --- */
+
+/* =================================================================
+   OBJECTIVE ACCORDION  (outer level — one per Objective)
+   Markup: <details class="category-block category-{color}">
+             <summary class="category-header">
+               <span class="category-title">
+               <span class="category-count">
+             <div class="category-description">
+   ================================================================= */
+
 .category-block {
     margin-bottom: 1rem;
     border: 0.5px solid #ccc;
     border-radius: 8px;
     overflow: hidden;
+
+    /* Header background color per Objective — compound selector because
+       the color class lives on this same element, not a descendant. */
+    &.category-green .category-header { background-color: $color-obj-green; }
+    &.category-red   .category-header { background-color: $color-obj-red; }
+    &.category-blue  .category-header { background-color: $color-obj-blue; }
+    &.category-grey  .category-header { background-color: $color-obj-grey; }
 }
 
 .category-header {
@@ -24,27 +44,28 @@
     align-items: center;
     justify-content: space-between;
     padding: 0.8rem 1.2rem;
-    background-color: #1B3B5D;
+    background-color: #1B3B5D;   /* default; overridden per-objective above */
     color: #ffffff;
     cursor: pointer;
     list-style: none;
     user-select: none;
-}
 
-.category-header::-webkit-details-marker {
-    display: none;
-}
+    &::-webkit-details-marker {
+        display: none;
+    }
 
-.category-header::before {
-    content: '▶';
-    font-size: 0.7rem;
-    margin-right: 0.6rem;
-    transition: transform 0.2s ease;
-    display: inline-block;
-}
+    /* Accordion arrow — rotates 90° when the parent <details> is open */
+    &::before {
+        content: '▶';
+        font-size: 0.7rem;
+        margin-right: 0.6rem;
+        transition: transform 0.2s ease;
+        display: inline-block;
 
-details[open] .category-header::before {
-    transform: rotate(90deg);
+        details[open] & {
+            transform: rotate(90deg);
+        }
+    }
 }
 
 .category-title {
@@ -60,33 +81,63 @@ details[open] .category-header::before {
 }
 
 .category-description {
+    /* Padding matches .category-header's own padding, so description text
+       aligns with the header above it rather than the header's inner text. */
     padding: 0.8rem 1.2rem 0;
     font-size: 0.9rem;
     color: #555;
     margin: 0;
 }
 
-/* --- Category header colors — match Gantt objective colors --- */
-.category-block.category-green .category-header { background-color: $color-obj-green; }
-.category-block.category-red   .category-header { background-color: $color-obj-red; }
-.category-block.category-blue  .category-header { background-color: $color-obj-blue; }
-.category-block.category-grey  .category-header { background-color: $color-obj-grey; }
 
-/* --- Project list inside expanded category --- */
+/* =================================================================
+   DELIVERABLE ACCORDION  (nested inside each Objective)
+   Markup: <details class="deliverable-block deliverable-{color}">
+             <summary class="deliverable-header">
+               <span class="deliverable-id-badge">
+               <span class="deliverable-title">
+               <span class="deliverable-status status-{status}">
+             <p class="deliverable-description">
+             <div class="deliverable-body">
+             <div class="deliverable-outputs">
+
+   Color mechanism: each .deliverable-{color} modifier sets ONLY the
+   --deliverable-color custom property — never `color` directly. A
+   custom property inherits harmlessly on its own; only .deliverable-header
+   explicitly reads it via var(), which is what keeps the color scoped to
+   the header pill instead of leaking into the description/body text
+   below it (both are siblings-of-summary inside the same <details>).
+   ================================================================= */
+
 .deliverable-list {
-    padding: 0.5rem .2rem;
+    padding: 0.5rem 0.2rem;
 }
 
+/* NOTE: not referenced by any current template (projects.md goes straight
+   from .deliverable-list to <details class="deliverable-block">) — looks
+   like a leftover from an earlier markup version. Left in place rather
+   than silently removed; safe to delete once confirmed unused elsewhere. */
 .deliverable-item {
     padding: 0.8rem 0;
     border-bottom: 0.5px solid #e0e0e0;
+
+    &:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
 }
 
-.deliverable-item:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-}
+.deliverable-block {
+    border: 1.5px solid var(--deliverable-color, #ccc);
+    border-radius: 8px;
+    margin: 0.4rem;
+    overflow: hidden;
 
+    &.deliverable-green { --deliverable-color: #{$color-obj-green}; }
+    &.deliverable-red   { --deliverable-color: #{$color-obj-red}; }
+    &.deliverable-blue  { --deliverable-color: #{$color-obj-blue}; }
+    &.deliverable-grey  { --deliverable-color: #{$color-obj-grey}; }
+}
 
 .deliverable-header {
     display: flex;
@@ -95,42 +146,34 @@ details[open] .category-header::before {
     width: 100%;
     margin: 0;
     padding: 0.5rem 0.9rem;
-    color: var(--deliverable-color, inherit);   // opts in explicitly — scoped to itself + real descendants only
+    color: var(--deliverable-color, inherit);   /* opts in explicitly — scoped to this element + its real descendants only */
     cursor: pointer;
     list-style: none;
     box-sizing: border-box;
-}
-.deliverable-header::-webkit-details-marker { display: none; }
 
-// Accordion arrow — rotates 90° when the parent <details> is open
-.deliverable-header::before {
-    content: "▸";
-    display: inline-block;
-    font-size: 1em;
-    transition: transform 0.15s ease;
-}
-details[open] > .deliverable-header::before {
-    transform: rotate(90deg);
-}
-details[open] > .deliverable-header {
-    border-bottom: 1.5px solid var(--deliverable-color, #ccc);
-}
+    &::-webkit-details-marker {
+        display: none;
+    }
 
-.deliverable-block {
-    border: 1.5px solid var(--deliverable-color, #ccc);
-    border-radius: 8px;
-    margin: 0.4rem;
-    overflow: hidden;
-}
-// Objective colors
-// Each class sets ONLY a custom property — inert until something explicitly
-// reads it with var(). This is what stops color from leaking into
-// .deliverable-description / .deliverable-body / .deliverable-outputs again.
-.deliverable-green { color: $color-obj-green; }
-.deliverable-red   { color: $color-obj-red; }
-.deliverable-blue  { color: $color-obj-blue; }
-.deliverable-grey  { color: $color-obj-grey; }
+    /* Accordion arrow — rotates 90° when the parent <details> is open */
+    &::before {
+        content: "▸";
+        display: inline-block;
+        font-size: 1em;
+        transition: transform 0.15s ease;
 
+        details[open] > & {
+            transform: rotate(90deg);
+        }
+    }
+
+    /* Separator between header and expanded content — only drawn when
+       actually open, so a closed pill doesn't show a redundant line
+       sitting on its own bottom edge. */
+    details[open] > & {
+        border-bottom: 1.5px solid var(--deliverable-color, #ccc);
+    }
+}
 
 .deliverable-title {
     font-size: 0.95rem;
@@ -153,7 +196,10 @@ details[open] > .deliverable-header {
     }
 }
 
-$deliverable-content-indent: 1.3rem;   // 0.4rem header margin + 0.9rem header padding — keeps description/body/outputs aligned with the pill's edge, in one place
+/* Shared left-indent for everything below the header pill, so it all
+   lines up with the pill's edge (margin + padding) rather than the
+   container edge. Single source of truth — change here, not per-rule. */
+$deliverable-content-indent: 1.3rem;   // 0.4rem header margin + 0.9rem header padding
 
 .deliverable-description {
     font-size: 0.875rem;
@@ -169,13 +215,17 @@ $deliverable-content-indent: 1.3rem;   // 0.4rem header margin + 0.9rem header p
 }
 
 .deliverable-outputs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.4rem;
     padding-left: $deliverable-content-indent;
 }
 
 .deliverable-read-more {
-    padding-left: $deliverable-content-indent;
     display: inline-block;
     margin-top: 0.5rem;
+    padding-left: $deliverable-content-indent;
     font-size: 0.875rem;
     font-weight: 600;
     color: $color-nav;
@@ -187,7 +237,7 @@ $deliverable-content-indent: 1.3rem;   // 0.4rem header margin + 0.9rem header p
     }
 
     &:visited {
-            color: inherit;
+        color: inherit;
     }
 }
 
@@ -200,11 +250,39 @@ $deliverable-content-indent: 1.3rem;   // 0.4rem header margin + 0.9rem header p
     white-space: nowrap;
 }
 
-/* --- Project description image --- */
-/* Used in individual project page bodies via <div class="deliv-desc-img"> */
+.status-active      { background: #e6f4ea; color: #1a7a3a; border: 0.5px solid #aaddbb; }
+.status-complete    { background: #e8eef8; color: #1a3a7a; border: 0.5px solid #aabbdd; }
+.status-planned     { background: #f8f4e8; color: #7a5a1a; border: 0.5px solid #ddccaa; }
+.status-development { background: #e6f4ea; color: #1a7a3a; border: 0.5px solid #aaddbb; }
+.status-support      { background: #e6f4ea; color: #1a7a3a; border: 0.5px solid #bed5c6; }
+
+
+/* --- Output links (buttons inside .deliverable-outputs) --- */
+.output-link {
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: #1B3B5D;
+    color: #ffffff !important;
+    text-decoration: none;
+    transition: background 0.15s;
+
+    &:hover {
+        background: #ffcc00;
+        color: #1B3B5D !important;
+    }
+}
+
+
+/* =================================================================
+   STANDALONE PAGE ELEMENTS  (used on individual /deliverables/*/ pages,
+   not inside the /projects/ accordion)
+   ================================================================= */
+
+/* Used in individual deliverable page bodies via <div class="deliv-desc-img"> */
 .deliv-desc-img {
     width: fit-content;     /* shrinks to the image's intrinsic width */
-    margin: 1.5rem auto;    /* centres within the content column */
+    margin: 1.5rem auto;    /* centers within the content column */
 
     img {
         display: block;     /* removes the inline descender gap beneath the image */
@@ -214,36 +292,10 @@ $deliverable-content-indent: 1.3rem;   // 0.4rem header margin + 0.9rem header p
 }
 
 
-.status-active   { background: #e6f4ea; color: #1a7a3a; border: 0.5px solid #aaddbb; }
-.status-complete { background: #e8eef8; color: #1a3a7a; border: 0.5px solid #aabbdd; }
-.status-planned  { background: #f8f4e8; color: #7a5a1a; border: 0.5px solid #ddccaa; }
-.status-development { background: #e6f4ea; color: #1a7a3a; border: 0.5px solid #aaddbb; }
-.status-support      { background: #e6f4ea; color: #1a7a3a; border: 0.5px solid #bed5c6; }
+/* =================================================================
+   RESPONSIVE
+   ================================================================= */
 
-/* --- Output links --- */
-.deliverable-outputs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-top: 0.4rem;
-}
-
-.output-link {
-    font-size: 0.75rem;
-    padding: 2px 8px;
-    border-radius: 4px;
-    background: #1B3B5D;
-    color: #ffffff !important;
-    text-decoration: none;
-    transition: background 0.15s;
-}
-
-.output-link:hover {
-    background: #ffcc00;
-    color: #1B3B5D !important;
-}
-
-/* --- Responsive --- */
 @media (max-width: 768px) {
     .deliverable-header {
         flex-direction: column;
