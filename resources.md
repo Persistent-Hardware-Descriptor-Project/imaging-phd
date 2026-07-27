@@ -77,7 +77,7 @@ permalink: /resources/
             <li>
                 <div class="resource-logo resource-logo--small">
                 <a href="https://www.pidinst.org/" target="_blank" rel="noopener noreferrer">
-                    <img src="{{ 'assets/images/logos/PIDINST-logo.svg' | relative_url }}" alt="PIDINST logo" />
+                    <img src="{{ 'assets/images/logos/pidinst-logo.svg' | relative_url }}" alt="PIDINST logo" />
                 </a>
                 </div>
                 <div class="resource-text">
